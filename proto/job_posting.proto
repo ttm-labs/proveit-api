@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package job_posting_service;
+
+option go_package = "proto/";
+
+service JobPostingService {
+    rpc CreateJobPosting(CreateJobPostingRequest) returns (CreateJobPostingResponse) {}
+    rpc ReadJobPosting(ReadJobPostingRequest) returns (ReadJobPostingResponse) {}
+    rpc UpdateJobPosting(UpdateJobPostingRequest) returns (UpdateJobPostingResponse) {}
+    rpc DeleteJobPosting(DeleteJobPostingRequest) returns (DeleteJobPostingResponse) {}
+}
+
+message CreateJobPostingRequest {}
+message CreateJobPostingResponse {}
+
+message ReadJobPostingRequest {}
+message ReadJobPostingResponse {}
+
+message UpdateJobPostingRequest {}
+message UpdateJobPostingResponse {}
+
+message DeleteJobPostingRequest {}
+message DeleteJobPostingResponse {}
