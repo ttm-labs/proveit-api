@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package job_interview_service;
+
+option go_package = "proto/";
+
+service JobInterviewService {
+    rpc UnaryConversation(JobInterviewRequest) returns (JobInterviewResponse) {}
+    rpc BidirectionalConversation(stream JobInterviewRequest) returns (stream JobInterviewResponse) {}
+}
+
+message JobInterviewRequest {}
+message JobInterviewResponse {}
