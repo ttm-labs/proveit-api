@@ -11,14 +11,54 @@ service JobPostingService {
     rpc DeleteJobPosting(DeleteJobPostingRequest) returns (DeleteJobPostingResponse) {}
 }
 
-message CreateJobPostingRequest {}
-message CreateJobPostingResponse {}
+message CreateJobPostingRequest {
+	string industry = 1;
+	string company_name = 2;
+	string location = 3;
+	string title = 4;
+	Salary base_salary = 5;
+	Salary bonus_salary = 6;
+	repeated string qualifications = 7;
+}
 
-message ReadJobPostingRequest {}
-message ReadJobPostingResponse {}
+message CreateJobPostingResponse {
+	string job_posting_id = 1;
+}
 
-message UpdateJobPostingRequest {}
+message ReadJobPostingRequest {
+	string job_posting_1 = 1;
+}
+
+message ReadJobPostingResponse {
+	string industry = 1;
+	string company_name = 2;
+	string location = 3;
+	string title = 4;
+	Salary base_salary = 5;
+	Salary bonus_salary = 6;
+	repeated string qualifications = 7;
+}
+
+message UpdateJobPostingRequest {
+	string job_posting_id = 1;
+	string industry = 2;
+	string company_name = 3;
+	string location = 4;
+	string title = 5;
+	Salary base_salary = 6;
+	Salary bonus_salary = 7;
+	repeated string qualifications = 8;
+}
+
 message UpdateJobPostingResponse {}
 
-message DeleteJobPostingRequest {}
+message DeleteJobPostingRequest {
+	string job_posting_id = 1;
+}
+
 message DeleteJobPostingResponse {}
+
+message Salary {
+	int32 min_range = 1;
+	int32 max_range = 2;
+}
