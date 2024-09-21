@@ -24,8 +24,6 @@ buf:
 				--go-grpc_out=${PROTO_GO_OUTPUT_DIR} \
 				--go-grpc_opt=paths=source_relative \
 				--plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
-				--js_out="import_style=commonjs_strict:${PROTO_JS_OUTPUT_DIR}" \
-				--grpc-web_out="import_style=commonjs,mode=grpcwebtext:${PROTO_JS_OUTPUT_DIR}" \
 				--ts_out="${PROTO_TS_OUTPUT_DIR}" \
 				--grpc-web_out="import_style=typescript,mode=grpcwebtext:${PROTO_TS_OUTPUT_DIR}" \
 				$$file; \
