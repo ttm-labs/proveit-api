@@ -1,3 +1,3 @@
-export * from './job_posting';
-export * from './job_interview';
-export * from './job_application';
+export * from './generated/job_posting';
+export * from './generated/job_interview';
+export * from './generated/job_application';
