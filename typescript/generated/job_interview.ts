@@ -8,23 +8,67 @@ import * as grpc_1 from "@grpc/grpc-js";
 export namespace job_interview_service {
     export class JobInterviewRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {}) {
+        constructor(data?: any[] | {
+            job_application_id?: string;
+            message?: string;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") { }
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("job_application_id" in data && data.job_application_id != undefined) {
+                    this.job_application_id = data.job_application_id;
+                }
+                if ("message" in data && data.message != undefined) {
+                    this.message = data.message;
+                }
+            }
         }
-        static fromObject(data: {}): JobInterviewRequest {
+        get job_application_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set job_application_id(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get message() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set message(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            job_application_id?: string;
+            message?: string;
+        }): JobInterviewRequest {
             const message = new JobInterviewRequest({});
+            if (data.job_application_id != null) {
+                message.job_application_id = data.job_application_id;
+            }
+            if (data.message != null) {
+                message.message = data.message;
+            }
             return message;
         }
         toObject() {
-            const data: {} = {};
+            const data: {
+                job_application_id?: string;
+                message?: string;
+            } = {};
+            if (this.job_application_id != null) {
+                data.job_application_id = this.job_application_id;
+            }
+            if (this.message != null) {
+                data.message = this.message;
+            }
             return data;
         }
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
+            if (this.job_application_id.length)
+                writer.writeString(1, this.job_application_id);
+            if (this.message.length)
+                writer.writeString(2, this.message);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -34,6 +78,12 @@ export namespace job_interview_service {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.job_application_id = reader.readString();
+                        break;
+                    case 2:
+                        message.message = reader.readString();
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -48,23 +98,67 @@ export namespace job_interview_service {
     }
     export class JobInterviewResponse extends pb_1.Message {
         #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {}) {
+        constructor(data?: any[] | {
+            request_id?: string;
+            message?: string;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") { }
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("request_id" in data && data.request_id != undefined) {
+                    this.request_id = data.request_id;
+                }
+                if ("message" in data && data.message != undefined) {
+                    this.message = data.message;
+                }
+            }
         }
-        static fromObject(data: {}): JobInterviewResponse {
+        get request_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set request_id(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get message() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set message(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            request_id?: string;
+            message?: string;
+        }): JobInterviewResponse {
             const message = new JobInterviewResponse({});
+            if (data.request_id != null) {
+                message.request_id = data.request_id;
+            }
+            if (data.message != null) {
+                message.message = data.message;
+            }
             return message;
         }
         toObject() {
-            const data: {} = {};
+            const data: {
+                request_id?: string;
+                message?: string;
+            } = {};
+            if (this.request_id != null) {
+                data.request_id = this.request_id;
+            }
+            if (this.message != null) {
+                data.message = this.message;
+            }
             return data;
         }
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
+            if (this.request_id.length)
+                writer.writeString(1, this.request_id);
+            if (this.message.length)
+                writer.writeString(2, this.message);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -74,6 +168,12 @@ export namespace job_interview_service {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.request_id = reader.readString();
+                        break;
+                    case 2:
+                        message.message = reader.readString();
+                        break;
                     default: reader.skipField();
                 }
             }

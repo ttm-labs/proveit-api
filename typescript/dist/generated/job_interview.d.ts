@@ -8,9 +8,22 @@ import * as grpc_1 from "@grpc/grpc-js";
 export declare namespace job_interview_service {
     export class JobInterviewRequest extends pb_1.Message {
         #private;
-        constructor(data?: any[] | {});
-        static fromObject(data: {}): JobInterviewRequest;
-        toObject(): {};
+        constructor(data?: any[] | {
+            job_application_id?: string;
+            message?: string;
+        });
+        get job_application_id(): string;
+        set job_application_id(value: string);
+        get message(): string;
+        set message(value: string);
+        static fromObject(data: {
+            job_application_id?: string;
+            message?: string;
+        }): JobInterviewRequest;
+        toObject(): {
+            job_application_id?: string;
+            message?: string;
+        };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): JobInterviewRequest;
@@ -19,9 +32,22 @@ export declare namespace job_interview_service {
     }
     export class JobInterviewResponse extends pb_1.Message {
         #private;
-        constructor(data?: any[] | {});
-        static fromObject(data: {}): JobInterviewResponse;
-        toObject(): {};
+        constructor(data?: any[] | {
+            request_id?: string;
+            message?: string;
+        });
+        get request_id(): string;
+        set request_id(value: string);
+        get message(): string;
+        set message(value: string);
+        static fromObject(data: {
+            request_id?: string;
+            message?: string;
+        }): JobInterviewResponse;
+        toObject(): {
+            request_id?: string;
+            message?: string;
+        };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): JobInterviewResponse;

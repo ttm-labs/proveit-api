@@ -8,9 +8,35 @@ import * as grpc_1 from "@grpc/grpc-js";
 export declare namespace job_application_service {
     export class CreateJobApplicationRequest extends pb_1.Message {
         #private;
-        constructor(data?: any[] | {});
-        static fromObject(data: {}): CreateJobApplicationRequest;
-        toObject(): {};
+        constructor(data?: any[] | {
+            job_posting_id?: string;
+            name?: Name;
+            contact?: Contact;
+            info?: Info;
+        });
+        get job_posting_id(): string;
+        set job_posting_id(value: string);
+        get name(): Name;
+        set name(value: Name);
+        get has_name(): boolean;
+        get contact(): Contact;
+        set contact(value: Contact);
+        get has_contact(): boolean;
+        get info(): Info;
+        set info(value: Info);
+        get has_info(): boolean;
+        static fromObject(data: {
+            job_posting_id?: string;
+            name?: ReturnType<typeof Name.prototype.toObject>;
+            contact?: ReturnType<typeof Contact.prototype.toObject>;
+            info?: ReturnType<typeof Info.prototype.toObject>;
+        }): CreateJobApplicationRequest;
+        toObject(): {
+            job_posting_id?: string;
+            name?: ReturnType<typeof Name.prototype.toObject>;
+            contact?: ReturnType<typeof Contact.prototype.toObject>;
+            info?: ReturnType<typeof Info.prototype.toObject>;
+        };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): CreateJobApplicationRequest;
@@ -19,9 +45,17 @@ export declare namespace job_application_service {
     }
     export class CreateJobApplicationResponse extends pb_1.Message {
         #private;
-        constructor(data?: any[] | {});
-        static fromObject(data: {}): CreateJobApplicationResponse;
-        toObject(): {};
+        constructor(data?: any[] | {
+            job_application_id?: string;
+        });
+        get job_application_id(): string;
+        set job_application_id(value: string);
+        static fromObject(data: {
+            job_application_id?: string;
+        }): CreateJobApplicationResponse;
+        toObject(): {
+            job_application_id?: string;
+        };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): CreateJobApplicationResponse;
@@ -30,9 +64,17 @@ export declare namespace job_application_service {
     }
     export class ReadJobApplicationRequest extends pb_1.Message {
         #private;
-        constructor(data?: any[] | {});
-        static fromObject(data: {}): ReadJobApplicationRequest;
-        toObject(): {};
+        constructor(data?: any[] | {
+            job_application_id?: string;
+        });
+        get job_application_id(): string;
+        set job_application_id(value: string);
+        static fromObject(data: {
+            job_application_id?: string;
+        }): ReadJobApplicationRequest;
+        toObject(): {
+            job_application_id?: string;
+        };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ReadJobApplicationRequest;
@@ -41,9 +83,36 @@ export declare namespace job_application_service {
     }
     export class ReadJobApplicationResponse extends pb_1.Message {
         #private;
-        constructor(data?: any[] | {});
-        static fromObject(data: {}): ReadJobApplicationResponse;
-        toObject(): {};
+        constructor(data?: any[] | {
+            name?: Name;
+            contact?: Contact;
+            info?: Info;
+            status?: Status;
+        });
+        get name(): Name;
+        set name(value: Name);
+        get has_name(): boolean;
+        get contact(): Contact;
+        set contact(value: Contact);
+        get has_contact(): boolean;
+        get info(): Info;
+        set info(value: Info);
+        get has_info(): boolean;
+        get status(): Status;
+        set status(value: Status);
+        get has_status(): boolean;
+        static fromObject(data: {
+            name?: ReturnType<typeof Name.prototype.toObject>;
+            contact?: ReturnType<typeof Contact.prototype.toObject>;
+            info?: ReturnType<typeof Info.prototype.toObject>;
+            status?: ReturnType<typeof Status.prototype.toObject>;
+        }): ReadJobApplicationResponse;
+        toObject(): {
+            name?: ReturnType<typeof Name.prototype.toObject>;
+            contact?: ReturnType<typeof Contact.prototype.toObject>;
+            info?: ReturnType<typeof Info.prototype.toObject>;
+            status?: ReturnType<typeof Status.prototype.toObject>;
+        };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ReadJobApplicationResponse;
@@ -52,9 +121,41 @@ export declare namespace job_application_service {
     }
     export class UpdateJobApplicationRequest extends pb_1.Message {
         #private;
-        constructor(data?: any[] | {});
-        static fromObject(data: {}): UpdateJobApplicationRequest;
-        toObject(): {};
+        constructor(data?: any[] | {
+            job_application_id?: string;
+            name?: Name;
+            contact?: Contact;
+            info?: Info;
+            status?: Status;
+        });
+        get job_application_id(): string;
+        set job_application_id(value: string);
+        get name(): Name;
+        set name(value: Name);
+        get has_name(): boolean;
+        get contact(): Contact;
+        set contact(value: Contact);
+        get has_contact(): boolean;
+        get info(): Info;
+        set info(value: Info);
+        get has_info(): boolean;
+        get status(): Status;
+        set status(value: Status);
+        get has_status(): boolean;
+        static fromObject(data: {
+            job_application_id?: string;
+            name?: ReturnType<typeof Name.prototype.toObject>;
+            contact?: ReturnType<typeof Contact.prototype.toObject>;
+            info?: ReturnType<typeof Info.prototype.toObject>;
+            status?: ReturnType<typeof Status.prototype.toObject>;
+        }): UpdateJobApplicationRequest;
+        toObject(): {
+            job_application_id?: string;
+            name?: ReturnType<typeof Name.prototype.toObject>;
+            contact?: ReturnType<typeof Contact.prototype.toObject>;
+            info?: ReturnType<typeof Info.prototype.toObject>;
+            status?: ReturnType<typeof Status.prototype.toObject>;
+        };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): UpdateJobApplicationRequest;
@@ -74,9 +175,17 @@ export declare namespace job_application_service {
     }
     export class DeleteJobApplicationRequest extends pb_1.Message {
         #private;
-        constructor(data?: any[] | {});
-        static fromObject(data: {}): DeleteJobApplicationRequest;
-        toObject(): {};
+        constructor(data?: any[] | {
+            job_application_id?: string;
+        });
+        get job_application_id(): string;
+        set job_application_id(value: string);
+        static fromObject(data: {
+            job_application_id?: string;
+        }): DeleteJobApplicationRequest;
+        toObject(): {
+            job_application_id?: string;
+        };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): DeleteJobApplicationRequest;
@@ -93,6 +202,84 @@ export declare namespace job_application_service {
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): DeleteJobApplicationResponse;
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): DeleteJobApplicationResponse;
+    }
+    export class Name extends pb_1.Message {
+        #private;
+        constructor(data?: any[] | {
+            first_name?: string;
+            last_name?: string;
+        });
+        get first_name(): string;
+        set first_name(value: string);
+        get last_name(): string;
+        set last_name(value: string);
+        static fromObject(data: {
+            first_name?: string;
+            last_name?: string;
+        }): Name;
+        toObject(): {
+            first_name?: string;
+            last_name?: string;
+        };
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Name;
+        serializeBinary(): Uint8Array;
+        static deserializeBinary(bytes: Uint8Array): Name;
+    }
+    export class Contact extends pb_1.Message {
+        #private;
+        constructor(data?: any[] | {
+            phone?: string;
+            email?: string;
+        });
+        get phone(): string;
+        set phone(value: string);
+        get email(): string;
+        set email(value: string);
+        static fromObject(data: {
+            phone?: string;
+            email?: string;
+        }): Contact;
+        toObject(): {
+            phone?: string;
+            email?: string;
+        };
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Contact;
+        serializeBinary(): Uint8Array;
+        static deserializeBinary(bytes: Uint8Array): Contact;
+    }
+    export class Info extends pb_1.Message {
+        #private;
+        constructor(data?: any[] | {
+            introduction?: string;
+        });
+        get introduction(): string;
+        set introduction(value: string);
+        static fromObject(data: {
+            introduction?: string;
+        }): Info;
+        toObject(): {
+            introduction?: string;
+        };
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Info;
+        serializeBinary(): Uint8Array;
+        static deserializeBinary(bytes: Uint8Array): Info;
+    }
+    export class Status extends pb_1.Message {
+        #private;
+        constructor(data?: any[] | {});
+        static fromObject(data: {}): Status;
+        toObject(): {};
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Status;
+        serializeBinary(): Uint8Array;
+        static deserializeBinary(bytes: Uint8Array): Status;
     }
     interface GrpcUnaryServiceInterface<P, R> {
         (message: P, metadata: grpc_1.Metadata, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;

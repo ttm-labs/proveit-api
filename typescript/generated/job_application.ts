@@ -8,23 +8,116 @@ import * as grpc_1 from "@grpc/grpc-js";
 export namespace job_application_service {
     export class CreateJobApplicationRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {}) {
+        constructor(data?: any[] | {
+            job_posting_id?: string;
+            name?: Name;
+            contact?: Contact;
+            info?: Info;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") { }
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("job_posting_id" in data && data.job_posting_id != undefined) {
+                    this.job_posting_id = data.job_posting_id;
+                }
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("contact" in data && data.contact != undefined) {
+                    this.contact = data.contact;
+                }
+                if ("info" in data && data.info != undefined) {
+                    this.info = data.info;
+                }
+            }
         }
-        static fromObject(data: {}): CreateJobApplicationRequest {
+        get job_posting_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set job_posting_id(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get name() {
+            return pb_1.Message.getWrapperField(this, Name, 2) as Name;
+        }
+        set name(value: Name) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_name() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        get contact() {
+            return pb_1.Message.getWrapperField(this, Contact, 3) as Contact;
+        }
+        set contact(value: Contact) {
+            pb_1.Message.setWrapperField(this, 3, value);
+        }
+        get has_contact() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
+        get info() {
+            return pb_1.Message.getWrapperField(this, Info, 4) as Info;
+        }
+        set info(value: Info) {
+            pb_1.Message.setWrapperField(this, 4, value);
+        }
+        get has_info() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
+        static fromObject(data: {
+            job_posting_id?: string;
+            name?: ReturnType<typeof Name.prototype.toObject>;
+            contact?: ReturnType<typeof Contact.prototype.toObject>;
+            info?: ReturnType<typeof Info.prototype.toObject>;
+        }): CreateJobApplicationRequest {
             const message = new CreateJobApplicationRequest({});
+            if (data.job_posting_id != null) {
+                message.job_posting_id = data.job_posting_id;
+            }
+            if (data.name != null) {
+                message.name = Name.fromObject(data.name);
+            }
+            if (data.contact != null) {
+                message.contact = Contact.fromObject(data.contact);
+            }
+            if (data.info != null) {
+                message.info = Info.fromObject(data.info);
+            }
             return message;
         }
         toObject() {
-            const data: {} = {};
+            const data: {
+                job_posting_id?: string;
+                name?: ReturnType<typeof Name.prototype.toObject>;
+                contact?: ReturnType<typeof Contact.prototype.toObject>;
+                info?: ReturnType<typeof Info.prototype.toObject>;
+            } = {};
+            if (this.job_posting_id != null) {
+                data.job_posting_id = this.job_posting_id;
+            }
+            if (this.name != null) {
+                data.name = this.name.toObject();
+            }
+            if (this.contact != null) {
+                data.contact = this.contact.toObject();
+            }
+            if (this.info != null) {
+                data.info = this.info.toObject();
+            }
             return data;
         }
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
+            if (this.job_posting_id.length)
+                writer.writeString(1, this.job_posting_id);
+            if (this.has_name)
+                writer.writeMessage(2, this.name, () => this.name.serialize(writer));
+            if (this.has_contact)
+                writer.writeMessage(3, this.contact, () => this.contact.serialize(writer));
+            if (this.has_info)
+                writer.writeMessage(4, this.info, () => this.info.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -34,6 +127,18 @@ export namespace job_application_service {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.job_posting_id = reader.readString();
+                        break;
+                    case 2:
+                        reader.readMessage(message.name, () => message.name = Name.deserialize(reader));
+                        break;
+                    case 3:
+                        reader.readMessage(message.contact, () => message.contact = Contact.deserialize(reader));
+                        break;
+                    case 4:
+                        reader.readMessage(message.info, () => message.info = Info.deserialize(reader));
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -48,23 +153,47 @@ export namespace job_application_service {
     }
     export class CreateJobApplicationResponse extends pb_1.Message {
         #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {}) {
+        constructor(data?: any[] | {
+            job_application_id?: string;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") { }
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("job_application_id" in data && data.job_application_id != undefined) {
+                    this.job_application_id = data.job_application_id;
+                }
+            }
         }
-        static fromObject(data: {}): CreateJobApplicationResponse {
+        get job_application_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set job_application_id(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            job_application_id?: string;
+        }): CreateJobApplicationResponse {
             const message = new CreateJobApplicationResponse({});
+            if (data.job_application_id != null) {
+                message.job_application_id = data.job_application_id;
+            }
             return message;
         }
         toObject() {
-            const data: {} = {};
+            const data: {
+                job_application_id?: string;
+            } = {};
+            if (this.job_application_id != null) {
+                data.job_application_id = this.job_application_id;
+            }
             return data;
         }
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
+            if (this.job_application_id.length)
+                writer.writeString(1, this.job_application_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -74,6 +203,9 @@ export namespace job_application_service {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.job_application_id = reader.readString();
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -88,23 +220,47 @@ export namespace job_application_service {
     }
     export class ReadJobApplicationRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {}) {
+        constructor(data?: any[] | {
+            job_application_id?: string;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") { }
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("job_application_id" in data && data.job_application_id != undefined) {
+                    this.job_application_id = data.job_application_id;
+                }
+            }
         }
-        static fromObject(data: {}): ReadJobApplicationRequest {
+        get job_application_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set job_application_id(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            job_application_id?: string;
+        }): ReadJobApplicationRequest {
             const message = new ReadJobApplicationRequest({});
+            if (data.job_application_id != null) {
+                message.job_application_id = data.job_application_id;
+            }
             return message;
         }
         toObject() {
-            const data: {} = {};
+            const data: {
+                job_application_id?: string;
+            } = {};
+            if (this.job_application_id != null) {
+                data.job_application_id = this.job_application_id;
+            }
             return data;
         }
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
+            if (this.job_application_id.length)
+                writer.writeString(1, this.job_application_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -114,6 +270,9 @@ export namespace job_application_service {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.job_application_id = reader.readString();
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -128,23 +287,119 @@ export namespace job_application_service {
     }
     export class ReadJobApplicationResponse extends pb_1.Message {
         #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {}) {
+        constructor(data?: any[] | {
+            name?: Name;
+            contact?: Contact;
+            info?: Info;
+            status?: Status;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") { }
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("contact" in data && data.contact != undefined) {
+                    this.contact = data.contact;
+                }
+                if ("info" in data && data.info != undefined) {
+                    this.info = data.info;
+                }
+                if ("status" in data && data.status != undefined) {
+                    this.status = data.status;
+                }
+            }
         }
-        static fromObject(data: {}): ReadJobApplicationResponse {
+        get name() {
+            return pb_1.Message.getWrapperField(this, Name, 1) as Name;
+        }
+        set name(value: Name) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_name() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get contact() {
+            return pb_1.Message.getWrapperField(this, Contact, 2) as Contact;
+        }
+        set contact(value: Contact) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_contact() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        get info() {
+            return pb_1.Message.getWrapperField(this, Info, 3) as Info;
+        }
+        set info(value: Info) {
+            pb_1.Message.setWrapperField(this, 3, value);
+        }
+        get has_info() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
+        get status() {
+            return pb_1.Message.getWrapperField(this, Status, 4) as Status;
+        }
+        set status(value: Status) {
+            pb_1.Message.setWrapperField(this, 4, value);
+        }
+        get has_status() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
+        static fromObject(data: {
+            name?: ReturnType<typeof Name.prototype.toObject>;
+            contact?: ReturnType<typeof Contact.prototype.toObject>;
+            info?: ReturnType<typeof Info.prototype.toObject>;
+            status?: ReturnType<typeof Status.prototype.toObject>;
+        }): ReadJobApplicationResponse {
             const message = new ReadJobApplicationResponse({});
+            if (data.name != null) {
+                message.name = Name.fromObject(data.name);
+            }
+            if (data.contact != null) {
+                message.contact = Contact.fromObject(data.contact);
+            }
+            if (data.info != null) {
+                message.info = Info.fromObject(data.info);
+            }
+            if (data.status != null) {
+                message.status = Status.fromObject(data.status);
+            }
             return message;
         }
         toObject() {
-            const data: {} = {};
+            const data: {
+                name?: ReturnType<typeof Name.prototype.toObject>;
+                contact?: ReturnType<typeof Contact.prototype.toObject>;
+                info?: ReturnType<typeof Info.prototype.toObject>;
+                status?: ReturnType<typeof Status.prototype.toObject>;
+            } = {};
+            if (this.name != null) {
+                data.name = this.name.toObject();
+            }
+            if (this.contact != null) {
+                data.contact = this.contact.toObject();
+            }
+            if (this.info != null) {
+                data.info = this.info.toObject();
+            }
+            if (this.status != null) {
+                data.status = this.status.toObject();
+            }
             return data;
         }
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
+            if (this.has_name)
+                writer.writeMessage(1, this.name, () => this.name.serialize(writer));
+            if (this.has_contact)
+                writer.writeMessage(2, this.contact, () => this.contact.serialize(writer));
+            if (this.has_info)
+                writer.writeMessage(3, this.info, () => this.info.serialize(writer));
+            if (this.has_status)
+                writer.writeMessage(4, this.status, () => this.status.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -154,6 +409,18 @@ export namespace job_application_service {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.name, () => message.name = Name.deserialize(reader));
+                        break;
+                    case 2:
+                        reader.readMessage(message.contact, () => message.contact = Contact.deserialize(reader));
+                        break;
+                    case 3:
+                        reader.readMessage(message.info, () => message.info = Info.deserialize(reader));
+                        break;
+                    case 4:
+                        reader.readMessage(message.status, () => message.status = Status.deserialize(reader));
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -168,23 +435,139 @@ export namespace job_application_service {
     }
     export class UpdateJobApplicationRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {}) {
+        constructor(data?: any[] | {
+            job_application_id?: string;
+            name?: Name;
+            contact?: Contact;
+            info?: Info;
+            status?: Status;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") { }
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("job_application_id" in data && data.job_application_id != undefined) {
+                    this.job_application_id = data.job_application_id;
+                }
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("contact" in data && data.contact != undefined) {
+                    this.contact = data.contact;
+                }
+                if ("info" in data && data.info != undefined) {
+                    this.info = data.info;
+                }
+                if ("status" in data && data.status != undefined) {
+                    this.status = data.status;
+                }
+            }
         }
-        static fromObject(data: {}): UpdateJobApplicationRequest {
+        get job_application_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set job_application_id(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get name() {
+            return pb_1.Message.getWrapperField(this, Name, 2) as Name;
+        }
+        set name(value: Name) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_name() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        get contact() {
+            return pb_1.Message.getWrapperField(this, Contact, 3) as Contact;
+        }
+        set contact(value: Contact) {
+            pb_1.Message.setWrapperField(this, 3, value);
+        }
+        get has_contact() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
+        get info() {
+            return pb_1.Message.getWrapperField(this, Info, 4) as Info;
+        }
+        set info(value: Info) {
+            pb_1.Message.setWrapperField(this, 4, value);
+        }
+        get has_info() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
+        get status() {
+            return pb_1.Message.getWrapperField(this, Status, 5) as Status;
+        }
+        set status(value: Status) {
+            pb_1.Message.setWrapperField(this, 5, value);
+        }
+        get has_status() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        static fromObject(data: {
+            job_application_id?: string;
+            name?: ReturnType<typeof Name.prototype.toObject>;
+            contact?: ReturnType<typeof Contact.prototype.toObject>;
+            info?: ReturnType<typeof Info.prototype.toObject>;
+            status?: ReturnType<typeof Status.prototype.toObject>;
+        }): UpdateJobApplicationRequest {
             const message = new UpdateJobApplicationRequest({});
+            if (data.job_application_id != null) {
+                message.job_application_id = data.job_application_id;
+            }
+            if (data.name != null) {
+                message.name = Name.fromObject(data.name);
+            }
+            if (data.contact != null) {
+                message.contact = Contact.fromObject(data.contact);
+            }
+            if (data.info != null) {
+                message.info = Info.fromObject(data.info);
+            }
+            if (data.status != null) {
+                message.status = Status.fromObject(data.status);
+            }
             return message;
         }
         toObject() {
-            const data: {} = {};
+            const data: {
+                job_application_id?: string;
+                name?: ReturnType<typeof Name.prototype.toObject>;
+                contact?: ReturnType<typeof Contact.prototype.toObject>;
+                info?: ReturnType<typeof Info.prototype.toObject>;
+                status?: ReturnType<typeof Status.prototype.toObject>;
+            } = {};
+            if (this.job_application_id != null) {
+                data.job_application_id = this.job_application_id;
+            }
+            if (this.name != null) {
+                data.name = this.name.toObject();
+            }
+            if (this.contact != null) {
+                data.contact = this.contact.toObject();
+            }
+            if (this.info != null) {
+                data.info = this.info.toObject();
+            }
+            if (this.status != null) {
+                data.status = this.status.toObject();
+            }
             return data;
         }
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
+            if (this.job_application_id.length)
+                writer.writeString(1, this.job_application_id);
+            if (this.has_name)
+                writer.writeMessage(2, this.name, () => this.name.serialize(writer));
+            if (this.has_contact)
+                writer.writeMessage(3, this.contact, () => this.contact.serialize(writer));
+            if (this.has_info)
+                writer.writeMessage(4, this.info, () => this.info.serialize(writer));
+            if (this.has_status)
+                writer.writeMessage(5, this.status, () => this.status.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -194,6 +577,21 @@ export namespace job_application_service {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.job_application_id = reader.readString();
+                        break;
+                    case 2:
+                        reader.readMessage(message.name, () => message.name = Name.deserialize(reader));
+                        break;
+                    case 3:
+                        reader.readMessage(message.contact, () => message.contact = Contact.deserialize(reader));
+                        break;
+                    case 4:
+                        reader.readMessage(message.info, () => message.info = Info.deserialize(reader));
+                        break;
+                    case 5:
+                        reader.readMessage(message.status, () => message.status = Status.deserialize(reader));
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -248,23 +646,47 @@ export namespace job_application_service {
     }
     export class DeleteJobApplicationRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {}) {
+        constructor(data?: any[] | {
+            job_application_id?: string;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") { }
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("job_application_id" in data && data.job_application_id != undefined) {
+                    this.job_application_id = data.job_application_id;
+                }
+            }
         }
-        static fromObject(data: {}): DeleteJobApplicationRequest {
+        get job_application_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set job_application_id(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            job_application_id?: string;
+        }): DeleteJobApplicationRequest {
             const message = new DeleteJobApplicationRequest({});
+            if (data.job_application_id != null) {
+                message.job_application_id = data.job_application_id;
+            }
             return message;
         }
         toObject() {
-            const data: {} = {};
+            const data: {
+                job_application_id?: string;
+            } = {};
+            if (this.job_application_id != null) {
+                data.job_application_id = this.job_application_id;
+            }
             return data;
         }
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
+            if (this.job_application_id.length)
+                writer.writeString(1, this.job_application_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -274,6 +696,9 @@ export namespace job_application_service {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.job_application_id = reader.readString();
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -324,6 +749,293 @@ export namespace job_application_service {
         }
         static deserializeBinary(bytes: Uint8Array): DeleteJobApplicationResponse {
             return DeleteJobApplicationResponse.deserialize(bytes);
+        }
+    }
+    export class Name extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            first_name?: string;
+            last_name?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("first_name" in data && data.first_name != undefined) {
+                    this.first_name = data.first_name;
+                }
+                if ("last_name" in data && data.last_name != undefined) {
+                    this.last_name = data.last_name;
+                }
+            }
+        }
+        get first_name() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set first_name(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get last_name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set last_name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            first_name?: string;
+            last_name?: string;
+        }): Name {
+            const message = new Name({});
+            if (data.first_name != null) {
+                message.first_name = data.first_name;
+            }
+            if (data.last_name != null) {
+                message.last_name = data.last_name;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                first_name?: string;
+                last_name?: string;
+            } = {};
+            if (this.first_name != null) {
+                data.first_name = this.first_name;
+            }
+            if (this.last_name != null) {
+                data.last_name = this.last_name;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.first_name.length)
+                writer.writeString(1, this.first_name);
+            if (this.last_name.length)
+                writer.writeString(2, this.last_name);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Name {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Name();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.first_name = reader.readString();
+                        break;
+                    case 2:
+                        message.last_name = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): Name {
+            return Name.deserialize(bytes);
+        }
+    }
+    export class Contact extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            phone?: string;
+            email?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("phone" in data && data.phone != undefined) {
+                    this.phone = data.phone;
+                }
+                if ("email" in data && data.email != undefined) {
+                    this.email = data.email;
+                }
+            }
+        }
+        get phone() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set phone(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get email() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set email(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            phone?: string;
+            email?: string;
+        }): Contact {
+            const message = new Contact({});
+            if (data.phone != null) {
+                message.phone = data.phone;
+            }
+            if (data.email != null) {
+                message.email = data.email;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                phone?: string;
+                email?: string;
+            } = {};
+            if (this.phone != null) {
+                data.phone = this.phone;
+            }
+            if (this.email != null) {
+                data.email = this.email;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.phone.length)
+                writer.writeString(1, this.phone);
+            if (this.email.length)
+                writer.writeString(2, this.email);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Contact {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Contact();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.phone = reader.readString();
+                        break;
+                    case 2:
+                        message.email = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): Contact {
+            return Contact.deserialize(bytes);
+        }
+    }
+    export class Info extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            introduction?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("introduction" in data && data.introduction != undefined) {
+                    this.introduction = data.introduction;
+                }
+            }
+        }
+        get introduction() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set introduction(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            introduction?: string;
+        }): Info {
+            const message = new Info({});
+            if (data.introduction != null) {
+                message.introduction = data.introduction;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                introduction?: string;
+            } = {};
+            if (this.introduction != null) {
+                data.introduction = this.introduction;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.introduction.length)
+                writer.writeString(1, this.introduction);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Info {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Info();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.introduction = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): Info {
+            return Info.deserialize(bytes);
+        }
+    }
+    export class Status extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {}) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") { }
+        }
+        static fromObject(data: {}): Status {
+            const message = new Status({});
+            return message;
+        }
+        toObject() {
+            const data: {} = {};
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Status {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Status();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): Status {
+            return Status.deserialize(bytes);
         }
     }
     interface GrpcUnaryServiceInterface<P, R> {

@@ -9,5 +9,11 @@ service JobInterviewService {
     rpc BidirectionalConversation(stream JobInterviewRequest) returns (stream JobInterviewResponse) {}
 }
 
-message JobInterviewRequest {}
-message JobInterviewResponse {}
+message JobInterviewRequest {
+    string job_application_id = 1;
+    string message = 2;
+}
+message JobInterviewResponse {
+    string request_id = 1;
+    string message = 2;
+}
