@@ -4,16 +4,54 @@ package job_interview_service;
 
 option go_package = "proto/";
 
+// Import the timestamp type
+import "google/protobuf/timestamp.proto";
+
 service JobInterviewService {
-    rpc UnaryConversation(JobInterviewRequest) returns (JobInterviewResponse) {}
-    rpc BidirectionalConversation(stream JobInterviewRequest) returns (stream JobInterviewResponse) {}
+    rpc UnaryConversation(Message) returns (Message) {}
+    rpc BidirectionalConversation(stream Message) returns (stream Message) {}
+
+    rpc CreateJobInterview(CreateJobInterviewRequest) returns (CreateJobInterviewResponse) {}
+    rpc ReadJobInterview(ReadJobInterviewRequest) returns (ReadJobInterviewResponse) {}
+    rpc UpdateJobInterview(UpdateJobInterviewRequest) returns (UpdateJobInterviewResponse) {}
+    rpc DeleteJobInterview(DeleteJobInterviewRequest) returns (DeleteJobInterviewResponse) {}
 }
 
-message JobInterviewRequest {
+message CreateJobInterviewRequest {
     string job_application_id = 1;
-    string message = 2;
 }
-message JobInterviewResponse {
-    string request_id = 1;
-    string message = 2;
+message CreateJobInterviewResponse {
+    string job_interview_id = 1;
+}
+
+message ReadJobInterviewRequest {
+    string job_interview_id = 1;
+}
+message ReadJobInterviewResponse {
+    string job_application_id = 1;
+    repeated Message conversation = 2;
+}
+
+message UpdateJobInterviewRequest {
+    string job_interview_id = 1;
+    Message message = 2;
+}
+message UpdateJobInterviewResponse {
+    bool success = 1;
+}
+
+message DeleteJobInterviewRequest {
+    string job_interview_id = 1;
+}
+message DeleteJobInterviewResponse {
+    bool success = 1;
+}
+
+message Message {
+    string id = 1;
+    string job_interview_id = 2;
+    string from = 3;
+    string to = 4;
+    string contents = 5;
+    google.protobuf.Timestamp time = 6;
 }

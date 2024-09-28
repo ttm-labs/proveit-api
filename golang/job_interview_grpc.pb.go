@@ -21,14 +21,22 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	JobInterviewService_UnaryConversation_FullMethodName         = "/job_interview_service.JobInterviewService/UnaryConversation"
 	JobInterviewService_BidirectionalConversation_FullMethodName = "/job_interview_service.JobInterviewService/BidirectionalConversation"
+	JobInterviewService_CreateJobInterview_FullMethodName        = "/job_interview_service.JobInterviewService/CreateJobInterview"
+	JobInterviewService_ReadJobInterview_FullMethodName          = "/job_interview_service.JobInterviewService/ReadJobInterview"
+	JobInterviewService_UpdateJobInterview_FullMethodName        = "/job_interview_service.JobInterviewService/UpdateJobInterview"
+	JobInterviewService_DeleteJobInterview_FullMethodName        = "/job_interview_service.JobInterviewService/DeleteJobInterview"
 )
 
 // JobInterviewServiceClient is the client API for JobInterviewService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type JobInterviewServiceClient interface {
-	UnaryConversation(ctx context.Context, in *JobInterviewRequest, opts ...grpc.CallOption) (*JobInterviewResponse, error)
-	BidirectionalConversation(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[JobInterviewRequest, JobInterviewResponse], error)
+	UnaryConversation(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error)
+	BidirectionalConversation(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[Message, Message], error)
+	CreateJobInterview(ctx context.Context, in *CreateJobInterviewRequest, opts ...grpc.CallOption) (*CreateJobInterviewResponse, error)
+	ReadJobInterview(ctx context.Context, in *ReadJobInterviewRequest, opts ...grpc.CallOption) (*ReadJobInterviewResponse, error)
+	UpdateJobInterview(ctx context.Context, in *UpdateJobInterviewRequest, opts ...grpc.CallOption) (*UpdateJobInterviewResponse, error)
+	DeleteJobInterview(ctx context.Context, in *DeleteJobInterviewRequest, opts ...grpc.CallOption) (*DeleteJobInterviewResponse, error)
 }
 
 type jobInterviewServiceClient struct {
@@ -39,9 +47,9 @@ func NewJobInterviewServiceClient(cc grpc.ClientConnInterface) JobInterviewServi
 	return &jobInterviewServiceClient{cc}
 }
 
-func (c *jobInterviewServiceClient) UnaryConversation(ctx context.Context, in *JobInterviewRequest, opts ...grpc.CallOption) (*JobInterviewResponse, error) {
+func (c *jobInterviewServiceClient) UnaryConversation(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(JobInterviewResponse)
+	out := new(Message)
 	err := c.cc.Invoke(ctx, JobInterviewService_UnaryConversation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -49,25 +57,69 @@ func (c *jobInterviewServiceClient) UnaryConversation(ctx context.Context, in *J
 	return out, nil
 }
 
-func (c *jobInterviewServiceClient) BidirectionalConversation(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[JobInterviewRequest, JobInterviewResponse], error) {
+func (c *jobInterviewServiceClient) BidirectionalConversation(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[Message, Message], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &JobInterviewService_ServiceDesc.Streams[0], JobInterviewService_BidirectionalConversation_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[JobInterviewRequest, JobInterviewResponse]{ClientStream: stream}
+	x := &grpc.GenericClientStream[Message, Message]{ClientStream: stream}
 	return x, nil
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type JobInterviewService_BidirectionalConversationClient = grpc.BidiStreamingClient[JobInterviewRequest, JobInterviewResponse]
+type JobInterviewService_BidirectionalConversationClient = grpc.BidiStreamingClient[Message, Message]
+
+func (c *jobInterviewServiceClient) CreateJobInterview(ctx context.Context, in *CreateJobInterviewRequest, opts ...grpc.CallOption) (*CreateJobInterviewResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateJobInterviewResponse)
+	err := c.cc.Invoke(ctx, JobInterviewService_CreateJobInterview_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *jobInterviewServiceClient) ReadJobInterview(ctx context.Context, in *ReadJobInterviewRequest, opts ...grpc.CallOption) (*ReadJobInterviewResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReadJobInterviewResponse)
+	err := c.cc.Invoke(ctx, JobInterviewService_ReadJobInterview_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *jobInterviewServiceClient) UpdateJobInterview(ctx context.Context, in *UpdateJobInterviewRequest, opts ...grpc.CallOption) (*UpdateJobInterviewResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateJobInterviewResponse)
+	err := c.cc.Invoke(ctx, JobInterviewService_UpdateJobInterview_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *jobInterviewServiceClient) DeleteJobInterview(ctx context.Context, in *DeleteJobInterviewRequest, opts ...grpc.CallOption) (*DeleteJobInterviewResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteJobInterviewResponse)
+	err := c.cc.Invoke(ctx, JobInterviewService_DeleteJobInterview_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
 
 // JobInterviewServiceServer is the server API for JobInterviewService service.
 // All implementations must embed UnimplementedJobInterviewServiceServer
 // for forward compatibility.
 type JobInterviewServiceServer interface {
-	UnaryConversation(context.Context, *JobInterviewRequest) (*JobInterviewResponse, error)
-	BidirectionalConversation(grpc.BidiStreamingServer[JobInterviewRequest, JobInterviewResponse]) error
+	UnaryConversation(context.Context, *Message) (*Message, error)
+	BidirectionalConversation(grpc.BidiStreamingServer[Message, Message]) error
+	CreateJobInterview(context.Context, *CreateJobInterviewRequest) (*CreateJobInterviewResponse, error)
+	ReadJobInterview(context.Context, *ReadJobInterviewRequest) (*ReadJobInterviewResponse, error)
+	UpdateJobInterview(context.Context, *UpdateJobInterviewRequest) (*UpdateJobInterviewResponse, error)
+	DeleteJobInterview(context.Context, *DeleteJobInterviewRequest) (*DeleteJobInterviewResponse, error)
 	mustEmbedUnimplementedJobInterviewServiceServer()
 }
 
@@ -78,11 +130,23 @@ type JobInterviewServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedJobInterviewServiceServer struct{}
 
-func (UnimplementedJobInterviewServiceServer) UnaryConversation(context.Context, *JobInterviewRequest) (*JobInterviewResponse, error) {
+func (UnimplementedJobInterviewServiceServer) UnaryConversation(context.Context, *Message) (*Message, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnaryConversation not implemented")
 }
-func (UnimplementedJobInterviewServiceServer) BidirectionalConversation(grpc.BidiStreamingServer[JobInterviewRequest, JobInterviewResponse]) error {
+func (UnimplementedJobInterviewServiceServer) BidirectionalConversation(grpc.BidiStreamingServer[Message, Message]) error {
 	return status.Errorf(codes.Unimplemented, "method BidirectionalConversation not implemented")
+}
+func (UnimplementedJobInterviewServiceServer) CreateJobInterview(context.Context, *CreateJobInterviewRequest) (*CreateJobInterviewResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateJobInterview not implemented")
+}
+func (UnimplementedJobInterviewServiceServer) ReadJobInterview(context.Context, *ReadJobInterviewRequest) (*ReadJobInterviewResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadJobInterview not implemented")
+}
+func (UnimplementedJobInterviewServiceServer) UpdateJobInterview(context.Context, *UpdateJobInterviewRequest) (*UpdateJobInterviewResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateJobInterview not implemented")
+}
+func (UnimplementedJobInterviewServiceServer) DeleteJobInterview(context.Context, *DeleteJobInterviewRequest) (*DeleteJobInterviewResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteJobInterview not implemented")
 }
 func (UnimplementedJobInterviewServiceServer) mustEmbedUnimplementedJobInterviewServiceServer() {}
 func (UnimplementedJobInterviewServiceServer) testEmbeddedByValue()                             {}
@@ -106,7 +170,7 @@ func RegisterJobInterviewServiceServer(s grpc.ServiceRegistrar, srv JobInterview
 }
 
 func _JobInterviewService_UnaryConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(JobInterviewRequest)
+	in := new(Message)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -118,17 +182,89 @@ func _JobInterviewService_UnaryConversation_Handler(srv interface{}, ctx context
 		FullMethod: JobInterviewService_UnaryConversation_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobInterviewServiceServer).UnaryConversation(ctx, req.(*JobInterviewRequest))
+		return srv.(JobInterviewServiceServer).UnaryConversation(ctx, req.(*Message))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _JobInterviewService_BidirectionalConversation_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(JobInterviewServiceServer).BidirectionalConversation(&grpc.GenericServerStream[JobInterviewRequest, JobInterviewResponse]{ServerStream: stream})
+	return srv.(JobInterviewServiceServer).BidirectionalConversation(&grpc.GenericServerStream[Message, Message]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type JobInterviewService_BidirectionalConversationServer = grpc.BidiStreamingServer[JobInterviewRequest, JobInterviewResponse]
+type JobInterviewService_BidirectionalConversationServer = grpc.BidiStreamingServer[Message, Message]
+
+func _JobInterviewService_CreateJobInterview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateJobInterviewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobInterviewServiceServer).CreateJobInterview(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JobInterviewService_CreateJobInterview_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobInterviewServiceServer).CreateJobInterview(ctx, req.(*CreateJobInterviewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _JobInterviewService_ReadJobInterview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadJobInterviewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobInterviewServiceServer).ReadJobInterview(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JobInterviewService_ReadJobInterview_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobInterviewServiceServer).ReadJobInterview(ctx, req.(*ReadJobInterviewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _JobInterviewService_UpdateJobInterview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateJobInterviewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobInterviewServiceServer).UpdateJobInterview(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JobInterviewService_UpdateJobInterview_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobInterviewServiceServer).UpdateJobInterview(ctx, req.(*UpdateJobInterviewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _JobInterviewService_DeleteJobInterview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteJobInterviewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobInterviewServiceServer).DeleteJobInterview(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JobInterviewService_DeleteJobInterview_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobInterviewServiceServer).DeleteJobInterview(ctx, req.(*DeleteJobInterviewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
 
 // JobInterviewService_ServiceDesc is the grpc.ServiceDesc for JobInterviewService service.
 // It's only intended for direct use with grpc.RegisterService,
@@ -140,6 +276,22 @@ var JobInterviewService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UnaryConversation",
 			Handler:    _JobInterviewService_UnaryConversation_Handler,
+		},
+		{
+			MethodName: "CreateJobInterview",
+			Handler:    _JobInterviewService_CreateJobInterview_Handler,
+		},
+		{
+			MethodName: "ReadJobInterview",
+			Handler:    _JobInterviewService_ReadJobInterview_Handler,
+		},
+		{
+			MethodName: "UpdateJobInterview",
+			Handler:    _JobInterviewService_UpdateJobInterview_Handler,
+		},
+		{
+			MethodName: "DeleteJobInterview",
+			Handler:    _JobInterviewService_DeleteJobInterview_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
