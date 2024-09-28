@@ -302,16 +302,16 @@ export namespace job_interview_service {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             job_interview_id?: string;
-            message?: Message;
+            conversation?: Message[];
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("job_interview_id" in data && data.job_interview_id != undefined) {
                     this.job_interview_id = data.job_interview_id;
                 }
-                if ("message" in data && data.message != undefined) {
-                    this.message = data.message;
+                if ("conversation" in data && data.conversation != undefined) {
+                    this.conversation = data.conversation;
                 }
             }
         }
@@ -321,38 +321,35 @@ export namespace job_interview_service {
         set job_interview_id(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
-        get message() {
-            return pb_1.Message.getWrapperField(this, Message, 2) as Message;
+        get conversation() {
+            return pb_1.Message.getRepeatedWrapperField(this, Message, 2) as Message[];
         }
-        set message(value: Message) {
-            pb_1.Message.setWrapperField(this, 2, value);
-        }
-        get has_message() {
-            return pb_1.Message.getField(this, 2) != null;
+        set conversation(value: Message[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 2, value);
         }
         static fromObject(data: {
             job_interview_id?: string;
-            message?: ReturnType<typeof Message.prototype.toObject>;
+            conversation?: ReturnType<typeof Message.prototype.toObject>[];
         }): UpdateJobInterviewRequest {
             const message = new UpdateJobInterviewRequest({});
             if (data.job_interview_id != null) {
                 message.job_interview_id = data.job_interview_id;
             }
-            if (data.message != null) {
-                message.message = Message.fromObject(data.message);
+            if (data.conversation != null) {
+                message.conversation = data.conversation.map(item => Message.fromObject(item));
             }
             return message;
         }
         toObject() {
             const data: {
                 job_interview_id?: string;
-                message?: ReturnType<typeof Message.prototype.toObject>;
+                conversation?: ReturnType<typeof Message.prototype.toObject>[];
             } = {};
             if (this.job_interview_id != null) {
                 data.job_interview_id = this.job_interview_id;
             }
-            if (this.message != null) {
-                data.message = this.message.toObject();
+            if (this.conversation != null) {
+                data.conversation = this.conversation.map((item: Message) => item.toObject());
             }
             return data;
         }
@@ -362,8 +359,8 @@ export namespace job_interview_service {
             const writer = w || new pb_1.BinaryWriter();
             if (this.job_interview_id.length)
                 writer.writeString(1, this.job_interview_id);
-            if (this.has_message)
-                writer.writeMessage(2, this.message, () => this.message.serialize(writer));
+            if (this.conversation.length)
+                writer.writeRepeatedMessage(2, this.conversation, (item: Message) => item.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -377,7 +374,7 @@ export namespace job_interview_service {
                         message.job_interview_id = reader.readString();
                         break;
                     case 2:
-                        reader.readMessage(message.message, () => message.message = Message.deserialize(reader));
+                        reader.readMessage(message.conversation, () => pb_1.Message.addToRepeatedWrapperField(message, 2, Message.deserialize(reader), Message));
                         break;
                     default: reader.skipField();
                 }
@@ -592,13 +589,244 @@ export namespace job_interview_service {
             return DeleteJobInterviewResponse.deserialize(bytes);
         }
     }
+    export class InterviewMessageRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            req?: InterviewMessage;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("req" in data && data.req != undefined) {
+                    this.req = data.req;
+                }
+            }
+        }
+        get req() {
+            return pb_1.Message.getWrapperField(this, InterviewMessage, 1) as InterviewMessage;
+        }
+        set req(value: InterviewMessage) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_req() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        static fromObject(data: {
+            req?: ReturnType<typeof InterviewMessage.prototype.toObject>;
+        }): InterviewMessageRequest {
+            const message = new InterviewMessageRequest({});
+            if (data.req != null) {
+                message.req = InterviewMessage.fromObject(data.req);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                req?: ReturnType<typeof InterviewMessage.prototype.toObject>;
+            } = {};
+            if (this.req != null) {
+                data.req = this.req.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_req)
+                writer.writeMessage(1, this.req, () => this.req.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): InterviewMessageRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new InterviewMessageRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.req, () => message.req = InterviewMessage.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): InterviewMessageRequest {
+            return InterviewMessageRequest.deserialize(bytes);
+        }
+    }
+    export class InterviewMessageResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            res?: InterviewMessage;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("res" in data && data.res != undefined) {
+                    this.res = data.res;
+                }
+            }
+        }
+        get res() {
+            return pb_1.Message.getWrapperField(this, InterviewMessage, 1) as InterviewMessage;
+        }
+        set res(value: InterviewMessage) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_res() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        static fromObject(data: {
+            res?: ReturnType<typeof InterviewMessage.prototype.toObject>;
+        }): InterviewMessageResponse {
+            const message = new InterviewMessageResponse({});
+            if (data.res != null) {
+                message.res = InterviewMessage.fromObject(data.res);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                res?: ReturnType<typeof InterviewMessage.prototype.toObject>;
+            } = {};
+            if (this.res != null) {
+                data.res = this.res.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_res)
+                writer.writeMessage(1, this.res, () => this.res.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): InterviewMessageResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new InterviewMessageResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.res, () => message.res = InterviewMessage.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): InterviewMessageResponse {
+            return InterviewMessageResponse.deserialize(bytes);
+        }
+    }
+    export class InterviewMessage extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            job_interview_id?: string;
+            message?: Message;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("job_interview_id" in data && data.job_interview_id != undefined) {
+                    this.job_interview_id = data.job_interview_id;
+                }
+                if ("message" in data && data.message != undefined) {
+                    this.message = data.message;
+                }
+            }
+        }
+        get job_interview_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set job_interview_id(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get message() {
+            return pb_1.Message.getWrapperField(this, Message, 2) as Message;
+        }
+        set message(value: Message) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_message() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        static fromObject(data: {
+            job_interview_id?: string;
+            message?: ReturnType<typeof Message.prototype.toObject>;
+        }): InterviewMessage {
+            const message = new InterviewMessage({});
+            if (data.job_interview_id != null) {
+                message.job_interview_id = data.job_interview_id;
+            }
+            if (data.message != null) {
+                message.message = Message.fromObject(data.message);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                job_interview_id?: string;
+                message?: ReturnType<typeof Message.prototype.toObject>;
+            } = {};
+            if (this.job_interview_id != null) {
+                data.job_interview_id = this.job_interview_id;
+            }
+            if (this.message != null) {
+                data.message = this.message.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.job_interview_id.length)
+                writer.writeString(1, this.job_interview_id);
+            if (this.has_message)
+                writer.writeMessage(2, this.message, () => this.message.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): InterviewMessage {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new InterviewMessage();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.job_interview_id = reader.readString();
+                        break;
+                    case 2:
+                        reader.readMessage(message.message, () => message.message = Message.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): InterviewMessage {
+            return InterviewMessage.deserialize(bytes);
+        }
+    }
     export class Message extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             id?: string;
-            job_interview_id?: string;
             from?: string;
-            to?: string;
             contents?: string;
             time?: dependency_1.google.protobuf.Timestamp;
         }) {
@@ -608,14 +836,8 @@ export namespace job_interview_service {
                 if ("id" in data && data.id != undefined) {
                     this.id = data.id;
                 }
-                if ("job_interview_id" in data && data.job_interview_id != undefined) {
-                    this.job_interview_id = data.job_interview_id;
-                }
                 if ("from" in data && data.from != undefined) {
                     this.from = data.from;
-                }
-                if ("to" in data && data.to != undefined) {
-                    this.to = data.to;
                 }
                 if ("contents" in data && data.contents != undefined) {
                     this.contents = data.contents;
@@ -631,44 +853,30 @@ export namespace job_interview_service {
         set id(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
-        get job_interview_id() {
+        get from() {
             return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
-        set job_interview_id(value: string) {
+        set from(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
-        get from() {
+        get contents() {
             return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
-        set from(value: string) {
+        set contents(value: string) {
             pb_1.Message.setField(this, 3, value);
         }
-        get to() {
-            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
-        }
-        set to(value: string) {
-            pb_1.Message.setField(this, 4, value);
-        }
-        get contents() {
-            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
-        }
-        set contents(value: string) {
-            pb_1.Message.setField(this, 5, value);
-        }
         get time() {
-            return pb_1.Message.getWrapperField(this, dependency_1.google.protobuf.Timestamp, 6) as dependency_1.google.protobuf.Timestamp;
+            return pb_1.Message.getWrapperField(this, dependency_1.google.protobuf.Timestamp, 4) as dependency_1.google.protobuf.Timestamp;
         }
         set time(value: dependency_1.google.protobuf.Timestamp) {
-            pb_1.Message.setWrapperField(this, 6, value);
+            pb_1.Message.setWrapperField(this, 4, value);
         }
         get has_time() {
-            return pb_1.Message.getField(this, 6) != null;
+            return pb_1.Message.getField(this, 4) != null;
         }
         static fromObject(data: {
             id?: string;
-            job_interview_id?: string;
             from?: string;
-            to?: string;
             contents?: string;
             time?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
         }): Message {
@@ -676,14 +884,8 @@ export namespace job_interview_service {
             if (data.id != null) {
                 message.id = data.id;
             }
-            if (data.job_interview_id != null) {
-                message.job_interview_id = data.job_interview_id;
-            }
             if (data.from != null) {
                 message.from = data.from;
-            }
-            if (data.to != null) {
-                message.to = data.to;
             }
             if (data.contents != null) {
                 message.contents = data.contents;
@@ -696,23 +898,15 @@ export namespace job_interview_service {
         toObject() {
             const data: {
                 id?: string;
-                job_interview_id?: string;
                 from?: string;
-                to?: string;
                 contents?: string;
                 time?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
             } = {};
             if (this.id != null) {
                 data.id = this.id;
             }
-            if (this.job_interview_id != null) {
-                data.job_interview_id = this.job_interview_id;
-            }
             if (this.from != null) {
                 data.from = this.from;
-            }
-            if (this.to != null) {
-                data.to = this.to;
             }
             if (this.contents != null) {
                 data.contents = this.contents;
@@ -728,16 +922,12 @@ export namespace job_interview_service {
             const writer = w || new pb_1.BinaryWriter();
             if (this.id.length)
                 writer.writeString(1, this.id);
-            if (this.job_interview_id.length)
-                writer.writeString(2, this.job_interview_id);
             if (this.from.length)
-                writer.writeString(3, this.from);
-            if (this.to.length)
-                writer.writeString(4, this.to);
+                writer.writeString(2, this.from);
             if (this.contents.length)
-                writer.writeString(5, this.contents);
+                writer.writeString(3, this.contents);
             if (this.has_time)
-                writer.writeMessage(6, this.time, () => this.time.serialize(writer));
+                writer.writeMessage(4, this.time, () => this.time.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -751,18 +941,12 @@ export namespace job_interview_service {
                         message.id = reader.readString();
                         break;
                     case 2:
-                        message.job_interview_id = reader.readString();
-                        break;
-                    case 3:
                         message.from = reader.readString();
                         break;
-                    case 4:
-                        message.to = reader.readString();
-                        break;
-                    case 5:
+                    case 3:
                         message.contents = reader.readString();
                         break;
-                    case 6:
+                    case 4:
                         reader.readMessage(message.time, () => message.time = dependency_1.google.protobuf.Timestamp.deserialize(reader));
                         break;
                     default: reader.skipField();
@@ -803,24 +987,6 @@ export namespace job_interview_service {
     }
     export abstract class UnimplementedJobInterviewServiceService {
         static definition = {
-            UnaryConversation: {
-                path: "/job_interview_service.JobInterviewService/UnaryConversation",
-                requestStream: false,
-                responseStream: false,
-                requestSerialize: (message: Message) => Buffer.from(message.serialize()),
-                requestDeserialize: (bytes: Buffer) => Message.deserialize(new Uint8Array(bytes)),
-                responseSerialize: (message: Message) => Buffer.from(message.serialize()),
-                responseDeserialize: (bytes: Buffer) => Message.deserialize(new Uint8Array(bytes))
-            },
-            BidirectionalConversation: {
-                path: "/job_interview_service.JobInterviewService/BidirectionalConversation",
-                requestStream: true,
-                responseStream: true,
-                requestSerialize: (message: Message) => Buffer.from(message.serialize()),
-                requestDeserialize: (bytes: Buffer) => Message.deserialize(new Uint8Array(bytes)),
-                responseSerialize: (message: Message) => Buffer.from(message.serialize()),
-                responseDeserialize: (bytes: Buffer) => Message.deserialize(new Uint8Array(bytes))
-            },
             CreateJobInterview: {
                 path: "/job_interview_service.JobInterviewService/CreateJobInterview",
                 requestStream: false,
@@ -856,26 +1022,38 @@ export namespace job_interview_service {
                 requestDeserialize: (bytes: Buffer) => DeleteJobInterviewRequest.deserialize(new Uint8Array(bytes)),
                 responseSerialize: (message: DeleteJobInterviewResponse) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => DeleteJobInterviewResponse.deserialize(new Uint8Array(bytes))
+            },
+            UnaryConversation: {
+                path: "/job_interview_service.JobInterviewService/UnaryConversation",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: InterviewMessageRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => InterviewMessageRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: InterviewMessageResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => InterviewMessageResponse.deserialize(new Uint8Array(bytes))
+            },
+            BidirectionalConversation: {
+                path: "/job_interview_service.JobInterviewService/BidirectionalConversation",
+                requestStream: true,
+                responseStream: true,
+                requestSerialize: (message: InterviewMessage) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => InterviewMessage.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: InterviewMessage) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => InterviewMessage.deserialize(new Uint8Array(bytes))
             }
         };
         [method: string]: grpc_1.UntypedHandleCall;
-        abstract UnaryConversation(call: grpc_1.ServerUnaryCall<Message, Message>, callback: grpc_1.sendUnaryData<Message>): void;
-        abstract BidirectionalConversation(call: grpc_1.ServerDuplexStream<Message, Message>): void;
         abstract CreateJobInterview(call: grpc_1.ServerUnaryCall<CreateJobInterviewRequest, CreateJobInterviewResponse>, callback: grpc_1.sendUnaryData<CreateJobInterviewResponse>): void;
         abstract ReadJobInterview(call: grpc_1.ServerUnaryCall<ReadJobInterviewRequest, ReadJobInterviewResponse>, callback: grpc_1.sendUnaryData<ReadJobInterviewResponse>): void;
         abstract UpdateJobInterview(call: grpc_1.ServerUnaryCall<UpdateJobInterviewRequest, UpdateJobInterviewResponse>, callback: grpc_1.sendUnaryData<UpdateJobInterviewResponse>): void;
         abstract DeleteJobInterview(call: grpc_1.ServerUnaryCall<DeleteJobInterviewRequest, DeleteJobInterviewResponse>, callback: grpc_1.sendUnaryData<DeleteJobInterviewResponse>): void;
+        abstract UnaryConversation(call: grpc_1.ServerUnaryCall<InterviewMessageRequest, InterviewMessageResponse>, callback: grpc_1.sendUnaryData<InterviewMessageResponse>): void;
+        abstract BidirectionalConversation(call: grpc_1.ServerDuplexStream<InterviewMessage, InterviewMessage>): void;
     }
     export class JobInterviewServiceClient extends grpc_1.makeGenericClientConstructor(UnimplementedJobInterviewServiceService.definition, "JobInterviewService", {}) {
         constructor(address: string, credentials: grpc_1.ChannelCredentials, options?: Partial<grpc_1.ChannelOptions>) {
             super(address, credentials, options);
         }
-        UnaryConversation: GrpcUnaryServiceInterface<Message, Message> = (message: Message, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<Message>, options?: grpc_1.CallOptions | grpc_1.requestCallback<Message>, callback?: grpc_1.requestCallback<Message>): grpc_1.ClientUnaryCall => {
-            return super.UnaryConversation(message, metadata, options, callback);
-        };
-        BidirectionalConversation: GrpcChunkServiceInterface<Message, Message> = (metadata?: grpc_1.Metadata | grpc_1.CallOptions, options?: grpc_1.CallOptions): grpc_1.ClientDuplexStream<Message, Message> => {
-            return super.BidirectionalConversation(metadata, options);
-        };
         CreateJobInterview: GrpcUnaryServiceInterface<CreateJobInterviewRequest, CreateJobInterviewResponse> = (message: CreateJobInterviewRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<CreateJobInterviewResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<CreateJobInterviewResponse>, callback?: grpc_1.requestCallback<CreateJobInterviewResponse>): grpc_1.ClientUnaryCall => {
             return super.CreateJobInterview(message, metadata, options, callback);
         };
@@ -887,6 +1065,12 @@ export namespace job_interview_service {
         };
         DeleteJobInterview: GrpcUnaryServiceInterface<DeleteJobInterviewRequest, DeleteJobInterviewResponse> = (message: DeleteJobInterviewRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<DeleteJobInterviewResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<DeleteJobInterviewResponse>, callback?: grpc_1.requestCallback<DeleteJobInterviewResponse>): grpc_1.ClientUnaryCall => {
             return super.DeleteJobInterview(message, metadata, options, callback);
+        };
+        UnaryConversation: GrpcUnaryServiceInterface<InterviewMessageRequest, InterviewMessageResponse> = (message: InterviewMessageRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<InterviewMessageResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<InterviewMessageResponse>, callback?: grpc_1.requestCallback<InterviewMessageResponse>): grpc_1.ClientUnaryCall => {
+            return super.UnaryConversation(message, metadata, options, callback);
+        };
+        BidirectionalConversation: GrpcChunkServiceInterface<InterviewMessage, InterviewMessage> = (metadata?: grpc_1.Metadata | grpc_1.CallOptions, options?: grpc_1.CallOptions): grpc_1.ClientDuplexStream<InterviewMessage, InterviewMessage> => {
+            return super.BidirectionalConversation(metadata, options);
         };
     }
 }

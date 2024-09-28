@@ -8,13 +8,13 @@ option go_package = "proto/";
 import "google/protobuf/timestamp.proto";
 
 service JobInterviewService {
-    rpc UnaryConversation(Message) returns (Message) {}
-    rpc BidirectionalConversation(stream Message) returns (stream Message) {}
-
     rpc CreateJobInterview(CreateJobInterviewRequest) returns (CreateJobInterviewResponse) {}
     rpc ReadJobInterview(ReadJobInterviewRequest) returns (ReadJobInterviewResponse) {}
     rpc UpdateJobInterview(UpdateJobInterviewRequest) returns (UpdateJobInterviewResponse) {}
     rpc DeleteJobInterview(DeleteJobInterviewRequest) returns (DeleteJobInterviewResponse) {}
+    
+    rpc UnaryConversation(InterviewMessageRequest) returns (InterviewMessageResponse) {}
+    rpc BidirectionalConversation(stream InterviewMessage) returns (stream InterviewMessage) {}
 }
 
 message CreateJobInterviewRequest {
@@ -34,7 +34,7 @@ message ReadJobInterviewResponse {
 
 message UpdateJobInterviewRequest {
     string job_interview_id = 1;
-    Message message = 2;
+    repeated Message conversation = 2;
 }
 message UpdateJobInterviewResponse {
     bool success = 1;
@@ -47,11 +47,23 @@ message DeleteJobInterviewResponse {
     bool success = 1;
 }
 
+// Anything below is used for interview message transmission.
+message InterviewMessageRequest {
+    InterviewMessage req = 1;
+}
+
+message InterviewMessageResponse {
+    InterviewMessage res = 1;
+}
+
+message InterviewMessage {
+    string job_interview_id = 1;
+    Message message = 2;
+}
+
 message Message {
     string id = 1;
-    string job_interview_id = 2;
-    string from = 3;
-    string to = 4;
-    string contents = 5;
-    google.protobuf.Timestamp time = 6;
+    string from = 2;
+    string contents = 3;
+    google.protobuf.Timestamp time = 4;
 }
