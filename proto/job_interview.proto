@@ -18,10 +18,11 @@ service JobInterviewService {
 }
 
 message CreateJobInterviewRequest {
-    string job_application_id = 1;
+    string job_interview_id = 1;
+    string job_application_id = 2;
 }
 message CreateJobInterviewResponse {
-    string job_interview_id = 1;
+    bool success = 1;
 }
 
 message ReadJobInterviewRequest {

@@ -319,7 +319,8 @@ proto.job_interview_service.CreateJobInterviewRequest.prototype.toObject = funct
  */
 proto.job_interview_service.CreateJobInterviewRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    jobApplicationId: jspb.Message.getFieldWithDefault(msg, 1, "")
+    jobInterviewId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    jobApplicationId: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -358,6 +359,10 @@ proto.job_interview_service.CreateJobInterviewRequest.deserializeBinaryFromReade
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
+      msg.setJobInterviewId(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
       msg.setJobApplicationId(value);
       break;
     default:
@@ -389,10 +394,17 @@ proto.job_interview_service.CreateJobInterviewRequest.prototype.serializeBinary 
  */
 proto.job_interview_service.CreateJobInterviewRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getJobApplicationId();
+  f = message.getJobInterviewId();
   if (f.length > 0) {
     writer.writeString(
       1,
+      f
+    );
+  }
+  f = message.getJobApplicationId();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
       f
     );
   }
@@ -400,10 +412,10 @@ proto.job_interview_service.CreateJobInterviewRequest.serializeBinaryToWriter = 
 
 
 /**
- * optional string job_application_id = 1;
+ * optional string job_interview_id = 1;
  * @return {string}
  */
-proto.job_interview_service.CreateJobInterviewRequest.prototype.getJobApplicationId = function() {
+proto.job_interview_service.CreateJobInterviewRequest.prototype.getJobInterviewId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -412,8 +424,26 @@ proto.job_interview_service.CreateJobInterviewRequest.prototype.getJobApplicatio
  * @param {string} value
  * @return {!proto.job_interview_service.CreateJobInterviewRequest} returns this
  */
-proto.job_interview_service.CreateJobInterviewRequest.prototype.setJobApplicationId = function(value) {
+proto.job_interview_service.CreateJobInterviewRequest.prototype.setJobInterviewId = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string job_application_id = 2;
+ * @return {string}
+ */
+proto.job_interview_service.CreateJobInterviewRequest.prototype.getJobApplicationId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.job_interview_service.CreateJobInterviewRequest} returns this
+ */
+proto.job_interview_service.CreateJobInterviewRequest.prototype.setJobApplicationId = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
@@ -449,7 +479,7 @@ proto.job_interview_service.CreateJobInterviewResponse.prototype.toObject = func
  */
 proto.job_interview_service.CreateJobInterviewResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    jobInterviewId: jspb.Message.getFieldWithDefault(msg, 1, "")
+    success: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
   };
 
   if (includeInstance) {
@@ -487,8 +517,8 @@ proto.job_interview_service.CreateJobInterviewResponse.deserializeBinaryFromRead
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setJobInterviewId(value);
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setSuccess(value);
       break;
     default:
       reader.skipField();
@@ -519,9 +549,9 @@ proto.job_interview_service.CreateJobInterviewResponse.prototype.serializeBinary
  */
 proto.job_interview_service.CreateJobInterviewResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getJobInterviewId();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getSuccess();
+  if (f) {
+    writer.writeBool(
       1,
       f
     );
@@ -530,20 +560,20 @@ proto.job_interview_service.CreateJobInterviewResponse.serializeBinaryToWriter =
 
 
 /**
- * optional string job_interview_id = 1;
- * @return {string}
+ * optional bool success = 1;
+ * @return {boolean}
  */
-proto.job_interview_service.CreateJobInterviewResponse.prototype.getJobInterviewId = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+proto.job_interview_service.CreateJobInterviewResponse.prototype.getSuccess = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 1, false));
 };
 
 
 /**
- * @param {string} value
+ * @param {boolean} value
  * @return {!proto.job_interview_service.CreateJobInterviewResponse} returns this
  */
-proto.job_interview_service.CreateJobInterviewResponse.prototype.setJobInterviewId = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
+proto.job_interview_service.CreateJobInterviewResponse.prototype.setSuccess = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 1, value);
 };
 
 

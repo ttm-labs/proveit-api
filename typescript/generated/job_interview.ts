@@ -10,26 +10,40 @@ export namespace job_interview_service {
     export class CreateJobInterviewRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
+            job_interview_id?: string;
             job_application_id?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
+                if ("job_interview_id" in data && data.job_interview_id != undefined) {
+                    this.job_interview_id = data.job_interview_id;
+                }
                 if ("job_application_id" in data && data.job_application_id != undefined) {
                     this.job_application_id = data.job_application_id;
                 }
             }
         }
-        get job_application_id() {
+        get job_interview_id() {
             return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
-        set job_application_id(value: string) {
+        set job_interview_id(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
+        get job_application_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set job_application_id(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
         static fromObject(data: {
+            job_interview_id?: string;
             job_application_id?: string;
         }): CreateJobInterviewRequest {
             const message = new CreateJobInterviewRequest({});
+            if (data.job_interview_id != null) {
+                message.job_interview_id = data.job_interview_id;
+            }
             if (data.job_application_id != null) {
                 message.job_application_id = data.job_application_id;
             }
@@ -37,8 +51,12 @@ export namespace job_interview_service {
         }
         toObject() {
             const data: {
+                job_interview_id?: string;
                 job_application_id?: string;
             } = {};
+            if (this.job_interview_id != null) {
+                data.job_interview_id = this.job_interview_id;
+            }
             if (this.job_application_id != null) {
                 data.job_application_id = this.job_application_id;
             }
@@ -48,8 +66,10 @@ export namespace job_interview_service {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
+            if (this.job_interview_id.length)
+                writer.writeString(1, this.job_interview_id);
             if (this.job_application_id.length)
-                writer.writeString(1, this.job_application_id);
+                writer.writeString(2, this.job_application_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -60,6 +80,9 @@ export namespace job_interview_service {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
+                        message.job_interview_id = reader.readString();
+                        break;
+                    case 2:
                         message.job_application_id = reader.readString();
                         break;
                     default: reader.skipField();
@@ -77,37 +100,37 @@ export namespace job_interview_service {
     export class CreateJobInterviewResponse extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            job_interview_id?: string;
+            success?: boolean;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("job_interview_id" in data && data.job_interview_id != undefined) {
-                    this.job_interview_id = data.job_interview_id;
+                if ("success" in data && data.success != undefined) {
+                    this.success = data.success;
                 }
             }
         }
-        get job_interview_id() {
-            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        get success() {
+            return pb_1.Message.getFieldWithDefault(this, 1, false) as boolean;
         }
-        set job_interview_id(value: string) {
+        set success(value: boolean) {
             pb_1.Message.setField(this, 1, value);
         }
         static fromObject(data: {
-            job_interview_id?: string;
+            success?: boolean;
         }): CreateJobInterviewResponse {
             const message = new CreateJobInterviewResponse({});
-            if (data.job_interview_id != null) {
-                message.job_interview_id = data.job_interview_id;
+            if (data.success != null) {
+                message.success = data.success;
             }
             return message;
         }
         toObject() {
             const data: {
-                job_interview_id?: string;
+                success?: boolean;
             } = {};
-            if (this.job_interview_id != null) {
-                data.job_interview_id = this.job_interview_id;
+            if (this.success != null) {
+                data.success = this.success;
             }
             return data;
         }
@@ -115,8 +138,8 @@ export namespace job_interview_service {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.job_interview_id.length)
-                writer.writeString(1, this.job_interview_id);
+            if (this.success != false)
+                writer.writeBool(1, this.success);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -127,7 +150,7 @@ export namespace job_interview_service {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.job_interview_id = reader.readString();
+                        message.success = reader.readBool();
                         break;
                     default: reader.skipField();
                 }

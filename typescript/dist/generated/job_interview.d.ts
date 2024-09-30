@@ -10,14 +10,19 @@ export declare namespace job_interview_service {
     export class CreateJobInterviewRequest extends pb_1.Message {
         #private;
         constructor(data?: any[] | {
+            job_interview_id?: string;
             job_application_id?: string;
         });
+        get job_interview_id(): string;
+        set job_interview_id(value: string);
         get job_application_id(): string;
         set job_application_id(value: string);
         static fromObject(data: {
+            job_interview_id?: string;
             job_application_id?: string;
         }): CreateJobInterviewRequest;
         toObject(): {
+            job_interview_id?: string;
             job_application_id?: string;
         };
         serialize(): Uint8Array;
@@ -29,15 +34,15 @@ export declare namespace job_interview_service {
     export class CreateJobInterviewResponse extends pb_1.Message {
         #private;
         constructor(data?: any[] | {
-            job_interview_id?: string;
+            success?: boolean;
         });
-        get job_interview_id(): string;
-        set job_interview_id(value: string);
+        get success(): boolean;
+        set success(value: boolean);
         static fromObject(data: {
-            job_interview_id?: string;
+            success?: boolean;
         }): CreateJobInterviewResponse;
         toObject(): {
-            job_interview_id?: string;
+            success?: boolean;
         };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
