@@ -297,6 +297,9 @@ var job_application_service;
             _ReadJobApplicationResponse_one_of_decls.set(this, []);
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], __classPrivateFieldGet(this, _ReadJobApplicationResponse_one_of_decls, "f"));
             if (!Array.isArray(data) && typeof data == "object") {
+                if ("job_posting_id" in data && data.job_posting_id != undefined) {
+                    this.job_posting_id = data.job_posting_id;
+                }
                 if ("name" in data && data.name != undefined) {
                     this.name = data.name;
                 }
@@ -311,44 +314,53 @@ var job_application_service;
                 }
             }
         }
+        get job_posting_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "");
+        }
+        set job_posting_id(value) {
+            pb_1.Message.setField(this, 1, value);
+        }
         get name() {
-            return pb_1.Message.getWrapperField(this, Name, 1);
+            return pb_1.Message.getWrapperField(this, Name, 2);
         }
         set name(value) {
-            pb_1.Message.setWrapperField(this, 1, value);
-        }
-        get has_name() {
-            return pb_1.Message.getField(this, 1) != null;
-        }
-        get contact() {
-            return pb_1.Message.getWrapperField(this, Contact, 2);
-        }
-        set contact(value) {
             pb_1.Message.setWrapperField(this, 2, value);
         }
-        get has_contact() {
+        get has_name() {
             return pb_1.Message.getField(this, 2) != null;
         }
-        get info() {
-            return pb_1.Message.getWrapperField(this, Info, 3);
+        get contact() {
+            return pb_1.Message.getWrapperField(this, Contact, 3);
         }
-        set info(value) {
+        set contact(value) {
             pb_1.Message.setWrapperField(this, 3, value);
         }
-        get has_info() {
+        get has_contact() {
             return pb_1.Message.getField(this, 3) != null;
         }
-        get status() {
-            return pb_1.Message.getWrapperField(this, Status, 4);
+        get info() {
+            return pb_1.Message.getWrapperField(this, Info, 4);
         }
-        set status(value) {
+        set info(value) {
             pb_1.Message.setWrapperField(this, 4, value);
         }
-        get has_status() {
+        get has_info() {
             return pb_1.Message.getField(this, 4) != null;
+        }
+        get status() {
+            return pb_1.Message.getWrapperField(this, Status, 5);
+        }
+        set status(value) {
+            pb_1.Message.setWrapperField(this, 5, value);
+        }
+        get has_status() {
+            return pb_1.Message.getField(this, 5) != null;
         }
         static fromObject(data) {
             const message = new ReadJobApplicationResponse({});
+            if (data.job_posting_id != null) {
+                message.job_posting_id = data.job_posting_id;
+            }
             if (data.name != null) {
                 message.name = Name.fromObject(data.name);
             }
@@ -365,6 +377,9 @@ var job_application_service;
         }
         toObject() {
             const data = {};
+            if (this.job_posting_id != null) {
+                data.job_posting_id = this.job_posting_id;
+            }
             if (this.name != null) {
                 data.name = this.name.toObject();
             }
@@ -381,14 +396,16 @@ var job_application_service;
         }
         serialize(w) {
             const writer = w || new pb_1.BinaryWriter();
+            if (this.job_posting_id.length)
+                writer.writeString(1, this.job_posting_id);
             if (this.has_name)
-                writer.writeMessage(1, this.name, () => this.name.serialize(writer));
+                writer.writeMessage(2, this.name, () => this.name.serialize(writer));
             if (this.has_contact)
-                writer.writeMessage(2, this.contact, () => this.contact.serialize(writer));
+                writer.writeMessage(3, this.contact, () => this.contact.serialize(writer));
             if (this.has_info)
-                writer.writeMessage(3, this.info, () => this.info.serialize(writer));
+                writer.writeMessage(4, this.info, () => this.info.serialize(writer));
             if (this.has_status)
-                writer.writeMessage(4, this.status, () => this.status.serialize(writer));
+                writer.writeMessage(5, this.status, () => this.status.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -399,15 +416,18 @@ var job_application_service;
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.name, () => message.name = Name.deserialize(reader));
+                        message.job_posting_id = reader.readString();
                         break;
                     case 2:
-                        reader.readMessage(message.contact, () => message.contact = Contact.deserialize(reader));
+                        reader.readMessage(message.name, () => message.name = Name.deserialize(reader));
                         break;
                     case 3:
-                        reader.readMessage(message.info, () => message.info = Info.deserialize(reader));
+                        reader.readMessage(message.contact, () => message.contact = Contact.deserialize(reader));
                         break;
                     case 4:
+                        reader.readMessage(message.info, () => message.info = Info.deserialize(reader));
+                        break;
+                    case 5:
                         reader.readMessage(message.status, () => message.status = Status.deserialize(reader));
                         break;
                     default: reader.skipField();

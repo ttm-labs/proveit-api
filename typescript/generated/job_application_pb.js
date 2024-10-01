@@ -860,6 +860,7 @@ proto.job_application_service.ReadJobApplicationResponse.prototype.toObject = fu
  */
 proto.job_application_service.ReadJobApplicationResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
+    jobPostingId: jspb.Message.getFieldWithDefault(msg, 1, ""),
     name: (f = msg.getName()) && proto.job_application_service.Name.toObject(includeInstance, f),
     contact: (f = msg.getContact()) && proto.job_application_service.Contact.toObject(includeInstance, f),
     info: (f = msg.getInfo()) && proto.job_application_service.Info.toObject(includeInstance, f),
@@ -901,21 +902,25 @@ proto.job_application_service.ReadJobApplicationResponse.deserializeBinaryFromRe
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setJobPostingId(value);
+      break;
+    case 2:
       var value = new proto.job_application_service.Name;
       reader.readMessage(value,proto.job_application_service.Name.deserializeBinaryFromReader);
       msg.setName(value);
       break;
-    case 2:
+    case 3:
       var value = new proto.job_application_service.Contact;
       reader.readMessage(value,proto.job_application_service.Contact.deserializeBinaryFromReader);
       msg.setContact(value);
       break;
-    case 3:
+    case 4:
       var value = new proto.job_application_service.Info;
       reader.readMessage(value,proto.job_application_service.Info.deserializeBinaryFromReader);
       msg.setInfo(value);
       break;
-    case 4:
+    case 5:
       var value = new proto.job_application_service.Status;
       reader.readMessage(value,proto.job_application_service.Status.deserializeBinaryFromReader);
       msg.setStatus(value);
@@ -949,10 +954,17 @@ proto.job_application_service.ReadJobApplicationResponse.prototype.serializeBina
  */
 proto.job_application_service.ReadJobApplicationResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getJobPostingId();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
   f = message.getName();
   if (f != null) {
     writer.writeMessage(
-      1,
+      2,
       f,
       proto.job_application_service.Name.serializeBinaryToWriter
     );
@@ -960,7 +972,7 @@ proto.job_application_service.ReadJobApplicationResponse.serializeBinaryToWriter
   f = message.getContact();
   if (f != null) {
     writer.writeMessage(
-      2,
+      3,
       f,
       proto.job_application_service.Contact.serializeBinaryToWriter
     );
@@ -968,7 +980,7 @@ proto.job_application_service.ReadJobApplicationResponse.serializeBinaryToWriter
   f = message.getInfo();
   if (f != null) {
     writer.writeMessage(
-      3,
+      4,
       f,
       proto.job_application_service.Info.serializeBinaryToWriter
     );
@@ -976,7 +988,7 @@ proto.job_application_service.ReadJobApplicationResponse.serializeBinaryToWriter
   f = message.getStatus();
   if (f != null) {
     writer.writeMessage(
-      4,
+      5,
       f,
       proto.job_application_service.Status.serializeBinaryToWriter
     );
@@ -985,12 +997,30 @@ proto.job_application_service.ReadJobApplicationResponse.serializeBinaryToWriter
 
 
 /**
- * optional Name name = 1;
+ * optional string job_posting_id = 1;
+ * @return {string}
+ */
+proto.job_application_service.ReadJobApplicationResponse.prototype.getJobPostingId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.job_application_service.ReadJobApplicationResponse} returns this
+ */
+proto.job_application_service.ReadJobApplicationResponse.prototype.setJobPostingId = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional Name name = 2;
  * @return {?proto.job_application_service.Name}
  */
 proto.job_application_service.ReadJobApplicationResponse.prototype.getName = function() {
   return /** @type{?proto.job_application_service.Name} */ (
-    jspb.Message.getWrapperField(this, proto.job_application_service.Name, 1));
+    jspb.Message.getWrapperField(this, proto.job_application_service.Name, 2));
 };
 
 
@@ -999,7 +1029,7 @@ proto.job_application_service.ReadJobApplicationResponse.prototype.getName = fun
  * @return {!proto.job_application_service.ReadJobApplicationResponse} returns this
 */
 proto.job_application_service.ReadJobApplicationResponse.prototype.setName = function(value) {
-  return jspb.Message.setWrapperField(this, 1, value);
+  return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
@@ -1017,17 +1047,17 @@ proto.job_application_service.ReadJobApplicationResponse.prototype.clearName = f
  * @return {boolean}
  */
 proto.job_application_service.ReadJobApplicationResponse.prototype.hasName = function() {
-  return jspb.Message.getField(this, 1) != null;
+  return jspb.Message.getField(this, 2) != null;
 };
 
 
 /**
- * optional Contact contact = 2;
+ * optional Contact contact = 3;
  * @return {?proto.job_application_service.Contact}
  */
 proto.job_application_service.ReadJobApplicationResponse.prototype.getContact = function() {
   return /** @type{?proto.job_application_service.Contact} */ (
-    jspb.Message.getWrapperField(this, proto.job_application_service.Contact, 2));
+    jspb.Message.getWrapperField(this, proto.job_application_service.Contact, 3));
 };
 
 
@@ -1036,7 +1066,7 @@ proto.job_application_service.ReadJobApplicationResponse.prototype.getContact = 
  * @return {!proto.job_application_service.ReadJobApplicationResponse} returns this
 */
 proto.job_application_service.ReadJobApplicationResponse.prototype.setContact = function(value) {
-  return jspb.Message.setWrapperField(this, 2, value);
+  return jspb.Message.setWrapperField(this, 3, value);
 };
 
 
@@ -1054,17 +1084,17 @@ proto.job_application_service.ReadJobApplicationResponse.prototype.clearContact 
  * @return {boolean}
  */
 proto.job_application_service.ReadJobApplicationResponse.prototype.hasContact = function() {
-  return jspb.Message.getField(this, 2) != null;
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
 /**
- * optional Info info = 3;
+ * optional Info info = 4;
  * @return {?proto.job_application_service.Info}
  */
 proto.job_application_service.ReadJobApplicationResponse.prototype.getInfo = function() {
   return /** @type{?proto.job_application_service.Info} */ (
-    jspb.Message.getWrapperField(this, proto.job_application_service.Info, 3));
+    jspb.Message.getWrapperField(this, proto.job_application_service.Info, 4));
 };
 
 
@@ -1073,7 +1103,7 @@ proto.job_application_service.ReadJobApplicationResponse.prototype.getInfo = fun
  * @return {!proto.job_application_service.ReadJobApplicationResponse} returns this
 */
 proto.job_application_service.ReadJobApplicationResponse.prototype.setInfo = function(value) {
-  return jspb.Message.setWrapperField(this, 3, value);
+  return jspb.Message.setWrapperField(this, 4, value);
 };
 
 
@@ -1091,17 +1121,17 @@ proto.job_application_service.ReadJobApplicationResponse.prototype.clearInfo = f
  * @return {boolean}
  */
 proto.job_application_service.ReadJobApplicationResponse.prototype.hasInfo = function() {
-  return jspb.Message.getField(this, 3) != null;
+  return jspb.Message.getField(this, 4) != null;
 };
 
 
 /**
- * optional Status status = 4;
+ * optional Status status = 5;
  * @return {?proto.job_application_service.Status}
  */
 proto.job_application_service.ReadJobApplicationResponse.prototype.getStatus = function() {
   return /** @type{?proto.job_application_service.Status} */ (
-    jspb.Message.getWrapperField(this, proto.job_application_service.Status, 4));
+    jspb.Message.getWrapperField(this, proto.job_application_service.Status, 5));
 };
 
 
@@ -1110,7 +1140,7 @@ proto.job_application_service.ReadJobApplicationResponse.prototype.getStatus = f
  * @return {!proto.job_application_service.ReadJobApplicationResponse} returns this
 */
 proto.job_application_service.ReadJobApplicationResponse.prototype.setStatus = function(value) {
-  return jspb.Message.setWrapperField(this, 4, value);
+  return jspb.Message.setWrapperField(this, 5, value);
 };
 
 
@@ -1128,7 +1158,7 @@ proto.job_application_service.ReadJobApplicationResponse.prototype.clearStatus =
  * @return {boolean}
  */
 proto.job_application_service.ReadJobApplicationResponse.prototype.hasStatus = function() {
-  return jspb.Message.getField(this, 4) != null;
+  return jspb.Message.getField(this, 5) != null;
 };
 
 

@@ -84,11 +84,14 @@ export declare namespace job_application_service {
     export class ReadJobApplicationResponse extends pb_1.Message {
         #private;
         constructor(data?: any[] | {
+            job_posting_id?: string;
             name?: Name;
             contact?: Contact;
             info?: Info;
             status?: Status;
         });
+        get job_posting_id(): string;
+        set job_posting_id(value: string);
         get name(): Name;
         set name(value: Name);
         get has_name(): boolean;
@@ -102,12 +105,14 @@ export declare namespace job_application_service {
         set status(value: Status);
         get has_status(): boolean;
         static fromObject(data: {
+            job_posting_id?: string;
             name?: ReturnType<typeof Name.prototype.toObject>;
             contact?: ReturnType<typeof Contact.prototype.toObject>;
             info?: ReturnType<typeof Info.prototype.toObject>;
             status?: ReturnType<typeof Status.prototype.toObject>;
         }): ReadJobApplicationResponse;
         toObject(): {
+            job_posting_id?: string;
             name?: ReturnType<typeof Name.prototype.toObject>;
             contact?: ReturnType<typeof Contact.prototype.toObject>;
             info?: ReturnType<typeof Info.prototype.toObject>;

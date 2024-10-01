@@ -27,10 +27,11 @@ message ReadJobApplicationRequest {
 }
 
 message ReadJobApplicationResponse {
-    Name name = 1;
-    Contact contact = 2;
-    Info info = 3;
-    Status status = 4;
+    string job_posting_id = 1;
+    Name name = 2;
+    Contact contact = 3;
+    Info info = 4;
+    Status status = 5;
 }
 
 message UpdateJobApplicationRequest {
