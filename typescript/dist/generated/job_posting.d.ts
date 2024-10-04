@@ -146,6 +146,45 @@ export declare namespace job_posting_service {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): ReadJobPostingResponse;
     }
+    export class ReadJobPostingByQueryRequest extends pb_1.Message {
+        #private;
+        constructor(data?: any[] | {
+            query?: JobPostingQuery;
+        });
+        get query(): JobPostingQuery;
+        set query(value: JobPostingQuery);
+        get has_query(): boolean;
+        static fromObject(data: {
+            query?: ReturnType<typeof JobPostingQuery.prototype.toObject>;
+        }): ReadJobPostingByQueryRequest;
+        toObject(): {
+            query?: ReturnType<typeof JobPostingQuery.prototype.toObject>;
+        };
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ReadJobPostingByQueryRequest;
+        serializeBinary(): Uint8Array;
+        static deserializeBinary(bytes: Uint8Array): ReadJobPostingByQueryRequest;
+    }
+    export class ReadJobPostingByQueryResponse extends pb_1.Message {
+        #private;
+        constructor(data?: any[] | {
+            result?: JobPostingQueryResponse[];
+        });
+        get result(): JobPostingQueryResponse[];
+        set result(value: JobPostingQueryResponse[]);
+        static fromObject(data: {
+            result?: ReturnType<typeof JobPostingQueryResponse.prototype.toObject>[];
+        }): ReadJobPostingByQueryResponse;
+        toObject(): {
+            result?: ReturnType<typeof JobPostingQueryResponse.prototype.toObject>[];
+        };
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ReadJobPostingByQueryResponse;
+        serializeBinary(): Uint8Array;
+        static deserializeBinary(bytes: Uint8Array): ReadJobPostingByQueryResponse;
+    }
     export class UpdateJobPostingRequest extends pb_1.Message {
         #private;
         constructor(data?: any[] | {
@@ -267,6 +306,121 @@ export declare namespace job_posting_service {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): Salary;
     }
+    export class JobPostingQuery extends pb_1.Message {
+        #private;
+        constructor(data?: any[] | {
+            regexp_industry?: string;
+            regexp_company_name?: string;
+            regexp_location?: string;
+            regexp_title?: string;
+            eval_min_base_salary?: string;
+            eval_max_base_salary?: string;
+            eval_min_bonus_salary?: string;
+            eval_max_bonus_salary?: string;
+            regexp_qualifications?: string[];
+        });
+        get regexp_industry(): string;
+        set regexp_industry(value: string);
+        get regexp_company_name(): string;
+        set regexp_company_name(value: string);
+        get regexp_location(): string;
+        set regexp_location(value: string);
+        get regexp_title(): string;
+        set regexp_title(value: string);
+        get eval_min_base_salary(): string;
+        set eval_min_base_salary(value: string);
+        get eval_max_base_salary(): string;
+        set eval_max_base_salary(value: string);
+        get eval_min_bonus_salary(): string;
+        set eval_min_bonus_salary(value: string);
+        get eval_max_bonus_salary(): string;
+        set eval_max_bonus_salary(value: string);
+        get regexp_qualifications(): string[];
+        set regexp_qualifications(value: string[]);
+        static fromObject(data: {
+            regexp_industry?: string;
+            regexp_company_name?: string;
+            regexp_location?: string;
+            regexp_title?: string;
+            eval_min_base_salary?: string;
+            eval_max_base_salary?: string;
+            eval_min_bonus_salary?: string;
+            eval_max_bonus_salary?: string;
+            regexp_qualifications?: string[];
+        }): JobPostingQuery;
+        toObject(): {
+            regexp_industry?: string;
+            regexp_company_name?: string;
+            regexp_location?: string;
+            regexp_title?: string;
+            eval_min_base_salary?: string;
+            eval_max_base_salary?: string;
+            eval_min_bonus_salary?: string;
+            eval_max_bonus_salary?: string;
+            regexp_qualifications?: string[];
+        };
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): JobPostingQuery;
+        serializeBinary(): Uint8Array;
+        static deserializeBinary(bytes: Uint8Array): JobPostingQuery;
+    }
+    export class JobPostingQueryResponse extends pb_1.Message {
+        #private;
+        constructor(data?: any[] | {
+            job_posting_id?: string;
+            industry?: string;
+            company_name?: string;
+            location?: string;
+            title?: string;
+            base_salary?: Salary;
+            bonus_salary?: Salary;
+            qualifications?: string[];
+        });
+        get job_posting_id(): string;
+        set job_posting_id(value: string);
+        get industry(): string;
+        set industry(value: string);
+        get company_name(): string;
+        set company_name(value: string);
+        get location(): string;
+        set location(value: string);
+        get title(): string;
+        set title(value: string);
+        get base_salary(): Salary;
+        set base_salary(value: Salary);
+        get has_base_salary(): boolean;
+        get bonus_salary(): Salary;
+        set bonus_salary(value: Salary);
+        get has_bonus_salary(): boolean;
+        get qualifications(): string[];
+        set qualifications(value: string[]);
+        static fromObject(data: {
+            job_posting_id?: string;
+            industry?: string;
+            company_name?: string;
+            location?: string;
+            title?: string;
+            base_salary?: ReturnType<typeof Salary.prototype.toObject>;
+            bonus_salary?: ReturnType<typeof Salary.prototype.toObject>;
+            qualifications?: string[];
+        }): JobPostingQueryResponse;
+        toObject(): {
+            job_posting_id?: string;
+            industry?: string;
+            company_name?: string;
+            location?: string;
+            title?: string;
+            base_salary?: ReturnType<typeof Salary.prototype.toObject>;
+            bonus_salary?: ReturnType<typeof Salary.prototype.toObject>;
+            qualifications?: string[];
+        };
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): JobPostingQueryResponse;
+        serializeBinary(): Uint8Array;
+        static deserializeBinary(bytes: Uint8Array): JobPostingQueryResponse;
+    }
     interface GrpcUnaryServiceInterface<P, R> {
         (message: P, metadata: grpc_1.Metadata, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
         (message: P, metadata: grpc_1.Metadata, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
@@ -293,6 +447,15 @@ export declare namespace job_posting_service {
                 responseSerialize: (message: ReadJobPostingResponse) => Buffer;
                 responseDeserialize: (bytes: Buffer) => ReadJobPostingResponse;
             };
+            ReadJobPostingByQuery: {
+                path: string;
+                requestStream: boolean;
+                responseStream: boolean;
+                requestSerialize: (message: ReadJobPostingByQueryRequest) => Buffer;
+                requestDeserialize: (bytes: Buffer) => ReadJobPostingByQueryRequest;
+                responseSerialize: (message: ReadJobPostingByQueryResponse) => Buffer;
+                responseDeserialize: (bytes: Buffer) => ReadJobPostingByQueryResponse;
+            };
             UpdateJobPosting: {
                 path: string;
                 requestStream: boolean;
@@ -315,6 +478,7 @@ export declare namespace job_posting_service {
         [method: string]: grpc_1.UntypedHandleCall;
         abstract CreateJobPosting(call: grpc_1.ServerUnaryCall<CreateJobPostingRequest, CreateJobPostingResponse>, callback: grpc_1.sendUnaryData<CreateJobPostingResponse>): void;
         abstract ReadJobPosting(call: grpc_1.ServerUnaryCall<ReadJobPostingRequest, ReadJobPostingResponse>, callback: grpc_1.sendUnaryData<ReadJobPostingResponse>): void;
+        abstract ReadJobPostingByQuery(call: grpc_1.ServerUnaryCall<ReadJobPostingByQueryRequest, ReadJobPostingByQueryResponse>, callback: grpc_1.sendUnaryData<ReadJobPostingByQueryResponse>): void;
         abstract UpdateJobPosting(call: grpc_1.ServerUnaryCall<UpdateJobPostingRequest, UpdateJobPostingResponse>, callback: grpc_1.sendUnaryData<UpdateJobPostingResponse>): void;
         abstract DeleteJobPosting(call: grpc_1.ServerUnaryCall<DeleteJobPostingRequest, DeleteJobPostingResponse>, callback: grpc_1.sendUnaryData<DeleteJobPostingResponse>): void;
     }
@@ -323,6 +487,7 @@ export declare namespace job_posting_service {
         constructor(address: string, credentials: grpc_1.ChannelCredentials, options?: Partial<grpc_1.ChannelOptions>);
         CreateJobPosting: GrpcUnaryServiceInterface<CreateJobPostingRequest, CreateJobPostingResponse>;
         ReadJobPosting: GrpcUnaryServiceInterface<ReadJobPostingRequest, ReadJobPostingResponse>;
+        ReadJobPostingByQuery: GrpcUnaryServiceInterface<ReadJobPostingByQueryRequest, ReadJobPostingByQueryResponse>;
         UpdateJobPosting: GrpcUnaryServiceInterface<UpdateJobPostingRequest, UpdateJobPostingResponse>;
         DeleteJobPosting: GrpcUnaryServiceInterface<DeleteJobPostingRequest, DeleteJobPostingResponse>;
     }

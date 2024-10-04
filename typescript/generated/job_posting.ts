@@ -562,6 +562,143 @@ export namespace job_posting_service {
             return ReadJobPostingResponse.deserialize(bytes);
         }
     }
+    export class ReadJobPostingByQueryRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            query?: JobPostingQuery;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("query" in data && data.query != undefined) {
+                    this.query = data.query;
+                }
+            }
+        }
+        get query() {
+            return pb_1.Message.getWrapperField(this, JobPostingQuery, 1) as JobPostingQuery;
+        }
+        set query(value: JobPostingQuery) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_query() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        static fromObject(data: {
+            query?: ReturnType<typeof JobPostingQuery.prototype.toObject>;
+        }): ReadJobPostingByQueryRequest {
+            const message = new ReadJobPostingByQueryRequest({});
+            if (data.query != null) {
+                message.query = JobPostingQuery.fromObject(data.query);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                query?: ReturnType<typeof JobPostingQuery.prototype.toObject>;
+            } = {};
+            if (this.query != null) {
+                data.query = this.query.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_query)
+                writer.writeMessage(1, this.query, () => this.query.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ReadJobPostingByQueryRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ReadJobPostingByQueryRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.query, () => message.query = JobPostingQuery.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ReadJobPostingByQueryRequest {
+            return ReadJobPostingByQueryRequest.deserialize(bytes);
+        }
+    }
+    export class ReadJobPostingByQueryResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            result?: JobPostingQueryResponse[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("result" in data && data.result != undefined) {
+                    this.result = data.result;
+                }
+            }
+        }
+        get result() {
+            return pb_1.Message.getRepeatedWrapperField(this, JobPostingQueryResponse, 1) as JobPostingQueryResponse[];
+        }
+        set result(value: JobPostingQueryResponse[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        static fromObject(data: {
+            result?: ReturnType<typeof JobPostingQueryResponse.prototype.toObject>[];
+        }): ReadJobPostingByQueryResponse {
+            const message = new ReadJobPostingByQueryResponse({});
+            if (data.result != null) {
+                message.result = data.result.map(item => JobPostingQueryResponse.fromObject(item));
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                result?: ReturnType<typeof JobPostingQueryResponse.prototype.toObject>[];
+            } = {};
+            if (this.result != null) {
+                data.result = this.result.map((item: JobPostingQueryResponse) => item.toObject());
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.result.length)
+                writer.writeRepeatedMessage(1, this.result, (item: JobPostingQueryResponse) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ReadJobPostingByQueryResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ReadJobPostingByQueryResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.result, () => pb_1.Message.addToRepeatedWrapperField(message, 1, JobPostingQueryResponse.deserialize(reader), JobPostingQueryResponse));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ReadJobPostingByQueryResponse {
+            return ReadJobPostingByQueryResponse.deserialize(bytes);
+        }
+    }
     export class UpdateJobPostingRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
@@ -1033,6 +1170,491 @@ export namespace job_posting_service {
             return Salary.deserialize(bytes);
         }
     }
+    export class JobPostingQuery extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            regexp_industry?: string;
+            regexp_company_name?: string;
+            regexp_location?: string;
+            regexp_title?: string;
+            eval_min_base_salary?: string;
+            eval_max_base_salary?: string;
+            eval_min_bonus_salary?: string;
+            eval_max_bonus_salary?: string;
+            regexp_qualifications?: string[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [9], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("regexp_industry" in data && data.regexp_industry != undefined) {
+                    this.regexp_industry = data.regexp_industry;
+                }
+                if ("regexp_company_name" in data && data.regexp_company_name != undefined) {
+                    this.regexp_company_name = data.regexp_company_name;
+                }
+                if ("regexp_location" in data && data.regexp_location != undefined) {
+                    this.regexp_location = data.regexp_location;
+                }
+                if ("regexp_title" in data && data.regexp_title != undefined) {
+                    this.regexp_title = data.regexp_title;
+                }
+                if ("eval_min_base_salary" in data && data.eval_min_base_salary != undefined) {
+                    this.eval_min_base_salary = data.eval_min_base_salary;
+                }
+                if ("eval_max_base_salary" in data && data.eval_max_base_salary != undefined) {
+                    this.eval_max_base_salary = data.eval_max_base_salary;
+                }
+                if ("eval_min_bonus_salary" in data && data.eval_min_bonus_salary != undefined) {
+                    this.eval_min_bonus_salary = data.eval_min_bonus_salary;
+                }
+                if ("eval_max_bonus_salary" in data && data.eval_max_bonus_salary != undefined) {
+                    this.eval_max_bonus_salary = data.eval_max_bonus_salary;
+                }
+                if ("regexp_qualifications" in data && data.regexp_qualifications != undefined) {
+                    this.regexp_qualifications = data.regexp_qualifications;
+                }
+            }
+        }
+        get regexp_industry() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set regexp_industry(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get regexp_company_name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set regexp_company_name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get regexp_location() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set regexp_location(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get regexp_title() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set regexp_title(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get eval_min_base_salary() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set eval_min_base_salary(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get eval_max_base_salary() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set eval_max_base_salary(value: string) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get eval_min_bonus_salary() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set eval_min_bonus_salary(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get eval_max_bonus_salary() {
+            return pb_1.Message.getFieldWithDefault(this, 8, "") as string;
+        }
+        set eval_max_bonus_salary(value: string) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get regexp_qualifications() {
+            return pb_1.Message.getFieldWithDefault(this, 9, []) as string[];
+        }
+        set regexp_qualifications(value: string[]) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        static fromObject(data: {
+            regexp_industry?: string;
+            regexp_company_name?: string;
+            regexp_location?: string;
+            regexp_title?: string;
+            eval_min_base_salary?: string;
+            eval_max_base_salary?: string;
+            eval_min_bonus_salary?: string;
+            eval_max_bonus_salary?: string;
+            regexp_qualifications?: string[];
+        }): JobPostingQuery {
+            const message = new JobPostingQuery({});
+            if (data.regexp_industry != null) {
+                message.regexp_industry = data.regexp_industry;
+            }
+            if (data.regexp_company_name != null) {
+                message.regexp_company_name = data.regexp_company_name;
+            }
+            if (data.regexp_location != null) {
+                message.regexp_location = data.regexp_location;
+            }
+            if (data.regexp_title != null) {
+                message.regexp_title = data.regexp_title;
+            }
+            if (data.eval_min_base_salary != null) {
+                message.eval_min_base_salary = data.eval_min_base_salary;
+            }
+            if (data.eval_max_base_salary != null) {
+                message.eval_max_base_salary = data.eval_max_base_salary;
+            }
+            if (data.eval_min_bonus_salary != null) {
+                message.eval_min_bonus_salary = data.eval_min_bonus_salary;
+            }
+            if (data.eval_max_bonus_salary != null) {
+                message.eval_max_bonus_salary = data.eval_max_bonus_salary;
+            }
+            if (data.regexp_qualifications != null) {
+                message.regexp_qualifications = data.regexp_qualifications;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                regexp_industry?: string;
+                regexp_company_name?: string;
+                regexp_location?: string;
+                regexp_title?: string;
+                eval_min_base_salary?: string;
+                eval_max_base_salary?: string;
+                eval_min_bonus_salary?: string;
+                eval_max_bonus_salary?: string;
+                regexp_qualifications?: string[];
+            } = {};
+            if (this.regexp_industry != null) {
+                data.regexp_industry = this.regexp_industry;
+            }
+            if (this.regexp_company_name != null) {
+                data.regexp_company_name = this.regexp_company_name;
+            }
+            if (this.regexp_location != null) {
+                data.regexp_location = this.regexp_location;
+            }
+            if (this.regexp_title != null) {
+                data.regexp_title = this.regexp_title;
+            }
+            if (this.eval_min_base_salary != null) {
+                data.eval_min_base_salary = this.eval_min_base_salary;
+            }
+            if (this.eval_max_base_salary != null) {
+                data.eval_max_base_salary = this.eval_max_base_salary;
+            }
+            if (this.eval_min_bonus_salary != null) {
+                data.eval_min_bonus_salary = this.eval_min_bonus_salary;
+            }
+            if (this.eval_max_bonus_salary != null) {
+                data.eval_max_bonus_salary = this.eval_max_bonus_salary;
+            }
+            if (this.regexp_qualifications != null) {
+                data.regexp_qualifications = this.regexp_qualifications;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.regexp_industry.length)
+                writer.writeString(1, this.regexp_industry);
+            if (this.regexp_company_name.length)
+                writer.writeString(2, this.regexp_company_name);
+            if (this.regexp_location.length)
+                writer.writeString(3, this.regexp_location);
+            if (this.regexp_title.length)
+                writer.writeString(4, this.regexp_title);
+            if (this.eval_min_base_salary.length)
+                writer.writeString(5, this.eval_min_base_salary);
+            if (this.eval_max_base_salary.length)
+                writer.writeString(6, this.eval_max_base_salary);
+            if (this.eval_min_bonus_salary.length)
+                writer.writeString(7, this.eval_min_bonus_salary);
+            if (this.eval_max_bonus_salary.length)
+                writer.writeString(8, this.eval_max_bonus_salary);
+            if (this.regexp_qualifications.length)
+                writer.writeRepeatedString(9, this.regexp_qualifications);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): JobPostingQuery {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new JobPostingQuery();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.regexp_industry = reader.readString();
+                        break;
+                    case 2:
+                        message.regexp_company_name = reader.readString();
+                        break;
+                    case 3:
+                        message.regexp_location = reader.readString();
+                        break;
+                    case 4:
+                        message.regexp_title = reader.readString();
+                        break;
+                    case 5:
+                        message.eval_min_base_salary = reader.readString();
+                        break;
+                    case 6:
+                        message.eval_max_base_salary = reader.readString();
+                        break;
+                    case 7:
+                        message.eval_min_bonus_salary = reader.readString();
+                        break;
+                    case 8:
+                        message.eval_max_bonus_salary = reader.readString();
+                        break;
+                    case 9:
+                        pb_1.Message.addToRepeatedField(message, 9, reader.readString());
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): JobPostingQuery {
+            return JobPostingQuery.deserialize(bytes);
+        }
+    }
+    export class JobPostingQueryResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            job_posting_id?: string;
+            industry?: string;
+            company_name?: string;
+            location?: string;
+            title?: string;
+            base_salary?: Salary;
+            bonus_salary?: Salary;
+            qualifications?: string[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [8], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("job_posting_id" in data && data.job_posting_id != undefined) {
+                    this.job_posting_id = data.job_posting_id;
+                }
+                if ("industry" in data && data.industry != undefined) {
+                    this.industry = data.industry;
+                }
+                if ("company_name" in data && data.company_name != undefined) {
+                    this.company_name = data.company_name;
+                }
+                if ("location" in data && data.location != undefined) {
+                    this.location = data.location;
+                }
+                if ("title" in data && data.title != undefined) {
+                    this.title = data.title;
+                }
+                if ("base_salary" in data && data.base_salary != undefined) {
+                    this.base_salary = data.base_salary;
+                }
+                if ("bonus_salary" in data && data.bonus_salary != undefined) {
+                    this.bonus_salary = data.bonus_salary;
+                }
+                if ("qualifications" in data && data.qualifications != undefined) {
+                    this.qualifications = data.qualifications;
+                }
+            }
+        }
+        get job_posting_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set job_posting_id(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get industry() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set industry(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get company_name() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set company_name(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get location() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set location(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get title() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set title(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get base_salary() {
+            return pb_1.Message.getWrapperField(this, Salary, 6) as Salary;
+        }
+        set base_salary(value: Salary) {
+            pb_1.Message.setWrapperField(this, 6, value);
+        }
+        get has_base_salary() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        get bonus_salary() {
+            return pb_1.Message.getWrapperField(this, Salary, 7) as Salary;
+        }
+        set bonus_salary(value: Salary) {
+            pb_1.Message.setWrapperField(this, 7, value);
+        }
+        get has_bonus_salary() {
+            return pb_1.Message.getField(this, 7) != null;
+        }
+        get qualifications() {
+            return pb_1.Message.getFieldWithDefault(this, 8, []) as string[];
+        }
+        set qualifications(value: string[]) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        static fromObject(data: {
+            job_posting_id?: string;
+            industry?: string;
+            company_name?: string;
+            location?: string;
+            title?: string;
+            base_salary?: ReturnType<typeof Salary.prototype.toObject>;
+            bonus_salary?: ReturnType<typeof Salary.prototype.toObject>;
+            qualifications?: string[];
+        }): JobPostingQueryResponse {
+            const message = new JobPostingQueryResponse({});
+            if (data.job_posting_id != null) {
+                message.job_posting_id = data.job_posting_id;
+            }
+            if (data.industry != null) {
+                message.industry = data.industry;
+            }
+            if (data.company_name != null) {
+                message.company_name = data.company_name;
+            }
+            if (data.location != null) {
+                message.location = data.location;
+            }
+            if (data.title != null) {
+                message.title = data.title;
+            }
+            if (data.base_salary != null) {
+                message.base_salary = Salary.fromObject(data.base_salary);
+            }
+            if (data.bonus_salary != null) {
+                message.bonus_salary = Salary.fromObject(data.bonus_salary);
+            }
+            if (data.qualifications != null) {
+                message.qualifications = data.qualifications;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                job_posting_id?: string;
+                industry?: string;
+                company_name?: string;
+                location?: string;
+                title?: string;
+                base_salary?: ReturnType<typeof Salary.prototype.toObject>;
+                bonus_salary?: ReturnType<typeof Salary.prototype.toObject>;
+                qualifications?: string[];
+            } = {};
+            if (this.job_posting_id != null) {
+                data.job_posting_id = this.job_posting_id;
+            }
+            if (this.industry != null) {
+                data.industry = this.industry;
+            }
+            if (this.company_name != null) {
+                data.company_name = this.company_name;
+            }
+            if (this.location != null) {
+                data.location = this.location;
+            }
+            if (this.title != null) {
+                data.title = this.title;
+            }
+            if (this.base_salary != null) {
+                data.base_salary = this.base_salary.toObject();
+            }
+            if (this.bonus_salary != null) {
+                data.bonus_salary = this.bonus_salary.toObject();
+            }
+            if (this.qualifications != null) {
+                data.qualifications = this.qualifications;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.job_posting_id.length)
+                writer.writeString(1, this.job_posting_id);
+            if (this.industry.length)
+                writer.writeString(2, this.industry);
+            if (this.company_name.length)
+                writer.writeString(3, this.company_name);
+            if (this.location.length)
+                writer.writeString(4, this.location);
+            if (this.title.length)
+                writer.writeString(5, this.title);
+            if (this.has_base_salary)
+                writer.writeMessage(6, this.base_salary, () => this.base_salary.serialize(writer));
+            if (this.has_bonus_salary)
+                writer.writeMessage(7, this.bonus_salary, () => this.bonus_salary.serialize(writer));
+            if (this.qualifications.length)
+                writer.writeRepeatedString(8, this.qualifications);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): JobPostingQueryResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new JobPostingQueryResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.job_posting_id = reader.readString();
+                        break;
+                    case 2:
+                        message.industry = reader.readString();
+                        break;
+                    case 3:
+                        message.company_name = reader.readString();
+                        break;
+                    case 4:
+                        message.location = reader.readString();
+                        break;
+                    case 5:
+                        message.title = reader.readString();
+                        break;
+                    case 6:
+                        reader.readMessage(message.base_salary, () => message.base_salary = Salary.deserialize(reader));
+                        break;
+                    case 7:
+                        reader.readMessage(message.bonus_salary, () => message.bonus_salary = Salary.deserialize(reader));
+                        break;
+                    case 8:
+                        pb_1.Message.addToRepeatedField(message, 8, reader.readString());
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): JobPostingQueryResponse {
+            return JobPostingQueryResponse.deserialize(bytes);
+        }
+    }
     interface GrpcUnaryServiceInterface<P, R> {
         (message: P, metadata: grpc_1.Metadata, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
         (message: P, metadata: grpc_1.Metadata, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
@@ -1077,6 +1699,15 @@ export namespace job_posting_service {
                 responseSerialize: (message: ReadJobPostingResponse) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => ReadJobPostingResponse.deserialize(new Uint8Array(bytes))
             },
+            ReadJobPostingByQuery: {
+                path: "/job_posting_service.JobPostingService/ReadJobPostingByQuery",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: ReadJobPostingByQueryRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => ReadJobPostingByQueryRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: ReadJobPostingByQueryResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => ReadJobPostingByQueryResponse.deserialize(new Uint8Array(bytes))
+            },
             UpdateJobPosting: {
                 path: "/job_posting_service.JobPostingService/UpdateJobPosting",
                 requestStream: false,
@@ -1099,6 +1730,7 @@ export namespace job_posting_service {
         [method: string]: grpc_1.UntypedHandleCall;
         abstract CreateJobPosting(call: grpc_1.ServerUnaryCall<CreateJobPostingRequest, CreateJobPostingResponse>, callback: grpc_1.sendUnaryData<CreateJobPostingResponse>): void;
         abstract ReadJobPosting(call: grpc_1.ServerUnaryCall<ReadJobPostingRequest, ReadJobPostingResponse>, callback: grpc_1.sendUnaryData<ReadJobPostingResponse>): void;
+        abstract ReadJobPostingByQuery(call: grpc_1.ServerUnaryCall<ReadJobPostingByQueryRequest, ReadJobPostingByQueryResponse>, callback: grpc_1.sendUnaryData<ReadJobPostingByQueryResponse>): void;
         abstract UpdateJobPosting(call: grpc_1.ServerUnaryCall<UpdateJobPostingRequest, UpdateJobPostingResponse>, callback: grpc_1.sendUnaryData<UpdateJobPostingResponse>): void;
         abstract DeleteJobPosting(call: grpc_1.ServerUnaryCall<DeleteJobPostingRequest, DeleteJobPostingResponse>, callback: grpc_1.sendUnaryData<DeleteJobPostingResponse>): void;
     }
@@ -1111,6 +1743,9 @@ export namespace job_posting_service {
         };
         ReadJobPosting: GrpcUnaryServiceInterface<ReadJobPostingRequest, ReadJobPostingResponse> = (message: ReadJobPostingRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<ReadJobPostingResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<ReadJobPostingResponse>, callback?: grpc_1.requestCallback<ReadJobPostingResponse>): grpc_1.ClientUnaryCall => {
             return super.ReadJobPosting(message, metadata, options, callback);
+        };
+        ReadJobPostingByQuery: GrpcUnaryServiceInterface<ReadJobPostingByQueryRequest, ReadJobPostingByQueryResponse> = (message: ReadJobPostingByQueryRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<ReadJobPostingByQueryResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<ReadJobPostingByQueryResponse>, callback?: grpc_1.requestCallback<ReadJobPostingByQueryResponse>): grpc_1.ClientUnaryCall => {
+            return super.ReadJobPostingByQuery(message, metadata, options, callback);
         };
         UpdateJobPosting: GrpcUnaryServiceInterface<UpdateJobPostingRequest, UpdateJobPostingResponse> = (message: UpdateJobPostingRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<UpdateJobPostingResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<UpdateJobPostingResponse>, callback?: grpc_1.requestCallback<UpdateJobPostingResponse>): grpc_1.ClientUnaryCall => {
             return super.UpdateJobPosting(message, metadata, options, callback);
