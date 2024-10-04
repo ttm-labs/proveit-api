@@ -287,37 +287,37 @@ export namespace job_posting_service {
     export class ReadJobPostingRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            job_posting_1?: string;
+            job_posting_id?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("job_posting_1" in data && data.job_posting_1 != undefined) {
-                    this.job_posting_1 = data.job_posting_1;
+                if ("job_posting_id" in data && data.job_posting_id != undefined) {
+                    this.job_posting_id = data.job_posting_id;
                 }
             }
         }
-        get job_posting_1() {
+        get job_posting_id() {
             return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
-        set job_posting_1(value: string) {
+        set job_posting_id(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         static fromObject(data: {
-            job_posting_1?: string;
+            job_posting_id?: string;
         }): ReadJobPostingRequest {
             const message = new ReadJobPostingRequest({});
-            if (data.job_posting_1 != null) {
-                message.job_posting_1 = data.job_posting_1;
+            if (data.job_posting_id != null) {
+                message.job_posting_id = data.job_posting_id;
             }
             return message;
         }
         toObject() {
             const data: {
-                job_posting_1?: string;
+                job_posting_id?: string;
             } = {};
-            if (this.job_posting_1 != null) {
-                data.job_posting_1 = this.job_posting_1;
+            if (this.job_posting_id != null) {
+                data.job_posting_id = this.job_posting_id;
             }
             return data;
         }
@@ -325,8 +325,8 @@ export namespace job_posting_service {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.job_posting_1.length)
-                writer.writeString(1, this.job_posting_1);
+            if (this.job_posting_id.length)
+                writer.writeString(1, this.job_posting_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -337,7 +337,7 @@ export namespace job_posting_service {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.job_posting_1 = reader.readString();
+                        message.job_posting_id = reader.readString();
                         break;
                     default: reader.skipField();
                 }

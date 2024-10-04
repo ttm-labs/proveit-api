@@ -759,7 +759,7 @@ proto.job_posting_service.ReadJobPostingRequest.prototype.toObject = function(op
  */
 proto.job_posting_service.ReadJobPostingRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    jobPosting1: jspb.Message.getFieldWithDefault(msg, 1, "")
+    jobPostingId: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -798,7 +798,7 @@ proto.job_posting_service.ReadJobPostingRequest.deserializeBinaryFromReader = fu
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setJobPosting1(value);
+      msg.setJobPostingId(value);
       break;
     default:
       reader.skipField();
@@ -829,7 +829,7 @@ proto.job_posting_service.ReadJobPostingRequest.prototype.serializeBinary = func
  */
 proto.job_posting_service.ReadJobPostingRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getJobPosting1();
+  f = message.getJobPostingId();
   if (f.length > 0) {
     writer.writeString(
       1,
@@ -840,10 +840,10 @@ proto.job_posting_service.ReadJobPostingRequest.serializeBinaryToWriter = functi
 
 
 /**
- * optional string job_posting_1 = 1;
+ * optional string job_posting_id = 1;
  * @return {string}
  */
-proto.job_posting_service.ReadJobPostingRequest.prototype.getJobPosting1 = function() {
+proto.job_posting_service.ReadJobPostingRequest.prototype.getJobPostingId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -852,7 +852,7 @@ proto.job_posting_service.ReadJobPostingRequest.prototype.getJobPosting1 = funct
  * @param {string} value
  * @return {!proto.job_posting_service.ReadJobPostingRequest} returns this
  */
-proto.job_posting_service.ReadJobPostingRequest.prototype.setJobPosting1 = function(value) {
+proto.job_posting_service.ReadJobPostingRequest.prototype.setJobPostingId = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 

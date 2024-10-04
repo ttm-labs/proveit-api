@@ -293,35 +293,35 @@ var job_posting_service;
             _ReadJobPostingRequest_one_of_decls.set(this, []);
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], __classPrivateFieldGet(this, _ReadJobPostingRequest_one_of_decls, "f"));
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("job_posting_1" in data && data.job_posting_1 != undefined) {
-                    this.job_posting_1 = data.job_posting_1;
+                if ("job_posting_id" in data && data.job_posting_id != undefined) {
+                    this.job_posting_id = data.job_posting_id;
                 }
             }
         }
-        get job_posting_1() {
+        get job_posting_id() {
             return pb_1.Message.getFieldWithDefault(this, 1, "");
         }
-        set job_posting_1(value) {
+        set job_posting_id(value) {
             pb_1.Message.setField(this, 1, value);
         }
         static fromObject(data) {
             const message = new ReadJobPostingRequest({});
-            if (data.job_posting_1 != null) {
-                message.job_posting_1 = data.job_posting_1;
+            if (data.job_posting_id != null) {
+                message.job_posting_id = data.job_posting_id;
             }
             return message;
         }
         toObject() {
             const data = {};
-            if (this.job_posting_1 != null) {
-                data.job_posting_1 = this.job_posting_1;
+            if (this.job_posting_id != null) {
+                data.job_posting_id = this.job_posting_id;
             }
             return data;
         }
         serialize(w) {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.job_posting_1.length)
-                writer.writeString(1, this.job_posting_1);
+            if (this.job_posting_id.length)
+                writer.writeString(1, this.job_posting_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -332,7 +332,7 @@ var job_posting_service;
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.job_posting_1 = reader.readString();
+                        message.job_posting_id = reader.readString();
                         break;
                     default: reader.skipField();
                 }

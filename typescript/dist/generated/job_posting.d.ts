@@ -79,15 +79,15 @@ export declare namespace job_posting_service {
     export class ReadJobPostingRequest extends pb_1.Message {
         #private;
         constructor(data?: any[] | {
-            job_posting_1?: string;
+            job_posting_id?: string;
         });
-        get job_posting_1(): string;
-        set job_posting_1(value: string);
+        get job_posting_id(): string;
+        set job_posting_id(value: string);
         static fromObject(data: {
-            job_posting_1?: string;
+            job_posting_id?: string;
         }): ReadJobPostingRequest;
         toObject(): {
-            job_posting_1?: string;
+            job_posting_id?: string;
         };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
