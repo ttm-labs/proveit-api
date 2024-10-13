@@ -2577,10 +2577,10 @@ proto.job_posting_service.JobPostingQuery.toObject = function(includeInstance, m
     regexpCompanyName: jspb.Message.getFieldWithDefault(msg, 2, ""),
     regexpLocation: jspb.Message.getFieldWithDefault(msg, 3, ""),
     regexpTitle: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    evalMinBaseSalary: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    evalMaxBaseSalary: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    evalMinBonusSalary: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    evalMaxBonusSalary: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    evalMinBaseSalary: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    evalMaxBaseSalary: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    evalMinBonusSalary: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    evalMaxBonusSalary: jspb.Message.getFieldWithDefault(msg, 8, 0),
     regexpQualificationsList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f
   };
 
@@ -2635,19 +2635,19 @@ proto.job_posting_service.JobPostingQuery.deserializeBinaryFromReader = function
       msg.setRegexpTitle(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readInt32());
       msg.setEvalMinBaseSalary(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readInt32());
       msg.setEvalMaxBaseSalary(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readInt32());
       msg.setEvalMinBonusSalary(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readInt32());
       msg.setEvalMaxBonusSalary(value);
       break;
     case 9:
@@ -2712,29 +2712,29 @@ proto.job_posting_service.JobPostingQuery.serializeBinaryToWriter = function(mes
     );
   }
   f = message.getEvalMinBaseSalary();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0) {
+    writer.writeInt32(
       5,
       f
     );
   }
   f = message.getEvalMaxBaseSalary();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0) {
+    writer.writeInt32(
       6,
       f
     );
   }
   f = message.getEvalMinBonusSalary();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0) {
+    writer.writeInt32(
       7,
       f
     );
   }
   f = message.getEvalMaxBonusSalary();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0) {
+    writer.writeInt32(
       8,
       f
     );
@@ -2822,74 +2822,74 @@ proto.job_posting_service.JobPostingQuery.prototype.setRegexpTitle = function(va
 
 
 /**
- * optional string eval_min_base_salary = 5;
- * @return {string}
+ * optional int32 eval_min_base_salary = 5;
+ * @return {number}
  */
 proto.job_posting_service.JobPostingQuery.prototype.getEvalMinBaseSalary = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.job_posting_service.JobPostingQuery} returns this
  */
 proto.job_posting_service.JobPostingQuery.prototype.setEvalMinBaseSalary = function(value) {
-  return jspb.Message.setProto3StringField(this, 5, value);
+  return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
 /**
- * optional string eval_max_base_salary = 6;
- * @return {string}
+ * optional int32 eval_max_base_salary = 6;
+ * @return {number}
  */
 proto.job_posting_service.JobPostingQuery.prototype.getEvalMaxBaseSalary = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.job_posting_service.JobPostingQuery} returns this
  */
 proto.job_posting_service.JobPostingQuery.prototype.setEvalMaxBaseSalary = function(value) {
-  return jspb.Message.setProto3StringField(this, 6, value);
+  return jspb.Message.setProto3IntField(this, 6, value);
 };
 
 
 /**
- * optional string eval_min_bonus_salary = 7;
- * @return {string}
+ * optional int32 eval_min_bonus_salary = 7;
+ * @return {number}
  */
 proto.job_posting_service.JobPostingQuery.prototype.getEvalMinBonusSalary = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.job_posting_service.JobPostingQuery} returns this
  */
 proto.job_posting_service.JobPostingQuery.prototype.setEvalMinBonusSalary = function(value) {
-  return jspb.Message.setProto3StringField(this, 7, value);
+  return jspb.Message.setProto3IntField(this, 7, value);
 };
 
 
 /**
- * optional string eval_max_bonus_salary = 8;
- * @return {string}
+ * optional int32 eval_max_bonus_salary = 8;
+ * @return {number}
  */
 proto.job_posting_service.JobPostingQuery.prototype.getEvalMaxBonusSalary = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.job_posting_service.JobPostingQuery} returns this
  */
 proto.job_posting_service.JobPostingQuery.prototype.setEvalMaxBonusSalary = function(value) {
-  return jspb.Message.setProto3StringField(this, 8, value);
+  return jspb.Message.setProto3IntField(this, 8, value);
 };
 
 

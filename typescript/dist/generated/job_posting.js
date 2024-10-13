@@ -1149,25 +1149,25 @@ var job_posting_service;
             pb_1.Message.setField(this, 4, value);
         }
         get eval_min_base_salary() {
-            return pb_1.Message.getFieldWithDefault(this, 5, "");
+            return pb_1.Message.getFieldWithDefault(this, 5, 0);
         }
         set eval_min_base_salary(value) {
             pb_1.Message.setField(this, 5, value);
         }
         get eval_max_base_salary() {
-            return pb_1.Message.getFieldWithDefault(this, 6, "");
+            return pb_1.Message.getFieldWithDefault(this, 6, 0);
         }
         set eval_max_base_salary(value) {
             pb_1.Message.setField(this, 6, value);
         }
         get eval_min_bonus_salary() {
-            return pb_1.Message.getFieldWithDefault(this, 7, "");
+            return pb_1.Message.getFieldWithDefault(this, 7, 0);
         }
         set eval_min_bonus_salary(value) {
             pb_1.Message.setField(this, 7, value);
         }
         get eval_max_bonus_salary() {
-            return pb_1.Message.getFieldWithDefault(this, 8, "");
+            return pb_1.Message.getFieldWithDefault(this, 8, 0);
         }
         set eval_max_bonus_salary(value) {
             pb_1.Message.setField(this, 8, value);
@@ -1250,14 +1250,14 @@ var job_posting_service;
                 writer.writeString(3, this.regexp_location);
             if (this.regexp_title.length)
                 writer.writeString(4, this.regexp_title);
-            if (this.eval_min_base_salary.length)
-                writer.writeString(5, this.eval_min_base_salary);
-            if (this.eval_max_base_salary.length)
-                writer.writeString(6, this.eval_max_base_salary);
-            if (this.eval_min_bonus_salary.length)
-                writer.writeString(7, this.eval_min_bonus_salary);
-            if (this.eval_max_bonus_salary.length)
-                writer.writeString(8, this.eval_max_bonus_salary);
+            if (this.eval_min_base_salary != 0)
+                writer.writeInt32(5, this.eval_min_base_salary);
+            if (this.eval_max_base_salary != 0)
+                writer.writeInt32(6, this.eval_max_base_salary);
+            if (this.eval_min_bonus_salary != 0)
+                writer.writeInt32(7, this.eval_min_bonus_salary);
+            if (this.eval_max_bonus_salary != 0)
+                writer.writeInt32(8, this.eval_max_bonus_salary);
             if (this.regexp_qualifications.length)
                 writer.writeRepeatedString(9, this.regexp_qualifications);
             if (!w)
@@ -1282,16 +1282,16 @@ var job_posting_service;
                         message.regexp_title = reader.readString();
                         break;
                     case 5:
-                        message.eval_min_base_salary = reader.readString();
+                        message.eval_min_base_salary = reader.readInt32();
                         break;
                     case 6:
-                        message.eval_max_base_salary = reader.readString();
+                        message.eval_max_base_salary = reader.readInt32();
                         break;
                     case 7:
-                        message.eval_min_bonus_salary = reader.readString();
+                        message.eval_min_bonus_salary = reader.readInt32();
                         break;
                     case 8:
-                        message.eval_max_bonus_salary = reader.readString();
+                        message.eval_max_bonus_salary = reader.readInt32();
                         break;
                     case 9:
                         pb_1.Message.addToRepeatedField(message, 9, reader.readString());

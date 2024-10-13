@@ -77,10 +77,10 @@ message JobPostingQuery {
 	string regexp_company_name = 2;
 	string regexp_location = 3;
 	string regexp_title = 4;
-	string eval_min_base_salary = 5;
-	string eval_max_base_salary = 6;
-	string eval_min_bonus_salary = 7;
-	string eval_max_bonus_salary = 8;
+	int32 eval_min_base_salary = 5;
+	int32 eval_max_base_salary = 6;
+	int32 eval_min_bonus_salary = 7;
+	int32 eval_max_bonus_salary = 8;
 	repeated string regexp_qualifications = 9;
 }
 

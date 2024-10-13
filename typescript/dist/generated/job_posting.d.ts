@@ -313,10 +313,10 @@ export declare namespace job_posting_service {
             regexp_company_name?: string;
             regexp_location?: string;
             regexp_title?: string;
-            eval_min_base_salary?: string;
-            eval_max_base_salary?: string;
-            eval_min_bonus_salary?: string;
-            eval_max_bonus_salary?: string;
+            eval_min_base_salary?: number;
+            eval_max_base_salary?: number;
+            eval_min_bonus_salary?: number;
+            eval_max_bonus_salary?: number;
             regexp_qualifications?: string[];
         });
         get regexp_industry(): string;
@@ -327,14 +327,14 @@ export declare namespace job_posting_service {
         set regexp_location(value: string);
         get regexp_title(): string;
         set regexp_title(value: string);
-        get eval_min_base_salary(): string;
-        set eval_min_base_salary(value: string);
-        get eval_max_base_salary(): string;
-        set eval_max_base_salary(value: string);
-        get eval_min_bonus_salary(): string;
-        set eval_min_bonus_salary(value: string);
-        get eval_max_bonus_salary(): string;
-        set eval_max_bonus_salary(value: string);
+        get eval_min_base_salary(): number;
+        set eval_min_base_salary(value: number);
+        get eval_max_base_salary(): number;
+        set eval_max_base_salary(value: number);
+        get eval_min_bonus_salary(): number;
+        set eval_min_bonus_salary(value: number);
+        get eval_max_bonus_salary(): number;
+        set eval_max_bonus_salary(value: number);
         get regexp_qualifications(): string[];
         set regexp_qualifications(value: string[]);
         static fromObject(data: {
@@ -342,10 +342,10 @@ export declare namespace job_posting_service {
             regexp_company_name?: string;
             regexp_location?: string;
             regexp_title?: string;
-            eval_min_base_salary?: string;
-            eval_max_base_salary?: string;
-            eval_min_bonus_salary?: string;
-            eval_max_bonus_salary?: string;
+            eval_min_base_salary?: number;
+            eval_max_base_salary?: number;
+            eval_min_bonus_salary?: number;
+            eval_max_bonus_salary?: number;
             regexp_qualifications?: string[];
         }): JobPostingQuery;
         toObject(): {
@@ -353,10 +353,10 @@ export declare namespace job_posting_service {
             regexp_company_name?: string;
             regexp_location?: string;
             regexp_title?: string;
-            eval_min_base_salary?: string;
-            eval_max_base_salary?: string;
-            eval_min_bonus_salary?: string;
-            eval_max_bonus_salary?: string;
+            eval_min_base_salary?: number;
+            eval_max_base_salary?: number;
+            eval_min_bonus_salary?: number;
+            eval_max_bonus_salary?: number;
             regexp_qualifications?: string[];
         };
         serialize(): Uint8Array;
