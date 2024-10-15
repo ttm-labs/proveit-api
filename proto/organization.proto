@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package organization_service;
+
+option go_package = "proto/";
+
+service OrganizationService {
+    rpc CreateOrganization(CreateOrganizationRequest) returns (CreateOrganizationResponse) {}
+    rpc ReadOrganization(ReadOrganizationRequest) returns (ReadOrganizationResponse) {}
+    rpc UpdateOrganization(UpdateOrganizationRequest) returns (UpdateOrganizationResponse) {}
+    rpc DeleteOrganization(DeleteOrganizationRequest) returns (DeleteOrganizationResponse) {}
+
+    rpc AddMember(AddMemberRequest) returns (AddMemberResponse);
+}
+
+message CreateOrganizationRequest {
+    string name = 1;
+}
+
+message CreateOrganizationResponse {
+	string organization_id = 1;
+}
+
+message ReadOrganizationRequest {
+	string organization_id = 1;
+}
+
+message ReadOrganizationResponse {
+    string name = 1;
+    Membership membership = 2;
+}
+
+message ReadOrganizationByQueryRequest {}
+
+message ReadOrganizationByQueryResponse {}
+
+message UpdateOrganizationRequest {}
+
+message UpdateOrganizationResponse {}
+
+message DeleteOrganizationRequest {}
+
+message DeleteOrganizationResponse {}
+
+message AddMemberRequest {}
+
+message AddMemberResponse {
+    bool success = 1;
+}
+
+message Membership {
+    repeated User users = 1;
+}
+
+message User {
+    UserInfo user_info = 1;
+    UserAuthorization user_authorization = 2;
+}
+
+message UserInfo {
+    string user_id = 1;
+    string user_email = 2;
+}
+
+message UserAuthorization {
+    string resource_type = 1;
+    string resource_id = 2;
+    string role = 3;
+}

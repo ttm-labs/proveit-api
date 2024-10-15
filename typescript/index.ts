@@ -2,3 +2,4 @@
 export * from './generated/job_posting';  // gRPC client code
 export * from './generated/job_interview';  // gRPC client code
 export * from './generated/job_application';  // gRPC client code
+export * from './generated/organization';  // gRPC client code
