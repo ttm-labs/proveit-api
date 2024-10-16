@@ -1355,6 +1355,7 @@ proto.job_posting_service.ReadJobPostingByQueryRequest.prototype.toObject = func
  */
 proto.job_posting_service.ReadJobPostingByQueryRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
+    organizationId: jspb.Message.getFieldWithDefault(msg, 1, ""),
     query: (f = msg.getQuery()) && proto.job_posting_service.JobPostingQuery.toObject(includeInstance, f)
   };
 
@@ -1393,6 +1394,10 @@ proto.job_posting_service.ReadJobPostingByQueryRequest.deserializeBinaryFromRead
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOrganizationId(value);
+      break;
+    case 2:
       var value = new proto.job_posting_service.JobPostingQuery;
       reader.readMessage(value,proto.job_posting_service.JobPostingQuery.deserializeBinaryFromReader);
       msg.setQuery(value);
@@ -1426,10 +1431,17 @@ proto.job_posting_service.ReadJobPostingByQueryRequest.prototype.serializeBinary
  */
 proto.job_posting_service.ReadJobPostingByQueryRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getOrganizationId();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
   f = message.getQuery();
   if (f != null) {
     writer.writeMessage(
-      1,
+      2,
       f,
       proto.job_posting_service.JobPostingQuery.serializeBinaryToWriter
     );
@@ -1438,12 +1450,30 @@ proto.job_posting_service.ReadJobPostingByQueryRequest.serializeBinaryToWriter =
 
 
 /**
- * optional JobPostingQuery query = 1;
+ * optional string organization_id = 1;
+ * @return {string}
+ */
+proto.job_posting_service.ReadJobPostingByQueryRequest.prototype.getOrganizationId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.job_posting_service.ReadJobPostingByQueryRequest} returns this
+ */
+proto.job_posting_service.ReadJobPostingByQueryRequest.prototype.setOrganizationId = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional JobPostingQuery query = 2;
  * @return {?proto.job_posting_service.JobPostingQuery}
  */
 proto.job_posting_service.ReadJobPostingByQueryRequest.prototype.getQuery = function() {
   return /** @type{?proto.job_posting_service.JobPostingQuery} */ (
-    jspb.Message.getWrapperField(this, proto.job_posting_service.JobPostingQuery, 1));
+    jspb.Message.getWrapperField(this, proto.job_posting_service.JobPostingQuery, 2));
 };
 
 
@@ -1452,7 +1482,7 @@ proto.job_posting_service.ReadJobPostingByQueryRequest.prototype.getQuery = func
  * @return {!proto.job_posting_service.ReadJobPostingByQueryRequest} returns this
 */
 proto.job_posting_service.ReadJobPostingByQueryRequest.prototype.setQuery = function(value) {
-  return jspb.Message.setWrapperField(this, 1, value);
+  return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
@@ -1470,7 +1500,7 @@ proto.job_posting_service.ReadJobPostingByQueryRequest.prototype.clearQuery = fu
  * @return {boolean}
  */
 proto.job_posting_service.ReadJobPostingByQueryRequest.prototype.hasQuery = function() {
-  return jspb.Message.getField(this, 1) != null;
+  return jspb.Message.getField(this, 2) != null;
 };
 
 

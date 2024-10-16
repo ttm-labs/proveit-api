@@ -41,7 +41,8 @@ message ReadJobPostingResponse {
 }
 
 message ReadJobPostingByQueryRequest {
-	JobPostingQuery query = 1;
+	string organization_id = 1;
+	JobPostingQuery query = 2;
 }
 
 message ReadJobPostingByQueryResponse {

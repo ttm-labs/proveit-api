@@ -565,29 +565,43 @@ export namespace job_posting_service {
     export class ReadJobPostingByQueryRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
+            organization_id?: string;
             query?: JobPostingQuery;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
+                if ("organization_id" in data && data.organization_id != undefined) {
+                    this.organization_id = data.organization_id;
+                }
                 if ("query" in data && data.query != undefined) {
                     this.query = data.query;
                 }
             }
         }
+        get organization_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set organization_id(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
         get query() {
-            return pb_1.Message.getWrapperField(this, JobPostingQuery, 1) as JobPostingQuery;
+            return pb_1.Message.getWrapperField(this, JobPostingQuery, 2) as JobPostingQuery;
         }
         set query(value: JobPostingQuery) {
-            pb_1.Message.setWrapperField(this, 1, value);
+            pb_1.Message.setWrapperField(this, 2, value);
         }
         get has_query() {
-            return pb_1.Message.getField(this, 1) != null;
+            return pb_1.Message.getField(this, 2) != null;
         }
         static fromObject(data: {
+            organization_id?: string;
             query?: ReturnType<typeof JobPostingQuery.prototype.toObject>;
         }): ReadJobPostingByQueryRequest {
             const message = new ReadJobPostingByQueryRequest({});
+            if (data.organization_id != null) {
+                message.organization_id = data.organization_id;
+            }
             if (data.query != null) {
                 message.query = JobPostingQuery.fromObject(data.query);
             }
@@ -595,8 +609,12 @@ export namespace job_posting_service {
         }
         toObject() {
             const data: {
+                organization_id?: string;
                 query?: ReturnType<typeof JobPostingQuery.prototype.toObject>;
             } = {};
+            if (this.organization_id != null) {
+                data.organization_id = this.organization_id;
+            }
             if (this.query != null) {
                 data.query = this.query.toObject();
             }
@@ -606,8 +624,10 @@ export namespace job_posting_service {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
+            if (this.organization_id.length)
+                writer.writeString(1, this.organization_id);
             if (this.has_query)
-                writer.writeMessage(1, this.query, () => this.query.serialize(writer));
+                writer.writeMessage(2, this.query, () => this.query.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -618,6 +638,9 @@ export namespace job_posting_service {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
+                        message.organization_id = reader.readString();
+                        break;
+                    case 2:
                         reader.readMessage(message.query, () => message.query = JobPostingQuery.deserialize(reader));
                         break;
                     default: reader.skipField();

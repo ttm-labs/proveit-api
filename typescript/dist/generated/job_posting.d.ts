@@ -149,15 +149,20 @@ export declare namespace job_posting_service {
     export class ReadJobPostingByQueryRequest extends pb_1.Message {
         #private;
         constructor(data?: any[] | {
+            organization_id?: string;
             query?: JobPostingQuery;
         });
+        get organization_id(): string;
+        set organization_id(value: string);
         get query(): JobPostingQuery;
         set query(value: JobPostingQuery);
         get has_query(): boolean;
         static fromObject(data: {
+            organization_id?: string;
             query?: ReturnType<typeof JobPostingQuery.prototype.toObject>;
         }): ReadJobPostingByQueryRequest;
         toObject(): {
+            organization_id?: string;
             query?: ReturnType<typeof JobPostingQuery.prototype.toObject>;
         };
         serialize(): Uint8Array;
