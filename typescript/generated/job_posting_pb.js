@@ -352,7 +352,8 @@ proto.job_posting_service.CreateJobPostingRequest.toObject = function(includeIns
     title: jspb.Message.getFieldWithDefault(msg, 4, ""),
     baseSalary: (f = msg.getBaseSalary()) && proto.job_posting_service.Salary.toObject(includeInstance, f),
     bonusSalary: (f = msg.getBonusSalary()) && proto.job_posting_service.Salary.toObject(includeInstance, f),
-    qualificationsList: (f = jspb.Message.getRepeatedField(msg, 7)) == null ? undefined : f
+    qualificationsList: (f = jspb.Message.getRepeatedField(msg, 7)) == null ? undefined : f,
+    organizationId: jspb.Message.getFieldWithDefault(msg, 8, "")
   };
 
   if (includeInstance) {
@@ -418,6 +419,10 @@ proto.job_posting_service.CreateJobPostingRequest.deserializeBinaryFromReader = 
     case 7:
       var value = /** @type {string} */ (reader.readString());
       msg.addQualifications(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOrganizationId(value);
       break;
     default:
       reader.skipField();
@@ -496,6 +501,13 @@ proto.job_posting_service.CreateJobPostingRequest.serializeBinaryToWriter = func
   if (f.length > 0) {
     writer.writeRepeatedString(
       7,
+      f
+    );
+  }
+  f = message.getOrganizationId();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
       f
     );
   }
@@ -682,6 +694,24 @@ proto.job_posting_service.CreateJobPostingRequest.prototype.addQualifications = 
  */
 proto.job_posting_service.CreateJobPostingRequest.prototype.clearQualificationsList = function() {
   return this.setQualificationsList([]);
+};
+
+
+/**
+ * optional string organization_id = 8;
+ * @return {string}
+ */
+proto.job_posting_service.CreateJobPostingRequest.prototype.getOrganizationId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.job_posting_service.CreateJobPostingRequest} returns this
+ */
+proto.job_posting_service.CreateJobPostingRequest.prototype.setOrganizationId = function(value) {
+  return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 

@@ -16,6 +16,7 @@ export declare namespace job_posting_service {
             base_salary?: Salary;
             bonus_salary?: Salary;
             qualifications?: string[];
+            organization_id?: string;
         });
         get industry(): string;
         set industry(value: string);
@@ -33,6 +34,8 @@ export declare namespace job_posting_service {
         get has_bonus_salary(): boolean;
         get qualifications(): string[];
         set qualifications(value: string[]);
+        get organization_id(): string;
+        set organization_id(value: string);
         static fromObject(data: {
             industry?: string;
             company_name?: string;
@@ -41,6 +44,7 @@ export declare namespace job_posting_service {
             base_salary?: ReturnType<typeof Salary.prototype.toObject>;
             bonus_salary?: ReturnType<typeof Salary.prototype.toObject>;
             qualifications?: string[];
+            organization_id?: string;
         }): CreateJobPostingRequest;
         toObject(): {
             industry?: string;
@@ -50,6 +54,7 @@ export declare namespace job_posting_service {
             base_salary?: ReturnType<typeof Salary.prototype.toObject>;
             bonus_salary?: ReturnType<typeof Salary.prototype.toObject>;
             qualifications?: string[];
+            organization_id?: string;
         };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;

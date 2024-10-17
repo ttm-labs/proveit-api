@@ -66,6 +66,9 @@ var job_posting_service;
                 if ("qualifications" in data && data.qualifications != undefined) {
                     this.qualifications = data.qualifications;
                 }
+                if ("organization_id" in data && data.organization_id != undefined) {
+                    this.organization_id = data.organization_id;
+                }
             }
         }
         get industry() {
@@ -116,6 +119,12 @@ var job_posting_service;
         set qualifications(value) {
             pb_1.Message.setField(this, 7, value);
         }
+        get organization_id() {
+            return pb_1.Message.getFieldWithDefault(this, 8, "");
+        }
+        set organization_id(value) {
+            pb_1.Message.setField(this, 8, value);
+        }
         static fromObject(data) {
             const message = new CreateJobPostingRequest({});
             if (data.industry != null) {
@@ -138,6 +147,9 @@ var job_posting_service;
             }
             if (data.qualifications != null) {
                 message.qualifications = data.qualifications;
+            }
+            if (data.organization_id != null) {
+                message.organization_id = data.organization_id;
             }
             return message;
         }
@@ -164,6 +176,9 @@ var job_posting_service;
             if (this.qualifications != null) {
                 data.qualifications = this.qualifications;
             }
+            if (this.organization_id != null) {
+                data.organization_id = this.organization_id;
+            }
             return data;
         }
         serialize(w) {
@@ -182,6 +197,8 @@ var job_posting_service;
                 writer.writeMessage(6, this.bonus_salary, () => this.bonus_salary.serialize(writer));
             if (this.qualifications.length)
                 writer.writeRepeatedString(7, this.qualifications);
+            if (this.organization_id.length)
+                writer.writeString(8, this.organization_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -211,6 +228,9 @@ var job_posting_service;
                         break;
                     case 7:
                         pb_1.Message.addToRepeatedField(message, 7, reader.readString());
+                        break;
+                    case 8:
+                        message.organization_id = reader.readString();
                         break;
                     default: reader.skipField();
                 }

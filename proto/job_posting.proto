@@ -20,6 +20,7 @@ message CreateJobPostingRequest {
 	Salary base_salary = 5;
 	Salary bonus_salary = 6;
 	repeated string qualifications = 7;
+	string organization_id = 8;
 }
 
 message CreateJobPostingResponse {
