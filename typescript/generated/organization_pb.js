@@ -1582,7 +1582,8 @@ proto.organization_service.AddMemberRequest.prototype.toObject = function(opt_in
  */
 proto.organization_service.AddMemberRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    organizationId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    user: (f = msg.getUser()) && proto.organization_service.User.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1619,6 +1620,15 @@ proto.organization_service.AddMemberRequest.deserializeBinaryFromReader = functi
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOrganizationId(value);
+      break;
+    case 2:
+      var value = new proto.organization_service.User;
+      reader.readMessage(value,proto.organization_service.User.deserializeBinaryFromReader);
+      msg.setUser(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -1648,6 +1658,76 @@ proto.organization_service.AddMemberRequest.prototype.serializeBinary = function
  */
 proto.organization_service.AddMemberRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getOrganizationId();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getUser();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      proto.organization_service.User.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional string organization_id = 1;
+ * @return {string}
+ */
+proto.organization_service.AddMemberRequest.prototype.getOrganizationId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.organization_service.AddMemberRequest} returns this
+ */
+proto.organization_service.AddMemberRequest.prototype.setOrganizationId = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional User user = 2;
+ * @return {?proto.organization_service.User}
+ */
+proto.organization_service.AddMemberRequest.prototype.getUser = function() {
+  return /** @type{?proto.organization_service.User} */ (
+    jspb.Message.getWrapperField(this, proto.organization_service.User, 2));
+};
+
+
+/**
+ * @param {?proto.organization_service.User|undefined} value
+ * @return {!proto.organization_service.AddMemberRequest} returns this
+*/
+proto.organization_service.AddMemberRequest.prototype.setUser = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.organization_service.AddMemberRequest} returns this
+ */
+proto.organization_service.AddMemberRequest.prototype.clearUser = function() {
+  return this.setUser(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.organization_service.AddMemberRequest.prototype.hasUser = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 

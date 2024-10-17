@@ -551,18 +551,56 @@ var organization_service;
             super();
             _AddMemberRequest_one_of_decls.set(this, []);
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], __classPrivateFieldGet(this, _AddMemberRequest_one_of_decls, "f"));
-            if (!Array.isArray(data) && typeof data == "object") { }
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("organization_id" in data && data.organization_id != undefined) {
+                    this.organization_id = data.organization_id;
+                }
+                if ("user" in data && data.user != undefined) {
+                    this.user = data.user;
+                }
+            }
+        }
+        get organization_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "");
+        }
+        set organization_id(value) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get user() {
+            return pb_1.Message.getWrapperField(this, User, 2);
+        }
+        set user(value) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_user() {
+            return pb_1.Message.getField(this, 2) != null;
         }
         static fromObject(data) {
             const message = new AddMemberRequest({});
+            if (data.organization_id != null) {
+                message.organization_id = data.organization_id;
+            }
+            if (data.user != null) {
+                message.user = User.fromObject(data.user);
+            }
             return message;
         }
         toObject() {
             const data = {};
+            if (this.organization_id != null) {
+                data.organization_id = this.organization_id;
+            }
+            if (this.user != null) {
+                data.user = this.user.toObject();
+            }
             return data;
         }
         serialize(w) {
             const writer = w || new pb_1.BinaryWriter();
+            if (this.organization_id.length)
+                writer.writeString(1, this.organization_id);
+            if (this.has_user)
+                writer.writeMessage(2, this.user, () => this.user.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -572,6 +610,12 @@ var organization_service;
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.organization_id = reader.readString();
+                        break;
+                    case 2:
+                        reader.readMessage(message.user, () => message.user = User.deserialize(reader));
+                        break;
                     default: reader.skipField();
                 }
             }

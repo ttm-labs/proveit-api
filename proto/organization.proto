@@ -42,7 +42,10 @@ message DeleteOrganizationRequest {}
 
 message DeleteOrganizationResponse {}
 
-message AddMemberRequest {}
+message AddMemberRequest {
+    string organization_id = 1;
+    User user = 2;
+}
 
 message AddMemberResponse {
     bool success = 1;

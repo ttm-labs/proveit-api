@@ -156,9 +156,23 @@ export declare namespace organization_service {
     }
     export class AddMemberRequest extends pb_1.Message {
         #private;
-        constructor(data?: any[] | {});
-        static fromObject(data: {}): AddMemberRequest;
-        toObject(): {};
+        constructor(data?: any[] | {
+            organization_id?: string;
+            user?: User;
+        });
+        get organization_id(): string;
+        set organization_id(value: string);
+        get user(): User;
+        set user(value: User);
+        get has_user(): boolean;
+        static fromObject(data: {
+            organization_id?: string;
+            user?: ReturnType<typeof User.prototype.toObject>;
+        }): AddMemberRequest;
+        toObject(): {
+            organization_id?: string;
+            user?: ReturnType<typeof User.prototype.toObject>;
+        };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): AddMemberRequest;

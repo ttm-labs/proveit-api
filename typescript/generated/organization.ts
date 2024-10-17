@@ -542,23 +542,70 @@ export namespace organization_service {
     }
     export class AddMemberRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {}) {
+        constructor(data?: any[] | {
+            organization_id?: string;
+            user?: User;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") { }
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("organization_id" in data && data.organization_id != undefined) {
+                    this.organization_id = data.organization_id;
+                }
+                if ("user" in data && data.user != undefined) {
+                    this.user = data.user;
+                }
+            }
         }
-        static fromObject(data: {}): AddMemberRequest {
+        get organization_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set organization_id(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get user() {
+            return pb_1.Message.getWrapperField(this, User, 2) as User;
+        }
+        set user(value: User) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_user() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        static fromObject(data: {
+            organization_id?: string;
+            user?: ReturnType<typeof User.prototype.toObject>;
+        }): AddMemberRequest {
             const message = new AddMemberRequest({});
+            if (data.organization_id != null) {
+                message.organization_id = data.organization_id;
+            }
+            if (data.user != null) {
+                message.user = User.fromObject(data.user);
+            }
             return message;
         }
         toObject() {
-            const data: {} = {};
+            const data: {
+                organization_id?: string;
+                user?: ReturnType<typeof User.prototype.toObject>;
+            } = {};
+            if (this.organization_id != null) {
+                data.organization_id = this.organization_id;
+            }
+            if (this.user != null) {
+                data.user = this.user.toObject();
+            }
             return data;
         }
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
+            if (this.organization_id.length)
+                writer.writeString(1, this.organization_id);
+            if (this.has_user)
+                writer.writeMessage(2, this.user, () => this.user.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -568,6 +615,12 @@ export namespace organization_service {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.organization_id = reader.readString();
+                        break;
+                    case 2:
+                        reader.readMessage(message.user, () => message.user = User.deserialize(reader));
+                        break;
                     default: reader.skipField();
                 }
             }
