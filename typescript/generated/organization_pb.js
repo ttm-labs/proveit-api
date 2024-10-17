@@ -1583,7 +1583,8 @@ proto.organization_service.AddMemberRequest.prototype.toObject = function(opt_in
 proto.organization_service.AddMemberRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     organizationId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    user: (f = msg.getUser()) && proto.organization_service.User.toObject(includeInstance, f)
+    userEmail: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    userAuthorization: (f = msg.getUserAuthorization()) && proto.organization_service.UserAuthorization.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1625,9 +1626,13 @@ proto.organization_service.AddMemberRequest.deserializeBinaryFromReader = functi
       msg.setOrganizationId(value);
       break;
     case 2:
-      var value = new proto.organization_service.User;
-      reader.readMessage(value,proto.organization_service.User.deserializeBinaryFromReader);
-      msg.setUser(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUserEmail(value);
+      break;
+    case 3:
+      var value = new proto.organization_service.UserAuthorization;
+      reader.readMessage(value,proto.organization_service.UserAuthorization.deserializeBinaryFromReader);
+      msg.setUserAuthorization(value);
       break;
     default:
       reader.skipField();
@@ -1665,12 +1670,19 @@ proto.organization_service.AddMemberRequest.serializeBinaryToWriter = function(m
       f
     );
   }
-  f = message.getUser();
+  f = message.getUserEmail();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getUserAuthorization();
   if (f != null) {
     writer.writeMessage(
-      2,
+      3,
       f,
-      proto.organization_service.User.serializeBinaryToWriter
+      proto.organization_service.UserAuthorization.serializeBinaryToWriter
     );
   }
 };
@@ -1695,21 +1707,39 @@ proto.organization_service.AddMemberRequest.prototype.setOrganizationId = functi
 
 
 /**
- * optional User user = 2;
- * @return {?proto.organization_service.User}
+ * optional string user_email = 2;
+ * @return {string}
  */
-proto.organization_service.AddMemberRequest.prototype.getUser = function() {
-  return /** @type{?proto.organization_service.User} */ (
-    jspb.Message.getWrapperField(this, proto.organization_service.User, 2));
+proto.organization_service.AddMemberRequest.prototype.getUserEmail = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
- * @param {?proto.organization_service.User|undefined} value
+ * @param {string} value
+ * @return {!proto.organization_service.AddMemberRequest} returns this
+ */
+proto.organization_service.AddMemberRequest.prototype.setUserEmail = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional UserAuthorization user_authorization = 3;
+ * @return {?proto.organization_service.UserAuthorization}
+ */
+proto.organization_service.AddMemberRequest.prototype.getUserAuthorization = function() {
+  return /** @type{?proto.organization_service.UserAuthorization} */ (
+    jspb.Message.getWrapperField(this, proto.organization_service.UserAuthorization, 3));
+};
+
+
+/**
+ * @param {?proto.organization_service.UserAuthorization|undefined} value
  * @return {!proto.organization_service.AddMemberRequest} returns this
 */
-proto.organization_service.AddMemberRequest.prototype.setUser = function(value) {
-  return jspb.Message.setWrapperField(this, 2, value);
+proto.organization_service.AddMemberRequest.prototype.setUserAuthorization = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
 };
 
 
@@ -1717,8 +1747,8 @@ proto.organization_service.AddMemberRequest.prototype.setUser = function(value) 
  * Clears the message field making it undefined.
  * @return {!proto.organization_service.AddMemberRequest} returns this
  */
-proto.organization_service.AddMemberRequest.prototype.clearUser = function() {
-  return this.setUser(undefined);
+proto.organization_service.AddMemberRequest.prototype.clearUserAuthorization = function() {
+  return this.setUserAuthorization(undefined);
 };
 
 
@@ -1726,8 +1756,8 @@ proto.organization_service.AddMemberRequest.prototype.clearUser = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.organization_service.AddMemberRequest.prototype.hasUser = function() {
-  return jspb.Message.getField(this, 2) != null;
+proto.organization_service.AddMemberRequest.prototype.hasUserAuthorization = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 

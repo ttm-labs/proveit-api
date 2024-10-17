@@ -555,8 +555,11 @@ var organization_service;
                 if ("organization_id" in data && data.organization_id != undefined) {
                     this.organization_id = data.organization_id;
                 }
-                if ("user" in data && data.user != undefined) {
-                    this.user = data.user;
+                if ("user_email" in data && data.user_email != undefined) {
+                    this.user_email = data.user_email;
+                }
+                if ("user_authorization" in data && data.user_authorization != undefined) {
+                    this.user_authorization = data.user_authorization;
                 }
             }
         }
@@ -566,22 +569,31 @@ var organization_service;
         set organization_id(value) {
             pb_1.Message.setField(this, 1, value);
         }
-        get user() {
-            return pb_1.Message.getWrapperField(this, User, 2);
+        get user_email() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "");
         }
-        set user(value) {
-            pb_1.Message.setWrapperField(this, 2, value);
+        set user_email(value) {
+            pb_1.Message.setField(this, 2, value);
         }
-        get has_user() {
-            return pb_1.Message.getField(this, 2) != null;
+        get user_authorization() {
+            return pb_1.Message.getWrapperField(this, UserAuthorization, 3);
+        }
+        set user_authorization(value) {
+            pb_1.Message.setWrapperField(this, 3, value);
+        }
+        get has_user_authorization() {
+            return pb_1.Message.getField(this, 3) != null;
         }
         static fromObject(data) {
             const message = new AddMemberRequest({});
             if (data.organization_id != null) {
                 message.organization_id = data.organization_id;
             }
-            if (data.user != null) {
-                message.user = User.fromObject(data.user);
+            if (data.user_email != null) {
+                message.user_email = data.user_email;
+            }
+            if (data.user_authorization != null) {
+                message.user_authorization = UserAuthorization.fromObject(data.user_authorization);
             }
             return message;
         }
@@ -590,8 +602,11 @@ var organization_service;
             if (this.organization_id != null) {
                 data.organization_id = this.organization_id;
             }
-            if (this.user != null) {
-                data.user = this.user.toObject();
+            if (this.user_email != null) {
+                data.user_email = this.user_email;
+            }
+            if (this.user_authorization != null) {
+                data.user_authorization = this.user_authorization.toObject();
             }
             return data;
         }
@@ -599,8 +614,10 @@ var organization_service;
             const writer = w || new pb_1.BinaryWriter();
             if (this.organization_id.length)
                 writer.writeString(1, this.organization_id);
-            if (this.has_user)
-                writer.writeMessage(2, this.user, () => this.user.serialize(writer));
+            if (this.user_email.length)
+                writer.writeString(2, this.user_email);
+            if (this.has_user_authorization)
+                writer.writeMessage(3, this.user_authorization, () => this.user_authorization.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -614,7 +631,10 @@ var organization_service;
                         message.organization_id = reader.readString();
                         break;
                     case 2:
-                        reader.readMessage(message.user, () => message.user = User.deserialize(reader));
+                        message.user_email = reader.readString();
+                        break;
+                    case 3:
+                        reader.readMessage(message.user_authorization, () => message.user_authorization = UserAuthorization.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }

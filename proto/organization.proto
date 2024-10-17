@@ -44,7 +44,8 @@ message DeleteOrganizationResponse {}
 
 message AddMemberRequest {
     string organization_id = 1;
-    User user = 2;
+    string user_email = 2;
+    UserAuthorization user_authorization = 3;
 }
 
 message AddMemberResponse {

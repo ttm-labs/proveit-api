@@ -158,20 +158,25 @@ export declare namespace organization_service {
         #private;
         constructor(data?: any[] | {
             organization_id?: string;
-            user?: User;
+            user_email?: string;
+            user_authorization?: UserAuthorization;
         });
         get organization_id(): string;
         set organization_id(value: string);
-        get user(): User;
-        set user(value: User);
-        get has_user(): boolean;
+        get user_email(): string;
+        set user_email(value: string);
+        get user_authorization(): UserAuthorization;
+        set user_authorization(value: UserAuthorization);
+        get has_user_authorization(): boolean;
         static fromObject(data: {
             organization_id?: string;
-            user?: ReturnType<typeof User.prototype.toObject>;
+            user_email?: string;
+            user_authorization?: ReturnType<typeof UserAuthorization.prototype.toObject>;
         }): AddMemberRequest;
         toObject(): {
             organization_id?: string;
-            user?: ReturnType<typeof User.prototype.toObject>;
+            user_email?: string;
+            user_authorization?: ReturnType<typeof UserAuthorization.prototype.toObject>;
         };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
