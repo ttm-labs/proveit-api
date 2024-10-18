@@ -891,6 +891,7 @@ export namespace organization_service {
         constructor(data?: any[] | {
             user_id?: string;
             user_email?: string;
+            user_name?: Name;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -900,6 +901,9 @@ export namespace organization_service {
                 }
                 if ("user_email" in data && data.user_email != undefined) {
                     this.user_email = data.user_email;
+                }
+                if ("user_name" in data && data.user_name != undefined) {
+                    this.user_name = data.user_name;
                 }
             }
         }
@@ -915,9 +919,19 @@ export namespace organization_service {
         set user_email(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
+        get user_name() {
+            return pb_1.Message.getWrapperField(this, Name, 3) as Name;
+        }
+        set user_name(value: Name) {
+            pb_1.Message.setWrapperField(this, 3, value);
+        }
+        get has_user_name() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
         static fromObject(data: {
             user_id?: string;
             user_email?: string;
+            user_name?: ReturnType<typeof Name.prototype.toObject>;
         }): UserInfo {
             const message = new UserInfo({});
             if (data.user_id != null) {
@@ -926,18 +940,25 @@ export namespace organization_service {
             if (data.user_email != null) {
                 message.user_email = data.user_email;
             }
+            if (data.user_name != null) {
+                message.user_name = Name.fromObject(data.user_name);
+            }
             return message;
         }
         toObject() {
             const data: {
                 user_id?: string;
                 user_email?: string;
+                user_name?: ReturnType<typeof Name.prototype.toObject>;
             } = {};
             if (this.user_id != null) {
                 data.user_id = this.user_id;
             }
             if (this.user_email != null) {
                 data.user_email = this.user_email;
+            }
+            if (this.user_name != null) {
+                data.user_name = this.user_name.toObject();
             }
             return data;
         }
@@ -949,6 +970,8 @@ export namespace organization_service {
                 writer.writeString(1, this.user_id);
             if (this.user_email.length)
                 writer.writeString(2, this.user_email);
+            if (this.has_user_name)
+                writer.writeMessage(3, this.user_name, () => this.user_name.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -963,6 +986,9 @@ export namespace organization_service {
                         break;
                     case 2:
                         message.user_email = reader.readString();
+                        break;
+                    case 3:
+                        reader.readMessage(message.user_name, () => message.user_name = Name.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }
@@ -1087,6 +1113,96 @@ export namespace organization_service {
         }
         static deserializeBinary(bytes: Uint8Array): UserAuthorization {
             return UserAuthorization.deserialize(bytes);
+        }
+    }
+    export class Name extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            first?: string;
+            last?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("first" in data && data.first != undefined) {
+                    this.first = data.first;
+                }
+                if ("last" in data && data.last != undefined) {
+                    this.last = data.last;
+                }
+            }
+        }
+        get first() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set first(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get last() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set last(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            first?: string;
+            last?: string;
+        }): Name {
+            const message = new Name({});
+            if (data.first != null) {
+                message.first = data.first;
+            }
+            if (data.last != null) {
+                message.last = data.last;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                first?: string;
+                last?: string;
+            } = {};
+            if (this.first != null) {
+                data.first = this.first;
+            }
+            if (this.last != null) {
+                data.last = this.last;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.first.length)
+                writer.writeString(1, this.first);
+            if (this.last.length)
+                writer.writeString(2, this.last);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Name {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Name();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.first = reader.readString();
+                        break;
+                    case 2:
+                        message.last = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): Name {
+            return Name.deserialize(bytes);
         }
     }
     interface GrpcUnaryServiceInterface<P, R> {

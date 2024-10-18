@@ -253,18 +253,24 @@ export declare namespace organization_service {
         constructor(data?: any[] | {
             user_id?: string;
             user_email?: string;
+            user_name?: Name;
         });
         get user_id(): string;
         set user_id(value: string);
         get user_email(): string;
         set user_email(value: string);
+        get user_name(): Name;
+        set user_name(value: Name);
+        get has_user_name(): boolean;
         static fromObject(data: {
             user_id?: string;
             user_email?: string;
+            user_name?: ReturnType<typeof Name.prototype.toObject>;
         }): UserInfo;
         toObject(): {
             user_id?: string;
             user_email?: string;
+            user_name?: ReturnType<typeof Name.prototype.toObject>;
         };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
@@ -300,6 +306,30 @@ export declare namespace organization_service {
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): UserAuthorization;
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): UserAuthorization;
+    }
+    export class Name extends pb_1.Message {
+        #private;
+        constructor(data?: any[] | {
+            first?: string;
+            last?: string;
+        });
+        get first(): string;
+        set first(value: string);
+        get last(): string;
+        set last(value: string);
+        static fromObject(data: {
+            first?: string;
+            last?: string;
+        }): Name;
+        toObject(): {
+            first?: string;
+            last?: string;
+        };
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Name;
+        serializeBinary(): Uint8Array;
+        static deserializeBinary(bytes: Uint8Array): Name;
     }
     interface GrpcUnaryServiceInterface<P, R> {
         (message: P, metadata: grpc_1.Metadata, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;

@@ -64,10 +64,16 @@ message User {
 message UserInfo {
     string user_id = 1;
     string user_email = 2;
+    Name user_name = 3;
 }
 
 message UserAuthorization {
     string resource_type = 1;
     string resource_id = 2;
     string role = 3;
+}
+
+message Name {
+    string first = 1;
+    string last = 2;
 }

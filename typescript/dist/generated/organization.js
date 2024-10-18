@@ -38,7 +38,7 @@ const pb_1 = __importStar(require("google-protobuf"));
 const grpc_1 = __importStar(require("@grpc/grpc-js"));
 var organization_service;
 (function (organization_service) {
-    var _CreateOrganizationRequest_one_of_decls, _CreateOrganizationResponse_one_of_decls, _ReadOrganizationRequest_one_of_decls, _ReadOrganizationResponse_one_of_decls, _ReadOrganizationByQueryRequest_one_of_decls, _ReadOrganizationByQueryResponse_one_of_decls, _UpdateOrganizationRequest_one_of_decls, _UpdateOrganizationResponse_one_of_decls, _DeleteOrganizationRequest_one_of_decls, _DeleteOrganizationResponse_one_of_decls, _AddMemberRequest_one_of_decls, _AddMemberResponse_one_of_decls, _Membership_one_of_decls, _User_one_of_decls, _UserInfo_one_of_decls, _UserAuthorization_one_of_decls;
+    var _CreateOrganizationRequest_one_of_decls, _CreateOrganizationResponse_one_of_decls, _ReadOrganizationRequest_one_of_decls, _ReadOrganizationResponse_one_of_decls, _ReadOrganizationByQueryRequest_one_of_decls, _ReadOrganizationByQueryResponse_one_of_decls, _UpdateOrganizationRequest_one_of_decls, _UpdateOrganizationResponse_one_of_decls, _DeleteOrganizationRequest_one_of_decls, _DeleteOrganizationResponse_one_of_decls, _AddMemberRequest_one_of_decls, _AddMemberResponse_one_of_decls, _Membership_one_of_decls, _User_one_of_decls, _UserInfo_one_of_decls, _UserAuthorization_one_of_decls, _Name_one_of_decls;
     class CreateOrganizationRequest extends pb_1.Message {
         constructor(data) {
             super();
@@ -871,6 +871,9 @@ var organization_service;
                 if ("user_email" in data && data.user_email != undefined) {
                     this.user_email = data.user_email;
                 }
+                if ("user_name" in data && data.user_name != undefined) {
+                    this.user_name = data.user_name;
+                }
             }
         }
         get user_id() {
@@ -885,6 +888,15 @@ var organization_service;
         set user_email(value) {
             pb_1.Message.setField(this, 2, value);
         }
+        get user_name() {
+            return pb_1.Message.getWrapperField(this, Name, 3);
+        }
+        set user_name(value) {
+            pb_1.Message.setWrapperField(this, 3, value);
+        }
+        get has_user_name() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
         static fromObject(data) {
             const message = new UserInfo({});
             if (data.user_id != null) {
@@ -892,6 +904,9 @@ var organization_service;
             }
             if (data.user_email != null) {
                 message.user_email = data.user_email;
+            }
+            if (data.user_name != null) {
+                message.user_name = Name.fromObject(data.user_name);
             }
             return message;
         }
@@ -903,6 +918,9 @@ var organization_service;
             if (this.user_email != null) {
                 data.user_email = this.user_email;
             }
+            if (this.user_name != null) {
+                data.user_name = this.user_name.toObject();
+            }
             return data;
         }
         serialize(w) {
@@ -911,6 +929,8 @@ var organization_service;
                 writer.writeString(1, this.user_id);
             if (this.user_email.length)
                 writer.writeString(2, this.user_email);
+            if (this.has_user_name)
+                writer.writeMessage(3, this.user_name, () => this.user_name.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -925,6 +945,9 @@ var organization_service;
                         break;
                     case 2:
                         message.user_email = reader.readString();
+                        break;
+                    case 3:
+                        reader.readMessage(message.user_name, () => message.user_name = Name.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }
@@ -1041,6 +1064,87 @@ var organization_service;
     }
     _UserAuthorization_one_of_decls = new WeakMap();
     organization_service.UserAuthorization = UserAuthorization;
+    class Name extends pb_1.Message {
+        constructor(data) {
+            super();
+            _Name_one_of_decls.set(this, []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], __classPrivateFieldGet(this, _Name_one_of_decls, "f"));
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("first" in data && data.first != undefined) {
+                    this.first = data.first;
+                }
+                if ("last" in data && data.last != undefined) {
+                    this.last = data.last;
+                }
+            }
+        }
+        get first() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "");
+        }
+        set first(value) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get last() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "");
+        }
+        set last(value) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data) {
+            const message = new Name({});
+            if (data.first != null) {
+                message.first = data.first;
+            }
+            if (data.last != null) {
+                message.last = data.last;
+            }
+            return message;
+        }
+        toObject() {
+            const data = {};
+            if (this.first != null) {
+                data.first = this.first;
+            }
+            if (this.last != null) {
+                data.last = this.last;
+            }
+            return data;
+        }
+        serialize(w) {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.first.length)
+                writer.writeString(1, this.first);
+            if (this.last.length)
+                writer.writeString(2, this.last);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes) {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Name();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.first = reader.readString();
+                        break;
+                    case 2:
+                        message.last = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary() {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes) {
+            return Name.deserialize(bytes);
+        }
+    }
+    _Name_one_of_decls = new WeakMap();
+    organization_service.Name = Name;
     class UnimplementedOrganizationServiceService {
     }
     UnimplementedOrganizationServiceService.definition = {
