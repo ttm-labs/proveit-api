@@ -19,11 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	OrganizationService_CreateOrganization_FullMethodName = "/organization_service.OrganizationService/CreateOrganization"
-	OrganizationService_ReadOrganization_FullMethodName   = "/organization_service.OrganizationService/ReadOrganization"
-	OrganizationService_UpdateOrganization_FullMethodName = "/organization_service.OrganizationService/UpdateOrganization"
-	OrganizationService_DeleteOrganization_FullMethodName = "/organization_service.OrganizationService/DeleteOrganization"
-	OrganizationService_AddMember_FullMethodName          = "/organization_service.OrganizationService/AddMember"
+	OrganizationService_CreateOrganization_FullMethodName             = "/organization_service.OrganizationService/CreateOrganization"
+	OrganizationService_ReadOrganization_FullMethodName               = "/organization_service.OrganizationService/ReadOrganization"
+	OrganizationService_UpdateOrganization_FullMethodName             = "/organization_service.OrganizationService/UpdateOrganization"
+	OrganizationService_DeleteOrganization_FullMethodName             = "/organization_service.OrganizationService/DeleteOrganization"
+	OrganizationService_GetOrganizationIDsForUserAdmin_FullMethodName = "/organization_service.OrganizationService/GetOrganizationIDsForUserAdmin"
+	OrganizationService_AddMember_FullMethodName                      = "/organization_service.OrganizationService/AddMember"
 )
 
 // OrganizationServiceClient is the client API for OrganizationService service.
@@ -34,6 +35,7 @@ type OrganizationServiceClient interface {
 	ReadOrganization(ctx context.Context, in *ReadOrganizationRequest, opts ...grpc.CallOption) (*ReadOrganizationResponse, error)
 	UpdateOrganization(ctx context.Context, in *UpdateOrganizationRequest, opts ...grpc.CallOption) (*UpdateOrganizationResponse, error)
 	DeleteOrganization(ctx context.Context, in *DeleteOrganizationRequest, opts ...grpc.CallOption) (*DeleteOrganizationResponse, error)
+	GetOrganizationIDsForUserAdmin(ctx context.Context, in *GetOrganizationIDsForUserAdminRequest, opts ...grpc.CallOption) (*GetOrganizationIDsForUserAdminResponse, error)
 	AddMember(ctx context.Context, in *AddMemberRequest, opts ...grpc.CallOption) (*AddMemberResponse, error)
 }
 
@@ -85,6 +87,16 @@ func (c *organizationServiceClient) DeleteOrganization(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *organizationServiceClient) GetOrganizationIDsForUserAdmin(ctx context.Context, in *GetOrganizationIDsForUserAdminRequest, opts ...grpc.CallOption) (*GetOrganizationIDsForUserAdminResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOrganizationIDsForUserAdminResponse)
+	err := c.cc.Invoke(ctx, OrganizationService_GetOrganizationIDsForUserAdmin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *organizationServiceClient) AddMember(ctx context.Context, in *AddMemberRequest, opts ...grpc.CallOption) (*AddMemberResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AddMemberResponse)
@@ -103,6 +115,7 @@ type OrganizationServiceServer interface {
 	ReadOrganization(context.Context, *ReadOrganizationRequest) (*ReadOrganizationResponse, error)
 	UpdateOrganization(context.Context, *UpdateOrganizationRequest) (*UpdateOrganizationResponse, error)
 	DeleteOrganization(context.Context, *DeleteOrganizationRequest) (*DeleteOrganizationResponse, error)
+	GetOrganizationIDsForUserAdmin(context.Context, *GetOrganizationIDsForUserAdminRequest) (*GetOrganizationIDsForUserAdminResponse, error)
 	AddMember(context.Context, *AddMemberRequest) (*AddMemberResponse, error)
 	mustEmbedUnimplementedOrganizationServiceServer()
 }
@@ -125,6 +138,9 @@ func (UnimplementedOrganizationServiceServer) UpdateOrganization(context.Context
 }
 func (UnimplementedOrganizationServiceServer) DeleteOrganization(context.Context, *DeleteOrganizationRequest) (*DeleteOrganizationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrganization not implemented")
+}
+func (UnimplementedOrganizationServiceServer) GetOrganizationIDsForUserAdmin(context.Context, *GetOrganizationIDsForUserAdminRequest) (*GetOrganizationIDsForUserAdminResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOrganizationIDsForUserAdmin not implemented")
 }
 func (UnimplementedOrganizationServiceServer) AddMember(context.Context, *AddMemberRequest) (*AddMemberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddMember not implemented")
@@ -222,6 +238,24 @@ func _OrganizationService_DeleteOrganization_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrganizationService_GetOrganizationIDsForUserAdmin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOrganizationIDsForUserAdminRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrganizationServiceServer).GetOrganizationIDsForUserAdmin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrganizationService_GetOrganizationIDsForUserAdmin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrganizationServiceServer).GetOrganizationIDsForUserAdmin(ctx, req.(*GetOrganizationIDsForUserAdminRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _OrganizationService_AddMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddMemberRequest)
 	if err := dec(in); err != nil {
@@ -262,6 +296,10 @@ var OrganizationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteOrganization",
 			Handler:    _OrganizationService_DeleteOrganization_Handler,
+		},
+		{
+			MethodName: "GetOrganizationIDsForUserAdmin",
+			Handler:    _OrganizationService_GetOrganizationIDsForUserAdmin_Handler,
 		},
 		{
 			MethodName: "AddMember",

@@ -39,7 +39,7 @@ const pb_1 = __importStar(require("google-protobuf"));
 const grpc_1 = __importStar(require("@grpc/grpc-js"));
 var organization_service;
 (function (organization_service) {
-    var _CreateOrganizationRequest_one_of_decls, _CreateOrganizationResponse_one_of_decls, _ReadOrganizationRequest_one_of_decls, _ReadOrganizationResponse_one_of_decls, _ReadOrganizationByQueryRequest_one_of_decls, _ReadOrganizationByQueryResponse_one_of_decls, _UpdateOrganizationRequest_one_of_decls, _UpdateOrganizationResponse_one_of_decls, _DeleteOrganizationRequest_one_of_decls, _DeleteOrganizationResponse_one_of_decls, _AddMemberRequest_one_of_decls, _AddMemberResponse_one_of_decls, _Membership_one_of_decls, _User_one_of_decls, _UserInfo_one_of_decls, _UserAuthorization_one_of_decls;
+    var _CreateOrganizationRequest_one_of_decls, _CreateOrganizationResponse_one_of_decls, _ReadOrganizationRequest_one_of_decls, _ReadOrganizationResponse_one_of_decls, _ReadOrganizationByQueryRequest_one_of_decls, _ReadOrganizationByQueryResponse_one_of_decls, _UpdateOrganizationRequest_one_of_decls, _UpdateOrganizationResponse_one_of_decls, _DeleteOrganizationRequest_one_of_decls, _DeleteOrganizationResponse_one_of_decls, _GetOrganizationIDsForUserAdminRequest_one_of_decls, _GetOrganizationIDsForUserAdminResponse_one_of_decls, _AddMemberRequest_one_of_decls, _AddMemberResponse_one_of_decls, _Membership_one_of_decls, _User_one_of_decls, _UserInfo_one_of_decls, _UserAuthorization_one_of_decls;
     class CreateOrganizationRequest extends pb_1.Message {
         constructor(data) {
             super();
@@ -547,6 +547,107 @@ var organization_service;
     }
     _DeleteOrganizationResponse_one_of_decls = new WeakMap();
     organization_service.DeleteOrganizationResponse = DeleteOrganizationResponse;
+    class GetOrganizationIDsForUserAdminRequest extends pb_1.Message {
+        constructor(data) {
+            super();
+            _GetOrganizationIDsForUserAdminRequest_one_of_decls.set(this, []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], __classPrivateFieldGet(this, _GetOrganizationIDsForUserAdminRequest_one_of_decls, "f"));
+            if (!Array.isArray(data) && typeof data == "object") { }
+        }
+        static fromObject(data) {
+            const message = new GetOrganizationIDsForUserAdminRequest({});
+            return message;
+        }
+        toObject() {
+            const data = {};
+            return data;
+        }
+        serialize(w) {
+            const writer = w || new pb_1.BinaryWriter();
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes) {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GetOrganizationIDsForUserAdminRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary() {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes) {
+            return GetOrganizationIDsForUserAdminRequest.deserialize(bytes);
+        }
+    }
+    _GetOrganizationIDsForUserAdminRequest_one_of_decls = new WeakMap();
+    organization_service.GetOrganizationIDsForUserAdminRequest = GetOrganizationIDsForUserAdminRequest;
+    class GetOrganizationIDsForUserAdminResponse extends pb_1.Message {
+        constructor(data) {
+            super();
+            _GetOrganizationIDsForUserAdminResponse_one_of_decls.set(this, []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], __classPrivateFieldGet(this, _GetOrganizationIDsForUserAdminResponse_one_of_decls, "f"));
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("organization_ids" in data && data.organization_ids != undefined) {
+                    this.organization_ids = data.organization_ids;
+                }
+            }
+        }
+        get organization_ids() {
+            return pb_1.Message.getFieldWithDefault(this, 1, []);
+        }
+        set organization_ids(value) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data) {
+            const message = new GetOrganizationIDsForUserAdminResponse({});
+            if (data.organization_ids != null) {
+                message.organization_ids = data.organization_ids;
+            }
+            return message;
+        }
+        toObject() {
+            const data = {};
+            if (this.organization_ids != null) {
+                data.organization_ids = this.organization_ids;
+            }
+            return data;
+        }
+        serialize(w) {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.organization_ids.length)
+                writer.writeRepeatedString(1, this.organization_ids);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes) {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GetOrganizationIDsForUserAdminResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        pb_1.Message.addToRepeatedField(message, 1, reader.readString());
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary() {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes) {
+            return GetOrganizationIDsForUserAdminResponse.deserialize(bytes);
+        }
+    }
+    _GetOrganizationIDsForUserAdminResponse_one_of_decls = new WeakMap();
+    organization_service.GetOrganizationIDsForUserAdminResponse = GetOrganizationIDsForUserAdminResponse;
     class AddMemberRequest extends pb_1.Message {
         constructor(data) {
             super();
@@ -1144,6 +1245,15 @@ var organization_service;
             responseSerialize: (message) => Buffer.from(message.serialize()),
             responseDeserialize: (bytes) => DeleteOrganizationResponse.deserialize(new Uint8Array(bytes))
         },
+        GetOrganizationIDsForUserAdmin: {
+            path: "/organization_service.OrganizationService/GetOrganizationIDsForUserAdmin",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: (message) => Buffer.from(message.serialize()),
+            requestDeserialize: (bytes) => GetOrganizationIDsForUserAdminRequest.deserialize(new Uint8Array(bytes)),
+            responseSerialize: (message) => Buffer.from(message.serialize()),
+            responseDeserialize: (bytes) => GetOrganizationIDsForUserAdminResponse.deserialize(new Uint8Array(bytes))
+        },
         AddMember: {
             path: "/organization_service.OrganizationService/AddMember",
             requestStream: false,
@@ -1169,6 +1279,9 @@ var organization_service;
             };
             this.DeleteOrganization = (message, metadata, options, callback) => {
                 return super.DeleteOrganization(message, metadata, options, callback);
+            };
+            this.GetOrganizationIDsForUserAdmin = (message, metadata, options, callback) => {
+                return super.GetOrganizationIDsForUserAdmin(message, metadata, options, callback);
             };
             this.AddMember = (message, metadata, options, callback) => {
                 return super.AddMember(message, metadata, options, callback);

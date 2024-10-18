@@ -155,6 +155,36 @@ export declare namespace organization_service {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): DeleteOrganizationResponse;
     }
+    export class GetOrganizationIDsForUserAdminRequest extends pb_1.Message {
+        #private;
+        constructor(data?: any[] | {});
+        static fromObject(data: {}): GetOrganizationIDsForUserAdminRequest;
+        toObject(): {};
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GetOrganizationIDsForUserAdminRequest;
+        serializeBinary(): Uint8Array;
+        static deserializeBinary(bytes: Uint8Array): GetOrganizationIDsForUserAdminRequest;
+    }
+    export class GetOrganizationIDsForUserAdminResponse extends pb_1.Message {
+        #private;
+        constructor(data?: any[] | {
+            organization_ids?: string[];
+        });
+        get organization_ids(): string[];
+        set organization_ids(value: string[]);
+        static fromObject(data: {
+            organization_ids?: string[];
+        }): GetOrganizationIDsForUserAdminResponse;
+        toObject(): {
+            organization_ids?: string[];
+        };
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GetOrganizationIDsForUserAdminResponse;
+        serializeBinary(): Uint8Array;
+        static deserializeBinary(bytes: Uint8Array): GetOrganizationIDsForUserAdminResponse;
+    }
     export class AddMemberRequest extends pb_1.Message {
         #private;
         constructor(data?: any[] | {
@@ -362,6 +392,15 @@ export declare namespace organization_service {
                 responseSerialize: (message: DeleteOrganizationResponse) => Buffer;
                 responseDeserialize: (bytes: Buffer) => DeleteOrganizationResponse;
             };
+            GetOrganizationIDsForUserAdmin: {
+                path: string;
+                requestStream: boolean;
+                responseStream: boolean;
+                requestSerialize: (message: GetOrganizationIDsForUserAdminRequest) => Buffer;
+                requestDeserialize: (bytes: Buffer) => GetOrganizationIDsForUserAdminRequest;
+                responseSerialize: (message: GetOrganizationIDsForUserAdminResponse) => Buffer;
+                responseDeserialize: (bytes: Buffer) => GetOrganizationIDsForUserAdminResponse;
+            };
             AddMember: {
                 path: string;
                 requestStream: boolean;
@@ -377,6 +416,7 @@ export declare namespace organization_service {
         abstract ReadOrganization(call: grpc_1.ServerUnaryCall<ReadOrganizationRequest, ReadOrganizationResponse>, callback: grpc_1.sendUnaryData<ReadOrganizationResponse>): void;
         abstract UpdateOrganization(call: grpc_1.ServerUnaryCall<UpdateOrganizationRequest, UpdateOrganizationResponse>, callback: grpc_1.sendUnaryData<UpdateOrganizationResponse>): void;
         abstract DeleteOrganization(call: grpc_1.ServerUnaryCall<DeleteOrganizationRequest, DeleteOrganizationResponse>, callback: grpc_1.sendUnaryData<DeleteOrganizationResponse>): void;
+        abstract GetOrganizationIDsForUserAdmin(call: grpc_1.ServerUnaryCall<GetOrganizationIDsForUserAdminRequest, GetOrganizationIDsForUserAdminResponse>, callback: grpc_1.sendUnaryData<GetOrganizationIDsForUserAdminResponse>): void;
         abstract AddMember(call: grpc_1.ServerUnaryCall<AddMemberRequest, AddMemberResponse>, callback: grpc_1.sendUnaryData<AddMemberResponse>): void;
     }
     const OrganizationServiceClient_base: grpc_1.ServiceClientConstructor;
@@ -386,6 +426,7 @@ export declare namespace organization_service {
         ReadOrganization: GrpcUnaryServiceInterface<ReadOrganizationRequest, ReadOrganizationResponse>;
         UpdateOrganization: GrpcUnaryServiceInterface<UpdateOrganizationRequest, UpdateOrganizationResponse>;
         DeleteOrganization: GrpcUnaryServiceInterface<DeleteOrganizationRequest, DeleteOrganizationResponse>;
+        GetOrganizationIDsForUserAdmin: GrpcUnaryServiceInterface<GetOrganizationIDsForUserAdminRequest, GetOrganizationIDsForUserAdminResponse>;
         AddMember: GrpcUnaryServiceInterface<AddMemberRequest, AddMemberResponse>;
     }
     export {};

@@ -541,6 +541,113 @@ export namespace organization_service {
             return DeleteOrganizationResponse.deserialize(bytes);
         }
     }
+    export class GetOrganizationIDsForUserAdminRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {}) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") { }
+        }
+        static fromObject(data: {}): GetOrganizationIDsForUserAdminRequest {
+            const message = new GetOrganizationIDsForUserAdminRequest({});
+            return message;
+        }
+        toObject() {
+            const data: {} = {};
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GetOrganizationIDsForUserAdminRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GetOrganizationIDsForUserAdminRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): GetOrganizationIDsForUserAdminRequest {
+            return GetOrganizationIDsForUserAdminRequest.deserialize(bytes);
+        }
+    }
+    export class GetOrganizationIDsForUserAdminResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            organization_ids?: string[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("organization_ids" in data && data.organization_ids != undefined) {
+                    this.organization_ids = data.organization_ids;
+                }
+            }
+        }
+        get organization_ids() {
+            return pb_1.Message.getFieldWithDefault(this, 1, []) as string[];
+        }
+        set organization_ids(value: string[]) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            organization_ids?: string[];
+        }): GetOrganizationIDsForUserAdminResponse {
+            const message = new GetOrganizationIDsForUserAdminResponse({});
+            if (data.organization_ids != null) {
+                message.organization_ids = data.organization_ids;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                organization_ids?: string[];
+            } = {};
+            if (this.organization_ids != null) {
+                data.organization_ids = this.organization_ids;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.organization_ids.length)
+                writer.writeRepeatedString(1, this.organization_ids);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GetOrganizationIDsForUserAdminResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GetOrganizationIDsForUserAdminResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        pb_1.Message.addToRepeatedField(message, 1, reader.readString());
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): GetOrganizationIDsForUserAdminResponse {
+            return GetOrganizationIDsForUserAdminResponse.deserialize(bytes);
+        }
+    }
     export class AddMemberRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
@@ -1224,6 +1331,15 @@ export namespace organization_service {
                 responseSerialize: (message: DeleteOrganizationResponse) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => DeleteOrganizationResponse.deserialize(new Uint8Array(bytes))
             },
+            GetOrganizationIDsForUserAdmin: {
+                path: "/organization_service.OrganizationService/GetOrganizationIDsForUserAdmin",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: GetOrganizationIDsForUserAdminRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => GetOrganizationIDsForUserAdminRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: GetOrganizationIDsForUserAdminResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => GetOrganizationIDsForUserAdminResponse.deserialize(new Uint8Array(bytes))
+            },
             AddMember: {
                 path: "/organization_service.OrganizationService/AddMember",
                 requestStream: false,
@@ -1239,6 +1355,7 @@ export namespace organization_service {
         abstract ReadOrganization(call: grpc_1.ServerUnaryCall<ReadOrganizationRequest, ReadOrganizationResponse>, callback: grpc_1.sendUnaryData<ReadOrganizationResponse>): void;
         abstract UpdateOrganization(call: grpc_1.ServerUnaryCall<UpdateOrganizationRequest, UpdateOrganizationResponse>, callback: grpc_1.sendUnaryData<UpdateOrganizationResponse>): void;
         abstract DeleteOrganization(call: grpc_1.ServerUnaryCall<DeleteOrganizationRequest, DeleteOrganizationResponse>, callback: grpc_1.sendUnaryData<DeleteOrganizationResponse>): void;
+        abstract GetOrganizationIDsForUserAdmin(call: grpc_1.ServerUnaryCall<GetOrganizationIDsForUserAdminRequest, GetOrganizationIDsForUserAdminResponse>, callback: grpc_1.sendUnaryData<GetOrganizationIDsForUserAdminResponse>): void;
         abstract AddMember(call: grpc_1.ServerUnaryCall<AddMemberRequest, AddMemberResponse>, callback: grpc_1.sendUnaryData<AddMemberResponse>): void;
     }
     export class OrganizationServiceClient extends grpc_1.makeGenericClientConstructor(UnimplementedOrganizationServiceService.definition, "OrganizationService", {}) {
@@ -1256,6 +1373,9 @@ export namespace organization_service {
         };
         DeleteOrganization: GrpcUnaryServiceInterface<DeleteOrganizationRequest, DeleteOrganizationResponse> = (message: DeleteOrganizationRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<DeleteOrganizationResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<DeleteOrganizationResponse>, callback?: grpc_1.requestCallback<DeleteOrganizationResponse>): grpc_1.ClientUnaryCall => {
             return super.DeleteOrganization(message, metadata, options, callback);
+        };
+        GetOrganizationIDsForUserAdmin: GrpcUnaryServiceInterface<GetOrganizationIDsForUserAdminRequest, GetOrganizationIDsForUserAdminResponse> = (message: GetOrganizationIDsForUserAdminRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<GetOrganizationIDsForUserAdminResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<GetOrganizationIDsForUserAdminResponse>, callback?: grpc_1.requestCallback<GetOrganizationIDsForUserAdminResponse>): grpc_1.ClientUnaryCall => {
+            return super.GetOrganizationIDsForUserAdmin(message, metadata, options, callback);
         };
         AddMember: GrpcUnaryServiceInterface<AddMemberRequest, AddMemberResponse> = (message: AddMemberRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<AddMemberResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<AddMemberResponse>, callback?: grpc_1.requestCallback<AddMemberResponse>): grpc_1.ClientUnaryCall => {
             return super.AddMember(message, metadata, options, callback);

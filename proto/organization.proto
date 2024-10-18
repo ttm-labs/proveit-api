@@ -12,7 +12,7 @@ service OrganizationService {
     rpc ReadOrganization(ReadOrganizationRequest) returns (ReadOrganizationResponse) {}
     rpc UpdateOrganization(UpdateOrganizationRequest) returns (UpdateOrganizationResponse) {}
     rpc DeleteOrganization(DeleteOrganizationRequest) returns (DeleteOrganizationResponse) {}
-
+    rpc GetOrganizationIDsForUserAdmin(GetOrganizationIDsForUserAdminRequest) returns (GetOrganizationIDsForUserAdminResponse) {}
     rpc AddMember(AddMemberRequest) returns (AddMemberResponse);
 }
 
@@ -44,6 +44,12 @@ message UpdateOrganizationResponse {}
 message DeleteOrganizationRequest {}
 
 message DeleteOrganizationResponse {}
+
+message GetOrganizationIDsForUserAdminRequest {}
+
+message GetOrganizationIDsForUserAdminResponse {
+    repeated string organization_ids = 1;
+}
 
 message AddMemberRequest {
     string organization_id = 1;
