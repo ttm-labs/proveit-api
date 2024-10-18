@@ -3,6 +3,7 @@
  * compiler version: 5.27.3
  * source: organization.proto
  * git: https://github.com/thesayyn/protoc-gen-ts */
+import * as dependency_1 from "./google/protobuf/timestamp";
 import * as pb_1 from "google-protobuf";
 import * as grpc_1 from "@grpc/grpc-js";
 export namespace organization_service {
@@ -890,8 +891,10 @@ export namespace organization_service {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             user_id?: string;
-            user_email?: string;
-            user_name?: Name;
+            email?: string;
+            first_name?: string;
+            last_name?: string;
+            ts_last_login?: dependency_1.google.protobuf.Timestamp;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -899,11 +902,17 @@ export namespace organization_service {
                 if ("user_id" in data && data.user_id != undefined) {
                     this.user_id = data.user_id;
                 }
-                if ("user_email" in data && data.user_email != undefined) {
-                    this.user_email = data.user_email;
+                if ("email" in data && data.email != undefined) {
+                    this.email = data.email;
                 }
-                if ("user_name" in data && data.user_name != undefined) {
-                    this.user_name = data.user_name;
+                if ("first_name" in data && data.first_name != undefined) {
+                    this.first_name = data.first_name;
+                }
+                if ("last_name" in data && data.last_name != undefined) {
+                    this.last_name = data.last_name;
+                }
+                if ("ts_last_login" in data && data.ts_last_login != undefined) {
+                    this.ts_last_login = data.ts_last_login;
                 }
             }
         }
@@ -913,52 +922,80 @@ export namespace organization_service {
         set user_id(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
-        get user_email() {
+        get email() {
             return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
-        set user_email(value: string) {
+        set email(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
-        get user_name() {
-            return pb_1.Message.getWrapperField(this, Name, 3) as Name;
+        get first_name() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
-        set user_name(value: Name) {
-            pb_1.Message.setWrapperField(this, 3, value);
+        set first_name(value: string) {
+            pb_1.Message.setField(this, 3, value);
         }
-        get has_user_name() {
-            return pb_1.Message.getField(this, 3) != null;
+        get last_name() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set last_name(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get ts_last_login() {
+            return pb_1.Message.getWrapperField(this, dependency_1.google.protobuf.Timestamp, 5) as dependency_1.google.protobuf.Timestamp;
+        }
+        set ts_last_login(value: dependency_1.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 5, value);
+        }
+        get has_ts_last_login() {
+            return pb_1.Message.getField(this, 5) != null;
         }
         static fromObject(data: {
             user_id?: string;
-            user_email?: string;
-            user_name?: ReturnType<typeof Name.prototype.toObject>;
+            email?: string;
+            first_name?: string;
+            last_name?: string;
+            ts_last_login?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
         }): UserInfo {
             const message = new UserInfo({});
             if (data.user_id != null) {
                 message.user_id = data.user_id;
             }
-            if (data.user_email != null) {
-                message.user_email = data.user_email;
+            if (data.email != null) {
+                message.email = data.email;
             }
-            if (data.user_name != null) {
-                message.user_name = Name.fromObject(data.user_name);
+            if (data.first_name != null) {
+                message.first_name = data.first_name;
+            }
+            if (data.last_name != null) {
+                message.last_name = data.last_name;
+            }
+            if (data.ts_last_login != null) {
+                message.ts_last_login = dependency_1.google.protobuf.Timestamp.fromObject(data.ts_last_login);
             }
             return message;
         }
         toObject() {
             const data: {
                 user_id?: string;
-                user_email?: string;
-                user_name?: ReturnType<typeof Name.prototype.toObject>;
+                email?: string;
+                first_name?: string;
+                last_name?: string;
+                ts_last_login?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
             } = {};
             if (this.user_id != null) {
                 data.user_id = this.user_id;
             }
-            if (this.user_email != null) {
-                data.user_email = this.user_email;
+            if (this.email != null) {
+                data.email = this.email;
             }
-            if (this.user_name != null) {
-                data.user_name = this.user_name.toObject();
+            if (this.first_name != null) {
+                data.first_name = this.first_name;
+            }
+            if (this.last_name != null) {
+                data.last_name = this.last_name;
+            }
+            if (this.ts_last_login != null) {
+                data.ts_last_login = this.ts_last_login.toObject();
             }
             return data;
         }
@@ -968,10 +1005,14 @@ export namespace organization_service {
             const writer = w || new pb_1.BinaryWriter();
             if (this.user_id.length)
                 writer.writeString(1, this.user_id);
-            if (this.user_email.length)
-                writer.writeString(2, this.user_email);
-            if (this.has_user_name)
-                writer.writeMessage(3, this.user_name, () => this.user_name.serialize(writer));
+            if (this.email.length)
+                writer.writeString(2, this.email);
+            if (this.first_name.length)
+                writer.writeString(3, this.first_name);
+            if (this.last_name.length)
+                writer.writeString(4, this.last_name);
+            if (this.has_ts_last_login)
+                writer.writeMessage(5, this.ts_last_login, () => this.ts_last_login.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -985,10 +1026,16 @@ export namespace organization_service {
                         message.user_id = reader.readString();
                         break;
                     case 2:
-                        message.user_email = reader.readString();
+                        message.email = reader.readString();
                         break;
                     case 3:
-                        reader.readMessage(message.user_name, () => message.user_name = Name.deserialize(reader));
+                        message.first_name = reader.readString();
+                        break;
+                    case 4:
+                        message.last_name = reader.readString();
+                        break;
+                    case 5:
+                        reader.readMessage(message.ts_last_login, () => message.ts_last_login = dependency_1.google.protobuf.Timestamp.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }
@@ -1113,96 +1160,6 @@ export namespace organization_service {
         }
         static deserializeBinary(bytes: Uint8Array): UserAuthorization {
             return UserAuthorization.deserialize(bytes);
-        }
-    }
-    export class Name extends pb_1.Message {
-        #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {
-            first?: string;
-            last?: string;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("first" in data && data.first != undefined) {
-                    this.first = data.first;
-                }
-                if ("last" in data && data.last != undefined) {
-                    this.last = data.last;
-                }
-            }
-        }
-        get first() {
-            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
-        }
-        set first(value: string) {
-            pb_1.Message.setField(this, 1, value);
-        }
-        get last() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
-        }
-        set last(value: string) {
-            pb_1.Message.setField(this, 2, value);
-        }
-        static fromObject(data: {
-            first?: string;
-            last?: string;
-        }): Name {
-            const message = new Name({});
-            if (data.first != null) {
-                message.first = data.first;
-            }
-            if (data.last != null) {
-                message.last = data.last;
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                first?: string;
-                last?: string;
-            } = {};
-            if (this.first != null) {
-                data.first = this.first;
-            }
-            if (this.last != null) {
-                data.last = this.last;
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.first.length)
-                writer.writeString(1, this.first);
-            if (this.last.length)
-                writer.writeString(2, this.last);
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Name {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Name();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        message.first = reader.readString();
-                        break;
-                    case 2:
-                        message.last = reader.readString();
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): Name {
-            return Name.deserialize(bytes);
         }
     }
     interface GrpcUnaryServiceInterface<P, R> {

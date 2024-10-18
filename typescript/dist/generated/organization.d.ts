@@ -3,6 +3,7 @@
  * compiler version: 5.27.3
  * source: organization.proto
  * git: https://github.com/thesayyn/protoc-gen-ts */
+import * as dependency_1 from "./google/protobuf/timestamp";
 import * as pb_1 from "google-protobuf";
 import * as grpc_1 from "@grpc/grpc-js";
 export declare namespace organization_service {
@@ -252,25 +253,35 @@ export declare namespace organization_service {
         #private;
         constructor(data?: any[] | {
             user_id?: string;
-            user_email?: string;
-            user_name?: Name;
+            email?: string;
+            first_name?: string;
+            last_name?: string;
+            ts_last_login?: dependency_1.google.protobuf.Timestamp;
         });
         get user_id(): string;
         set user_id(value: string);
-        get user_email(): string;
-        set user_email(value: string);
-        get user_name(): Name;
-        set user_name(value: Name);
-        get has_user_name(): boolean;
+        get email(): string;
+        set email(value: string);
+        get first_name(): string;
+        set first_name(value: string);
+        get last_name(): string;
+        set last_name(value: string);
+        get ts_last_login(): dependency_1.google.protobuf.Timestamp;
+        set ts_last_login(value: dependency_1.google.protobuf.Timestamp);
+        get has_ts_last_login(): boolean;
         static fromObject(data: {
             user_id?: string;
-            user_email?: string;
-            user_name?: ReturnType<typeof Name.prototype.toObject>;
+            email?: string;
+            first_name?: string;
+            last_name?: string;
+            ts_last_login?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
         }): UserInfo;
         toObject(): {
             user_id?: string;
-            user_email?: string;
-            user_name?: ReturnType<typeof Name.prototype.toObject>;
+            email?: string;
+            first_name?: string;
+            last_name?: string;
+            ts_last_login?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
         };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
@@ -306,30 +317,6 @@ export declare namespace organization_service {
         static deserialize(bytes: Uint8Array | pb_1.BinaryReader): UserAuthorization;
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): UserAuthorization;
-    }
-    export class Name extends pb_1.Message {
-        #private;
-        constructor(data?: any[] | {
-            first?: string;
-            last?: string;
-        });
-        get first(): string;
-        set first(value: string);
-        get last(): string;
-        set last(value: string);
-        static fromObject(data: {
-            first?: string;
-            last?: string;
-        }): Name;
-        toObject(): {
-            first?: string;
-            last?: string;
-        };
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Name;
-        serializeBinary(): Uint8Array;
-        static deserializeBinary(bytes: Uint8Array): Name;
     }
     interface GrpcUnaryServiceInterface<P, R> {
         (message: P, metadata: grpc_1.Metadata, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
