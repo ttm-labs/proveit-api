@@ -745,6 +745,322 @@ export namespace job_posting_service {
             return ReadJobPostingByQueryResponse.deserialize(bytes);
         }
     }
+    export class ReadJobPostingApplicantsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            job_posting_id?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("job_posting_id" in data && data.job_posting_id != undefined) {
+                    this.job_posting_id = data.job_posting_id;
+                }
+            }
+        }
+        get job_posting_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set job_posting_id(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            job_posting_id?: string;
+        }): ReadJobPostingApplicantsRequest {
+            const message = new ReadJobPostingApplicantsRequest({});
+            if (data.job_posting_id != null) {
+                message.job_posting_id = data.job_posting_id;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                job_posting_id?: string;
+            } = {};
+            if (this.job_posting_id != null) {
+                data.job_posting_id = this.job_posting_id;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.job_posting_id.length)
+                writer.writeString(1, this.job_posting_id);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ReadJobPostingApplicantsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ReadJobPostingApplicantsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.job_posting_id = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ReadJobPostingApplicantsRequest {
+            return ReadJobPostingApplicantsRequest.deserialize(bytes);
+        }
+    }
+    export class ReadJobPostingApplicantsResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            applicants?: Applicant[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("applicants" in data && data.applicants != undefined) {
+                    this.applicants = data.applicants;
+                }
+            }
+        }
+        get applicants() {
+            return pb_1.Message.getRepeatedWrapperField(this, Applicant, 1) as Applicant[];
+        }
+        set applicants(value: Applicant[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        static fromObject(data: {
+            applicants?: ReturnType<typeof Applicant.prototype.toObject>[];
+        }): ReadJobPostingApplicantsResponse {
+            const message = new ReadJobPostingApplicantsResponse({});
+            if (data.applicants != null) {
+                message.applicants = data.applicants.map(item => Applicant.fromObject(item));
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                applicants?: ReturnType<typeof Applicant.prototype.toObject>[];
+            } = {};
+            if (this.applicants != null) {
+                data.applicants = this.applicants.map((item: Applicant) => item.toObject());
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.applicants.length)
+                writer.writeRepeatedMessage(1, this.applicants, (item: Applicant) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ReadJobPostingApplicantsResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ReadJobPostingApplicantsResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.applicants, () => pb_1.Message.addToRepeatedWrapperField(message, 1, Applicant.deserialize(reader), Applicant));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ReadJobPostingApplicantsResponse {
+            return ReadJobPostingApplicantsResponse.deserialize(bytes);
+        }
+    }
+    export class Applicant extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            user_id?: string;
+            first_name?: string;
+            last_name?: string;
+            email?: string;
+            submission_date?: string;
+            interview_id?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("user_id" in data && data.user_id != undefined) {
+                    this.user_id = data.user_id;
+                }
+                if ("first_name" in data && data.first_name != undefined) {
+                    this.first_name = data.first_name;
+                }
+                if ("last_name" in data && data.last_name != undefined) {
+                    this.last_name = data.last_name;
+                }
+                if ("email" in data && data.email != undefined) {
+                    this.email = data.email;
+                }
+                if ("submission_date" in data && data.submission_date != undefined) {
+                    this.submission_date = data.submission_date;
+                }
+                if ("interview_id" in data && data.interview_id != undefined) {
+                    this.interview_id = data.interview_id;
+                }
+            }
+        }
+        get user_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set user_id(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get first_name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set first_name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get last_name() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set last_name(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get email() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set email(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get submission_date() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set submission_date(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get interview_id() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set interview_id(value: string) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        static fromObject(data: {
+            user_id?: string;
+            first_name?: string;
+            last_name?: string;
+            email?: string;
+            submission_date?: string;
+            interview_id?: string;
+        }): Applicant {
+            const message = new Applicant({});
+            if (data.user_id != null) {
+                message.user_id = data.user_id;
+            }
+            if (data.first_name != null) {
+                message.first_name = data.first_name;
+            }
+            if (data.last_name != null) {
+                message.last_name = data.last_name;
+            }
+            if (data.email != null) {
+                message.email = data.email;
+            }
+            if (data.submission_date != null) {
+                message.submission_date = data.submission_date;
+            }
+            if (data.interview_id != null) {
+                message.interview_id = data.interview_id;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                user_id?: string;
+                first_name?: string;
+                last_name?: string;
+                email?: string;
+                submission_date?: string;
+                interview_id?: string;
+            } = {};
+            if (this.user_id != null) {
+                data.user_id = this.user_id;
+            }
+            if (this.first_name != null) {
+                data.first_name = this.first_name;
+            }
+            if (this.last_name != null) {
+                data.last_name = this.last_name;
+            }
+            if (this.email != null) {
+                data.email = this.email;
+            }
+            if (this.submission_date != null) {
+                data.submission_date = this.submission_date;
+            }
+            if (this.interview_id != null) {
+                data.interview_id = this.interview_id;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.user_id.length)
+                writer.writeString(1, this.user_id);
+            if (this.first_name.length)
+                writer.writeString(2, this.first_name);
+            if (this.last_name.length)
+                writer.writeString(3, this.last_name);
+            if (this.email.length)
+                writer.writeString(4, this.email);
+            if (this.submission_date.length)
+                writer.writeString(5, this.submission_date);
+            if (this.interview_id.length)
+                writer.writeString(6, this.interview_id);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Applicant {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Applicant();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.user_id = reader.readString();
+                        break;
+                    case 2:
+                        message.first_name = reader.readString();
+                        break;
+                    case 3:
+                        message.last_name = reader.readString();
+                        break;
+                    case 4:
+                        message.email = reader.readString();
+                        break;
+                    case 5:
+                        message.submission_date = reader.readString();
+                        break;
+                    case 6:
+                        message.interview_id = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): Applicant {
+            return Applicant.deserialize(bytes);
+        }
+    }
     export class UpdateJobPostingRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
@@ -1754,6 +2070,15 @@ export namespace job_posting_service {
                 responseSerialize: (message: ReadJobPostingByQueryResponse) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => ReadJobPostingByQueryResponse.deserialize(new Uint8Array(bytes))
             },
+            ReadJobPostingApplicants: {
+                path: "/job_posting_service.JobPostingService/ReadJobPostingApplicants",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: ReadJobPostingApplicantsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => ReadJobPostingApplicantsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: ReadJobPostingApplicantsResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => ReadJobPostingApplicantsResponse.deserialize(new Uint8Array(bytes))
+            },
             UpdateJobPosting: {
                 path: "/job_posting_service.JobPostingService/UpdateJobPosting",
                 requestStream: false,
@@ -1777,6 +2102,7 @@ export namespace job_posting_service {
         abstract CreateJobPosting(call: grpc_1.ServerUnaryCall<CreateJobPostingRequest, CreateJobPostingResponse>, callback: grpc_1.sendUnaryData<CreateJobPostingResponse>): void;
         abstract ReadJobPosting(call: grpc_1.ServerUnaryCall<ReadJobPostingRequest, ReadJobPostingResponse>, callback: grpc_1.sendUnaryData<ReadJobPostingResponse>): void;
         abstract ReadJobPostingByQuery(call: grpc_1.ServerUnaryCall<ReadJobPostingByQueryRequest, ReadJobPostingByQueryResponse>, callback: grpc_1.sendUnaryData<ReadJobPostingByQueryResponse>): void;
+        abstract ReadJobPostingApplicants(call: grpc_1.ServerUnaryCall<ReadJobPostingApplicantsRequest, ReadJobPostingApplicantsResponse>, callback: grpc_1.sendUnaryData<ReadJobPostingApplicantsResponse>): void;
         abstract UpdateJobPosting(call: grpc_1.ServerUnaryCall<UpdateJobPostingRequest, UpdateJobPostingResponse>, callback: grpc_1.sendUnaryData<UpdateJobPostingResponse>): void;
         abstract DeleteJobPosting(call: grpc_1.ServerUnaryCall<DeleteJobPostingRequest, DeleteJobPostingResponse>, callback: grpc_1.sendUnaryData<DeleteJobPostingResponse>): void;
     }
@@ -1792,6 +2118,9 @@ export namespace job_posting_service {
         };
         ReadJobPostingByQuery: GrpcUnaryServiceInterface<ReadJobPostingByQueryRequest, ReadJobPostingByQueryResponse> = (message: ReadJobPostingByQueryRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<ReadJobPostingByQueryResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<ReadJobPostingByQueryResponse>, callback?: grpc_1.requestCallback<ReadJobPostingByQueryResponse>): grpc_1.ClientUnaryCall => {
             return super.ReadJobPostingByQuery(message, metadata, options, callback);
+        };
+        ReadJobPostingApplicants: GrpcUnaryServiceInterface<ReadJobPostingApplicantsRequest, ReadJobPostingApplicantsResponse> = (message: ReadJobPostingApplicantsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<ReadJobPostingApplicantsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<ReadJobPostingApplicantsResponse>, callback?: grpc_1.requestCallback<ReadJobPostingApplicantsResponse>): grpc_1.ClientUnaryCall => {
+            return super.ReadJobPostingApplicants(message, metadata, options, callback);
         };
         UpdateJobPosting: GrpcUnaryServiceInterface<UpdateJobPostingRequest, UpdateJobPostingResponse> = (message: UpdateJobPostingRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<UpdateJobPostingResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<UpdateJobPostingResponse>, callback?: grpc_1.requestCallback<UpdateJobPostingResponse>): grpc_1.ClientUnaryCall => {
             return super.UpdateJobPosting(message, metadata, options, callback);

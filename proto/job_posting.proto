@@ -8,6 +8,7 @@ service JobPostingService {
     rpc CreateJobPosting(CreateJobPostingRequest) returns (CreateJobPostingResponse) {}
     rpc ReadJobPosting(ReadJobPostingRequest) returns (ReadJobPostingResponse) {}
     rpc ReadJobPostingByQuery(ReadJobPostingByQueryRequest) returns (ReadJobPostingByQueryResponse) {}
+	rpc ReadJobPostingApplicants(ReadJobPostingApplicantsRequest) returns (ReadJobPostingApplicantsResponse) {}
     rpc UpdateJobPosting(UpdateJobPostingRequest) returns (UpdateJobPostingResponse) {}
     rpc DeleteJobPosting(DeleteJobPostingRequest) returns (DeleteJobPostingResponse) {}
 }
@@ -48,6 +49,23 @@ message ReadJobPostingByQueryRequest {
 
 message ReadJobPostingByQueryResponse {
 	repeated JobPostingQueryResponse result = 1;
+}
+
+message ReadJobPostingApplicantsRequest {
+	string job_posting_id = 1;
+}
+
+message ReadJobPostingApplicantsResponse {
+	repeated Applicant applicants = 1;
+}
+
+message Applicant {
+	string user_id = 1;
+	string first_name = 2;
+	string last_name = 3;
+	string email = 4;
+	string submission_date = 5;
+	string interview_id = 6;
 }
 
 message UpdateJobPostingRequest {

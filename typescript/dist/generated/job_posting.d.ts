@@ -195,6 +195,88 @@ export declare namespace job_posting_service {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): ReadJobPostingByQueryResponse;
     }
+    export class ReadJobPostingApplicantsRequest extends pb_1.Message {
+        #private;
+        constructor(data?: any[] | {
+            job_posting_id?: string;
+        });
+        get job_posting_id(): string;
+        set job_posting_id(value: string);
+        static fromObject(data: {
+            job_posting_id?: string;
+        }): ReadJobPostingApplicantsRequest;
+        toObject(): {
+            job_posting_id?: string;
+        };
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ReadJobPostingApplicantsRequest;
+        serializeBinary(): Uint8Array;
+        static deserializeBinary(bytes: Uint8Array): ReadJobPostingApplicantsRequest;
+    }
+    export class ReadJobPostingApplicantsResponse extends pb_1.Message {
+        #private;
+        constructor(data?: any[] | {
+            applicants?: Applicant[];
+        });
+        get applicants(): Applicant[];
+        set applicants(value: Applicant[]);
+        static fromObject(data: {
+            applicants?: ReturnType<typeof Applicant.prototype.toObject>[];
+        }): ReadJobPostingApplicantsResponse;
+        toObject(): {
+            applicants?: ReturnType<typeof Applicant.prototype.toObject>[];
+        };
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ReadJobPostingApplicantsResponse;
+        serializeBinary(): Uint8Array;
+        static deserializeBinary(bytes: Uint8Array): ReadJobPostingApplicantsResponse;
+    }
+    export class Applicant extends pb_1.Message {
+        #private;
+        constructor(data?: any[] | {
+            user_id?: string;
+            first_name?: string;
+            last_name?: string;
+            email?: string;
+            submission_date?: string;
+            interview_id?: string;
+        });
+        get user_id(): string;
+        set user_id(value: string);
+        get first_name(): string;
+        set first_name(value: string);
+        get last_name(): string;
+        set last_name(value: string);
+        get email(): string;
+        set email(value: string);
+        get submission_date(): string;
+        set submission_date(value: string);
+        get interview_id(): string;
+        set interview_id(value: string);
+        static fromObject(data: {
+            user_id?: string;
+            first_name?: string;
+            last_name?: string;
+            email?: string;
+            submission_date?: string;
+            interview_id?: string;
+        }): Applicant;
+        toObject(): {
+            user_id?: string;
+            first_name?: string;
+            last_name?: string;
+            email?: string;
+            submission_date?: string;
+            interview_id?: string;
+        };
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Applicant;
+        serializeBinary(): Uint8Array;
+        static deserializeBinary(bytes: Uint8Array): Applicant;
+    }
     export class UpdateJobPostingRequest extends pb_1.Message {
         #private;
         constructor(data?: any[] | {
@@ -466,6 +548,15 @@ export declare namespace job_posting_service {
                 responseSerialize: (message: ReadJobPostingByQueryResponse) => Buffer;
                 responseDeserialize: (bytes: Buffer) => ReadJobPostingByQueryResponse;
             };
+            ReadJobPostingApplicants: {
+                path: string;
+                requestStream: boolean;
+                responseStream: boolean;
+                requestSerialize: (message: ReadJobPostingApplicantsRequest) => Buffer;
+                requestDeserialize: (bytes: Buffer) => ReadJobPostingApplicantsRequest;
+                responseSerialize: (message: ReadJobPostingApplicantsResponse) => Buffer;
+                responseDeserialize: (bytes: Buffer) => ReadJobPostingApplicantsResponse;
+            };
             UpdateJobPosting: {
                 path: string;
                 requestStream: boolean;
@@ -489,6 +580,7 @@ export declare namespace job_posting_service {
         abstract CreateJobPosting(call: grpc_1.ServerUnaryCall<CreateJobPostingRequest, CreateJobPostingResponse>, callback: grpc_1.sendUnaryData<CreateJobPostingResponse>): void;
         abstract ReadJobPosting(call: grpc_1.ServerUnaryCall<ReadJobPostingRequest, ReadJobPostingResponse>, callback: grpc_1.sendUnaryData<ReadJobPostingResponse>): void;
         abstract ReadJobPostingByQuery(call: grpc_1.ServerUnaryCall<ReadJobPostingByQueryRequest, ReadJobPostingByQueryResponse>, callback: grpc_1.sendUnaryData<ReadJobPostingByQueryResponse>): void;
+        abstract ReadJobPostingApplicants(call: grpc_1.ServerUnaryCall<ReadJobPostingApplicantsRequest, ReadJobPostingApplicantsResponse>, callback: grpc_1.sendUnaryData<ReadJobPostingApplicantsResponse>): void;
         abstract UpdateJobPosting(call: grpc_1.ServerUnaryCall<UpdateJobPostingRequest, UpdateJobPostingResponse>, callback: grpc_1.sendUnaryData<UpdateJobPostingResponse>): void;
         abstract DeleteJobPosting(call: grpc_1.ServerUnaryCall<DeleteJobPostingRequest, DeleteJobPostingResponse>, callback: grpc_1.sendUnaryData<DeleteJobPostingResponse>): void;
     }
@@ -498,6 +590,7 @@ export declare namespace job_posting_service {
         CreateJobPosting: GrpcUnaryServiceInterface<CreateJobPostingRequest, CreateJobPostingResponse>;
         ReadJobPosting: GrpcUnaryServiceInterface<ReadJobPostingRequest, ReadJobPostingResponse>;
         ReadJobPostingByQuery: GrpcUnaryServiceInterface<ReadJobPostingByQueryRequest, ReadJobPostingByQueryResponse>;
+        ReadJobPostingApplicants: GrpcUnaryServiceInterface<ReadJobPostingApplicantsRequest, ReadJobPostingApplicantsResponse>;
         UpdateJobPosting: GrpcUnaryServiceInterface<UpdateJobPostingRequest, UpdateJobPostingResponse>;
         DeleteJobPosting: GrpcUnaryServiceInterface<DeleteJobPostingRequest, DeleteJobPostingResponse>;
     }

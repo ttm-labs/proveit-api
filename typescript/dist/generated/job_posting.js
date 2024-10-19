@@ -38,7 +38,7 @@ const pb_1 = __importStar(require("google-protobuf"));
 const grpc_1 = __importStar(require("@grpc/grpc-js"));
 var job_posting_service;
 (function (job_posting_service) {
-    var _CreateJobPostingRequest_one_of_decls, _CreateJobPostingResponse_one_of_decls, _ReadJobPostingRequest_one_of_decls, _ReadJobPostingResponse_one_of_decls, _ReadJobPostingByQueryRequest_one_of_decls, _ReadJobPostingByQueryResponse_one_of_decls, _UpdateJobPostingRequest_one_of_decls, _UpdateJobPostingResponse_one_of_decls, _DeleteJobPostingRequest_one_of_decls, _DeleteJobPostingResponse_one_of_decls, _Salary_one_of_decls, _JobPostingQuery_one_of_decls, _JobPostingQueryResponse_one_of_decls;
+    var _CreateJobPostingRequest_one_of_decls, _CreateJobPostingResponse_one_of_decls, _ReadJobPostingRequest_one_of_decls, _ReadJobPostingResponse_one_of_decls, _ReadJobPostingByQueryRequest_one_of_decls, _ReadJobPostingByQueryResponse_one_of_decls, _ReadJobPostingApplicantsRequest_one_of_decls, _ReadJobPostingApplicantsResponse_one_of_decls, _Applicant_one_of_decls, _UpdateJobPostingRequest_one_of_decls, _UpdateJobPostingResponse_one_of_decls, _DeleteJobPostingRequest_one_of_decls, _DeleteJobPostingResponse_one_of_decls, _Salary_one_of_decls, _JobPostingQuery_one_of_decls, _JobPostingQueryResponse_one_of_decls;
     class CreateJobPostingRequest extends pb_1.Message {
         constructor(data) {
             super();
@@ -700,6 +700,289 @@ var job_posting_service;
     }
     _ReadJobPostingByQueryResponse_one_of_decls = new WeakMap();
     job_posting_service.ReadJobPostingByQueryResponse = ReadJobPostingByQueryResponse;
+    class ReadJobPostingApplicantsRequest extends pb_1.Message {
+        constructor(data) {
+            super();
+            _ReadJobPostingApplicantsRequest_one_of_decls.set(this, []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], __classPrivateFieldGet(this, _ReadJobPostingApplicantsRequest_one_of_decls, "f"));
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("job_posting_id" in data && data.job_posting_id != undefined) {
+                    this.job_posting_id = data.job_posting_id;
+                }
+            }
+        }
+        get job_posting_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "");
+        }
+        set job_posting_id(value) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data) {
+            const message = new ReadJobPostingApplicantsRequest({});
+            if (data.job_posting_id != null) {
+                message.job_posting_id = data.job_posting_id;
+            }
+            return message;
+        }
+        toObject() {
+            const data = {};
+            if (this.job_posting_id != null) {
+                data.job_posting_id = this.job_posting_id;
+            }
+            return data;
+        }
+        serialize(w) {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.job_posting_id.length)
+                writer.writeString(1, this.job_posting_id);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes) {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ReadJobPostingApplicantsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.job_posting_id = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary() {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes) {
+            return ReadJobPostingApplicantsRequest.deserialize(bytes);
+        }
+    }
+    _ReadJobPostingApplicantsRequest_one_of_decls = new WeakMap();
+    job_posting_service.ReadJobPostingApplicantsRequest = ReadJobPostingApplicantsRequest;
+    class ReadJobPostingApplicantsResponse extends pb_1.Message {
+        constructor(data) {
+            super();
+            _ReadJobPostingApplicantsResponse_one_of_decls.set(this, []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], __classPrivateFieldGet(this, _ReadJobPostingApplicantsResponse_one_of_decls, "f"));
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("applicants" in data && data.applicants != undefined) {
+                    this.applicants = data.applicants;
+                }
+            }
+        }
+        get applicants() {
+            return pb_1.Message.getRepeatedWrapperField(this, Applicant, 1);
+        }
+        set applicants(value) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        static fromObject(data) {
+            const message = new ReadJobPostingApplicantsResponse({});
+            if (data.applicants != null) {
+                message.applicants = data.applicants.map(item => Applicant.fromObject(item));
+            }
+            return message;
+        }
+        toObject() {
+            const data = {};
+            if (this.applicants != null) {
+                data.applicants = this.applicants.map((item) => item.toObject());
+            }
+            return data;
+        }
+        serialize(w) {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.applicants.length)
+                writer.writeRepeatedMessage(1, this.applicants, (item) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes) {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ReadJobPostingApplicantsResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.applicants, () => pb_1.Message.addToRepeatedWrapperField(message, 1, Applicant.deserialize(reader), Applicant));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary() {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes) {
+            return ReadJobPostingApplicantsResponse.deserialize(bytes);
+        }
+    }
+    _ReadJobPostingApplicantsResponse_one_of_decls = new WeakMap();
+    job_posting_service.ReadJobPostingApplicantsResponse = ReadJobPostingApplicantsResponse;
+    class Applicant extends pb_1.Message {
+        constructor(data) {
+            super();
+            _Applicant_one_of_decls.set(this, []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], __classPrivateFieldGet(this, _Applicant_one_of_decls, "f"));
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("user_id" in data && data.user_id != undefined) {
+                    this.user_id = data.user_id;
+                }
+                if ("first_name" in data && data.first_name != undefined) {
+                    this.first_name = data.first_name;
+                }
+                if ("last_name" in data && data.last_name != undefined) {
+                    this.last_name = data.last_name;
+                }
+                if ("email" in data && data.email != undefined) {
+                    this.email = data.email;
+                }
+                if ("submission_date" in data && data.submission_date != undefined) {
+                    this.submission_date = data.submission_date;
+                }
+                if ("interview_id" in data && data.interview_id != undefined) {
+                    this.interview_id = data.interview_id;
+                }
+            }
+        }
+        get user_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "");
+        }
+        set user_id(value) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get first_name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "");
+        }
+        set first_name(value) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get last_name() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "");
+        }
+        set last_name(value) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get email() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "");
+        }
+        set email(value) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get submission_date() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "");
+        }
+        set submission_date(value) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get interview_id() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "");
+        }
+        set interview_id(value) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        static fromObject(data) {
+            const message = new Applicant({});
+            if (data.user_id != null) {
+                message.user_id = data.user_id;
+            }
+            if (data.first_name != null) {
+                message.first_name = data.first_name;
+            }
+            if (data.last_name != null) {
+                message.last_name = data.last_name;
+            }
+            if (data.email != null) {
+                message.email = data.email;
+            }
+            if (data.submission_date != null) {
+                message.submission_date = data.submission_date;
+            }
+            if (data.interview_id != null) {
+                message.interview_id = data.interview_id;
+            }
+            return message;
+        }
+        toObject() {
+            const data = {};
+            if (this.user_id != null) {
+                data.user_id = this.user_id;
+            }
+            if (this.first_name != null) {
+                data.first_name = this.first_name;
+            }
+            if (this.last_name != null) {
+                data.last_name = this.last_name;
+            }
+            if (this.email != null) {
+                data.email = this.email;
+            }
+            if (this.submission_date != null) {
+                data.submission_date = this.submission_date;
+            }
+            if (this.interview_id != null) {
+                data.interview_id = this.interview_id;
+            }
+            return data;
+        }
+        serialize(w) {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.user_id.length)
+                writer.writeString(1, this.user_id);
+            if (this.first_name.length)
+                writer.writeString(2, this.first_name);
+            if (this.last_name.length)
+                writer.writeString(3, this.last_name);
+            if (this.email.length)
+                writer.writeString(4, this.email);
+            if (this.submission_date.length)
+                writer.writeString(5, this.submission_date);
+            if (this.interview_id.length)
+                writer.writeString(6, this.interview_id);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes) {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Applicant();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.user_id = reader.readString();
+                        break;
+                    case 2:
+                        message.first_name = reader.readString();
+                        break;
+                    case 3:
+                        message.last_name = reader.readString();
+                        break;
+                    case 4:
+                        message.email = reader.readString();
+                        break;
+                    case 5:
+                        message.submission_date = reader.readString();
+                        break;
+                    case 6:
+                        message.interview_id = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary() {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes) {
+            return Applicant.deserialize(bytes);
+        }
+    }
+    _Applicant_one_of_decls = new WeakMap();
+    job_posting_service.Applicant = Applicant;
     class UpdateJobPostingRequest extends pb_1.Message {
         constructor(data) {
             super();
@@ -1587,6 +1870,15 @@ var job_posting_service;
             responseSerialize: (message) => Buffer.from(message.serialize()),
             responseDeserialize: (bytes) => ReadJobPostingByQueryResponse.deserialize(new Uint8Array(bytes))
         },
+        ReadJobPostingApplicants: {
+            path: "/job_posting_service.JobPostingService/ReadJobPostingApplicants",
+            requestStream: false,
+            responseStream: false,
+            requestSerialize: (message) => Buffer.from(message.serialize()),
+            requestDeserialize: (bytes) => ReadJobPostingApplicantsRequest.deserialize(new Uint8Array(bytes)),
+            responseSerialize: (message) => Buffer.from(message.serialize()),
+            responseDeserialize: (bytes) => ReadJobPostingApplicantsResponse.deserialize(new Uint8Array(bytes))
+        },
         UpdateJobPosting: {
             path: "/job_posting_service.JobPostingService/UpdateJobPosting",
             requestStream: false,
@@ -1618,6 +1910,9 @@ var job_posting_service;
             };
             this.ReadJobPostingByQuery = (message, metadata, options, callback) => {
                 return super.ReadJobPostingByQuery(message, metadata, options, callback);
+            };
+            this.ReadJobPostingApplicants = (message, metadata, options, callback) => {
+                return super.ReadJobPostingApplicants(message, metadata, options, callback);
             };
             this.UpdateJobPosting = (message, metadata, options, callback) => {
                 return super.UpdateJobPosting(message, metadata, options, callback);

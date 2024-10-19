@@ -19,11 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	JobPostingService_CreateJobPosting_FullMethodName      = "/job_posting_service.JobPostingService/CreateJobPosting"
-	JobPostingService_ReadJobPosting_FullMethodName        = "/job_posting_service.JobPostingService/ReadJobPosting"
-	JobPostingService_ReadJobPostingByQuery_FullMethodName = "/job_posting_service.JobPostingService/ReadJobPostingByQuery"
-	JobPostingService_UpdateJobPosting_FullMethodName      = "/job_posting_service.JobPostingService/UpdateJobPosting"
-	JobPostingService_DeleteJobPosting_FullMethodName      = "/job_posting_service.JobPostingService/DeleteJobPosting"
+	JobPostingService_CreateJobPosting_FullMethodName         = "/job_posting_service.JobPostingService/CreateJobPosting"
+	JobPostingService_ReadJobPosting_FullMethodName           = "/job_posting_service.JobPostingService/ReadJobPosting"
+	JobPostingService_ReadJobPostingByQuery_FullMethodName    = "/job_posting_service.JobPostingService/ReadJobPostingByQuery"
+	JobPostingService_ReadJobPostingApplicants_FullMethodName = "/job_posting_service.JobPostingService/ReadJobPostingApplicants"
+	JobPostingService_UpdateJobPosting_FullMethodName         = "/job_posting_service.JobPostingService/UpdateJobPosting"
+	JobPostingService_DeleteJobPosting_FullMethodName         = "/job_posting_service.JobPostingService/DeleteJobPosting"
 )
 
 // JobPostingServiceClient is the client API for JobPostingService service.
@@ -33,6 +34,7 @@ type JobPostingServiceClient interface {
 	CreateJobPosting(ctx context.Context, in *CreateJobPostingRequest, opts ...grpc.CallOption) (*CreateJobPostingResponse, error)
 	ReadJobPosting(ctx context.Context, in *ReadJobPostingRequest, opts ...grpc.CallOption) (*ReadJobPostingResponse, error)
 	ReadJobPostingByQuery(ctx context.Context, in *ReadJobPostingByQueryRequest, opts ...grpc.CallOption) (*ReadJobPostingByQueryResponse, error)
+	ReadJobPostingApplicants(ctx context.Context, in *ReadJobPostingApplicantsRequest, opts ...grpc.CallOption) (*ReadJobPostingApplicantsResponse, error)
 	UpdateJobPosting(ctx context.Context, in *UpdateJobPostingRequest, opts ...grpc.CallOption) (*UpdateJobPostingResponse, error)
 	DeleteJobPosting(ctx context.Context, in *DeleteJobPostingRequest, opts ...grpc.CallOption) (*DeleteJobPostingResponse, error)
 }
@@ -75,6 +77,16 @@ func (c *jobPostingServiceClient) ReadJobPostingByQuery(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *jobPostingServiceClient) ReadJobPostingApplicants(ctx context.Context, in *ReadJobPostingApplicantsRequest, opts ...grpc.CallOption) (*ReadJobPostingApplicantsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReadJobPostingApplicantsResponse)
+	err := c.cc.Invoke(ctx, JobPostingService_ReadJobPostingApplicants_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *jobPostingServiceClient) UpdateJobPosting(ctx context.Context, in *UpdateJobPostingRequest, opts ...grpc.CallOption) (*UpdateJobPostingResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateJobPostingResponse)
@@ -102,6 +114,7 @@ type JobPostingServiceServer interface {
 	CreateJobPosting(context.Context, *CreateJobPostingRequest) (*CreateJobPostingResponse, error)
 	ReadJobPosting(context.Context, *ReadJobPostingRequest) (*ReadJobPostingResponse, error)
 	ReadJobPostingByQuery(context.Context, *ReadJobPostingByQueryRequest) (*ReadJobPostingByQueryResponse, error)
+	ReadJobPostingApplicants(context.Context, *ReadJobPostingApplicantsRequest) (*ReadJobPostingApplicantsResponse, error)
 	UpdateJobPosting(context.Context, *UpdateJobPostingRequest) (*UpdateJobPostingResponse, error)
 	DeleteJobPosting(context.Context, *DeleteJobPostingRequest) (*DeleteJobPostingResponse, error)
 	mustEmbedUnimplementedJobPostingServiceServer()
@@ -122,6 +135,9 @@ func (UnimplementedJobPostingServiceServer) ReadJobPosting(context.Context, *Rea
 }
 func (UnimplementedJobPostingServiceServer) ReadJobPostingByQuery(context.Context, *ReadJobPostingByQueryRequest) (*ReadJobPostingByQueryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadJobPostingByQuery not implemented")
+}
+func (UnimplementedJobPostingServiceServer) ReadJobPostingApplicants(context.Context, *ReadJobPostingApplicantsRequest) (*ReadJobPostingApplicantsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadJobPostingApplicants not implemented")
 }
 func (UnimplementedJobPostingServiceServer) UpdateJobPosting(context.Context, *UpdateJobPostingRequest) (*UpdateJobPostingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateJobPosting not implemented")
@@ -204,6 +220,24 @@ func _JobPostingService_ReadJobPostingByQuery_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _JobPostingService_ReadJobPostingApplicants_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadJobPostingApplicantsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobPostingServiceServer).ReadJobPostingApplicants(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JobPostingService_ReadJobPostingApplicants_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobPostingServiceServer).ReadJobPostingApplicants(ctx, req.(*ReadJobPostingApplicantsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _JobPostingService_UpdateJobPosting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateJobPostingRequest)
 	if err := dec(in); err != nil {
@@ -258,6 +292,10 @@ var JobPostingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReadJobPostingByQuery",
 			Handler:    _JobPostingService_ReadJobPostingByQuery_Handler,
+		},
+		{
+			MethodName: "ReadJobPostingApplicants",
+			Handler:    _JobPostingService_ReadJobPostingApplicants_Handler,
 		},
 		{
 			MethodName: "UpdateJobPosting",
