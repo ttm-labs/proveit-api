@@ -66,6 +66,7 @@ message Applicant {
 	string email = 4;
 	string submission_date = 5;
 	string interview_id = 6;
+	string application_id = 7;
 }
 
 message UpdateJobPostingRequest {

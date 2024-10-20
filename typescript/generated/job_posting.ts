@@ -888,6 +888,7 @@ export namespace job_posting_service {
             email?: string;
             submission_date?: string;
             interview_id?: string;
+            application_id?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -909,6 +910,9 @@ export namespace job_posting_service {
                 }
                 if ("interview_id" in data && data.interview_id != undefined) {
                     this.interview_id = data.interview_id;
+                }
+                if ("application_id" in data && data.application_id != undefined) {
+                    this.application_id = data.application_id;
                 }
             }
         }
@@ -948,6 +952,12 @@ export namespace job_posting_service {
         set interview_id(value: string) {
             pb_1.Message.setField(this, 6, value);
         }
+        get application_id() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set application_id(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
         static fromObject(data: {
             user_id?: string;
             first_name?: string;
@@ -955,6 +965,7 @@ export namespace job_posting_service {
             email?: string;
             submission_date?: string;
             interview_id?: string;
+            application_id?: string;
         }): Applicant {
             const message = new Applicant({});
             if (data.user_id != null) {
@@ -975,6 +986,9 @@ export namespace job_posting_service {
             if (data.interview_id != null) {
                 message.interview_id = data.interview_id;
             }
+            if (data.application_id != null) {
+                message.application_id = data.application_id;
+            }
             return message;
         }
         toObject() {
@@ -985,6 +999,7 @@ export namespace job_posting_service {
                 email?: string;
                 submission_date?: string;
                 interview_id?: string;
+                application_id?: string;
             } = {};
             if (this.user_id != null) {
                 data.user_id = this.user_id;
@@ -1004,6 +1019,9 @@ export namespace job_posting_service {
             if (this.interview_id != null) {
                 data.interview_id = this.interview_id;
             }
+            if (this.application_id != null) {
+                data.application_id = this.application_id;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -1022,6 +1040,8 @@ export namespace job_posting_service {
                 writer.writeString(5, this.submission_date);
             if (this.interview_id.length)
                 writer.writeString(6, this.interview_id);
+            if (this.application_id.length)
+                writer.writeString(7, this.application_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1048,6 +1068,9 @@ export namespace job_posting_service {
                         break;
                     case 6:
                         message.interview_id = reader.readString();
+                        break;
+                    case 7:
+                        message.application_id = reader.readString();
                         break;
                     default: reader.skipField();
                 }

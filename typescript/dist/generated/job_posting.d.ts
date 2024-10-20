@@ -242,6 +242,7 @@ export declare namespace job_posting_service {
             email?: string;
             submission_date?: string;
             interview_id?: string;
+            application_id?: string;
         });
         get user_id(): string;
         set user_id(value: string);
@@ -255,6 +256,8 @@ export declare namespace job_posting_service {
         set submission_date(value: string);
         get interview_id(): string;
         set interview_id(value: string);
+        get application_id(): string;
+        set application_id(value: string);
         static fromObject(data: {
             user_id?: string;
             first_name?: string;
@@ -262,6 +265,7 @@ export declare namespace job_posting_service {
             email?: string;
             submission_date?: string;
             interview_id?: string;
+            application_id?: string;
         }): Applicant;
         toObject(): {
             user_id?: string;
@@ -270,6 +274,7 @@ export declare namespace job_posting_service {
             email?: string;
             submission_date?: string;
             interview_id?: string;
+            application_id?: string;
         };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;

@@ -2087,7 +2087,8 @@ proto.job_posting_service.Applicant.toObject = function(includeInstance, msg) {
     lastName: jspb.Message.getFieldWithDefault(msg, 3, ""),
     email: jspb.Message.getFieldWithDefault(msg, 4, ""),
     submissionDate: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    interviewId: jspb.Message.getFieldWithDefault(msg, 6, "")
+    interviewId: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    applicationId: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
 
   if (includeInstance) {
@@ -2147,6 +2148,10 @@ proto.job_posting_service.Applicant.deserializeBinaryFromReader = function(msg, 
     case 6:
       var value = /** @type {string} */ (reader.readString());
       msg.setInterviewId(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setApplicationId(value);
       break;
     default:
       reader.skipField();
@@ -2216,6 +2221,13 @@ proto.job_posting_service.Applicant.serializeBinaryToWriter = function(message, 
   if (f.length > 0) {
     writer.writeString(
       6,
+      f
+    );
+  }
+  f = message.getApplicationId();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
       f
     );
   }
@@ -2327,6 +2339,24 @@ proto.job_posting_service.Applicant.prototype.getInterviewId = function() {
  */
 proto.job_posting_service.Applicant.prototype.setInterviewId = function(value) {
   return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * optional string application_id = 7;
+ * @return {string}
+ */
+proto.job_posting_service.Applicant.prototype.getApplicationId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.job_posting_service.Applicant} returns this
+ */
+proto.job_posting_service.Applicant.prototype.setApplicationId = function(value) {
+  return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 
