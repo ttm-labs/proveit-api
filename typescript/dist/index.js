@@ -17,5 +17,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // Export the gRPC service client and request/response types
 __exportStar(require("./generated/job_posting"), exports); // gRPC client code
 __exportStar(require("./generated/job_interview"), exports); // gRPC client code
+__exportStar(require("./generated/job_interview_analysis"), exports); // gRPC client code
 __exportStar(require("./generated/job_application"), exports); // gRPC client code
 __exportStar(require("./generated/organization"), exports); // gRPC client code

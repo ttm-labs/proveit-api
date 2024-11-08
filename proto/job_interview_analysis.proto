@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package job_interview_analysis_service;
+
+option go_package = "proto/";
+
+service JobInterviewAnalysisService {
+    rpc CreateJobInterviewAnalysis(CreateJobInterviewAnalysisRequest) returns (CreateJobInterviewAnalysisResponse) {}
+    rpc ReadJobInterviewAnalysis(ReadJobInterviewAnalysisRequest) returns (ReadJobInterviewAnalysisResponse) {}
+    rpc UpdateJobInterviewAnalysis(UpdateJobInterviewAnalysisRequest) returns (UpdateJobInterviewAnalysisResponse) {}
+    rpc DeleteJobInterviewAnalysis(DeleteJobInterviewAnalysisRequest) returns (DeleteJobInterviewAnalysisResponse) {}
+}
+
+message CreateJobInterviewAnalysisRequest {
+    string job_interview_id = 1;
+}
+
+message CreateJobInterviewAnalysisResponse {
+    string job_interview_analysis_id = 1;
+}
+
+message ReadJobInterviewAnalysisRequest {
+    string job_interview_analysis_id = 1;
+}
+
+message ReadJobInterviewAnalysisResponse {
+    Analysis analysis = 1;
+}
+
+message UpdateJobInterviewAnalysisRequest {}
+
+message UpdateJobInterviewAnalysisResponse {}
+
+message DeleteJobInterviewAnalysisRequest {}
+
+message DeleteJobInterviewAnalysisResponse {}
+
+message Analysis {
+    string last_message_id = 1;
+    string last_message_ts = 2;
+    string summary = 3;
+}
