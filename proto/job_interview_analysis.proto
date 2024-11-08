@@ -20,7 +20,7 @@ message CreateJobInterviewAnalysisResponse {
 }
 
 message ReadJobInterviewAnalysisRequest {
-    string job_interview_analysis_id = 1;
+    string job_interview_id = 1;
 }
 
 message ReadJobInterviewAnalysisResponse {

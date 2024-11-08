@@ -167,35 +167,35 @@ var job_interview_analysis_service;
             _ReadJobInterviewAnalysisRequest_one_of_decls.set(this, []);
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], __classPrivateFieldGet(this, _ReadJobInterviewAnalysisRequest_one_of_decls, "f"));
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("job_interview_analysis_id" in data && data.job_interview_analysis_id != undefined) {
-                    this.job_interview_analysis_id = data.job_interview_analysis_id;
+                if ("job_interview_id" in data && data.job_interview_id != undefined) {
+                    this.job_interview_id = data.job_interview_id;
                 }
             }
         }
-        get job_interview_analysis_id() {
+        get job_interview_id() {
             return pb_1.Message.getFieldWithDefault(this, 1, "");
         }
-        set job_interview_analysis_id(value) {
+        set job_interview_id(value) {
             pb_1.Message.setField(this, 1, value);
         }
         static fromObject(data) {
             const message = new ReadJobInterviewAnalysisRequest({});
-            if (data.job_interview_analysis_id != null) {
-                message.job_interview_analysis_id = data.job_interview_analysis_id;
+            if (data.job_interview_id != null) {
+                message.job_interview_id = data.job_interview_id;
             }
             return message;
         }
         toObject() {
             const data = {};
-            if (this.job_interview_analysis_id != null) {
-                data.job_interview_analysis_id = this.job_interview_analysis_id;
+            if (this.job_interview_id != null) {
+                data.job_interview_id = this.job_interview_id;
             }
             return data;
         }
         serialize(w) {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.job_interview_analysis_id.length)
-                writer.writeString(1, this.job_interview_analysis_id);
+            if (this.job_interview_id.length)
+                writer.writeString(1, this.job_interview_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -206,7 +206,7 @@ var job_interview_analysis_service;
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.job_interview_analysis_id = reader.readString();
+                        message.job_interview_id = reader.readString();
                         break;
                     default: reader.skipField();
                 }

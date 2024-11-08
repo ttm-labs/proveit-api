@@ -143,37 +143,37 @@ export namespace job_interview_analysis_service {
     export class ReadJobInterviewAnalysisRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            job_interview_analysis_id?: string;
+            job_interview_id?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("job_interview_analysis_id" in data && data.job_interview_analysis_id != undefined) {
-                    this.job_interview_analysis_id = data.job_interview_analysis_id;
+                if ("job_interview_id" in data && data.job_interview_id != undefined) {
+                    this.job_interview_id = data.job_interview_id;
                 }
             }
         }
-        get job_interview_analysis_id() {
+        get job_interview_id() {
             return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
-        set job_interview_analysis_id(value: string) {
+        set job_interview_id(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         static fromObject(data: {
-            job_interview_analysis_id?: string;
+            job_interview_id?: string;
         }): ReadJobInterviewAnalysisRequest {
             const message = new ReadJobInterviewAnalysisRequest({});
-            if (data.job_interview_analysis_id != null) {
-                message.job_interview_analysis_id = data.job_interview_analysis_id;
+            if (data.job_interview_id != null) {
+                message.job_interview_id = data.job_interview_id;
             }
             return message;
         }
         toObject() {
             const data: {
-                job_interview_analysis_id?: string;
+                job_interview_id?: string;
             } = {};
-            if (this.job_interview_analysis_id != null) {
-                data.job_interview_analysis_id = this.job_interview_analysis_id;
+            if (this.job_interview_id != null) {
+                data.job_interview_id = this.job_interview_id;
             }
             return data;
         }
@@ -181,8 +181,8 @@ export namespace job_interview_analysis_service {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.job_interview_analysis_id.length)
-                writer.writeString(1, this.job_interview_analysis_id);
+            if (this.job_interview_id.length)
+                writer.writeString(1, this.job_interview_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -193,7 +193,7 @@ export namespace job_interview_analysis_service {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.job_interview_analysis_id = reader.readString();
+                        message.job_interview_id = reader.readString();
                         break;
                     default: reader.skipField();
                 }

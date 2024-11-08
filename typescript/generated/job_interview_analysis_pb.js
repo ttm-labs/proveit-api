@@ -511,7 +511,7 @@ proto.job_interview_analysis_service.ReadJobInterviewAnalysisRequest.prototype.t
  */
 proto.job_interview_analysis_service.ReadJobInterviewAnalysisRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    jobInterviewAnalysisId: jspb.Message.getFieldWithDefault(msg, 1, "")
+    jobInterviewId: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -550,7 +550,7 @@ proto.job_interview_analysis_service.ReadJobInterviewAnalysisRequest.deserialize
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setJobInterviewAnalysisId(value);
+      msg.setJobInterviewId(value);
       break;
     default:
       reader.skipField();
@@ -581,7 +581,7 @@ proto.job_interview_analysis_service.ReadJobInterviewAnalysisRequest.prototype.s
  */
 proto.job_interview_analysis_service.ReadJobInterviewAnalysisRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getJobInterviewAnalysisId();
+  f = message.getJobInterviewId();
   if (f.length > 0) {
     writer.writeString(
       1,
@@ -592,10 +592,10 @@ proto.job_interview_analysis_service.ReadJobInterviewAnalysisRequest.serializeBi
 
 
 /**
- * optional string job_interview_analysis_id = 1;
+ * optional string job_interview_id = 1;
  * @return {string}
  */
-proto.job_interview_analysis_service.ReadJobInterviewAnalysisRequest.prototype.getJobInterviewAnalysisId = function() {
+proto.job_interview_analysis_service.ReadJobInterviewAnalysisRequest.prototype.getJobInterviewId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -604,7 +604,7 @@ proto.job_interview_analysis_service.ReadJobInterviewAnalysisRequest.prototype.g
  * @param {string} value
  * @return {!proto.job_interview_analysis_service.ReadJobInterviewAnalysisRequest} returns this
  */
-proto.job_interview_analysis_service.ReadJobInterviewAnalysisRequest.prototype.setJobInterviewAnalysisId = function(value) {
+proto.job_interview_analysis_service.ReadJobInterviewAnalysisRequest.prototype.setJobInterviewId = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
