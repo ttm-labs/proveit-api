@@ -438,6 +438,233 @@ export namespace job_interview_analysis_service {
             return DeleteJobInterviewAnalysisResponse.deserialize(bytes);
         }
     }
+    export class GetAnalysesForInterviewsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            job_application_id?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("job_application_id" in data && data.job_application_id != undefined) {
+                    this.job_application_id = data.job_application_id;
+                }
+            }
+        }
+        get job_application_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set job_application_id(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            job_application_id?: string;
+        }): GetAnalysesForInterviewsRequest {
+            const message = new GetAnalysesForInterviewsRequest({});
+            if (data.job_application_id != null) {
+                message.job_application_id = data.job_application_id;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                job_application_id?: string;
+            } = {};
+            if (this.job_application_id != null) {
+                data.job_application_id = this.job_application_id;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.job_application_id.length)
+                writer.writeString(1, this.job_application_id);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GetAnalysesForInterviewsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GetAnalysesForInterviewsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.job_application_id = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): GetAnalysesForInterviewsRequest {
+            return GetAnalysesForInterviewsRequest.deserialize(bytes);
+        }
+    }
+    export class GetAnalysesForInterviewsResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            analyses?: AnalysisForInterview[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("analyses" in data && data.analyses != undefined) {
+                    this.analyses = data.analyses;
+                }
+            }
+        }
+        get analyses() {
+            return pb_1.Message.getRepeatedWrapperField(this, AnalysisForInterview, 1) as AnalysisForInterview[];
+        }
+        set analyses(value: AnalysisForInterview[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        static fromObject(data: {
+            analyses?: ReturnType<typeof AnalysisForInterview.prototype.toObject>[];
+        }): GetAnalysesForInterviewsResponse {
+            const message = new GetAnalysesForInterviewsResponse({});
+            if (data.analyses != null) {
+                message.analyses = data.analyses.map(item => AnalysisForInterview.fromObject(item));
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                analyses?: ReturnType<typeof AnalysisForInterview.prototype.toObject>[];
+            } = {};
+            if (this.analyses != null) {
+                data.analyses = this.analyses.map((item: AnalysisForInterview) => item.toObject());
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.analyses.length)
+                writer.writeRepeatedMessage(1, this.analyses, (item: AnalysisForInterview) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GetAnalysesForInterviewsResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GetAnalysesForInterviewsResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.analyses, () => pb_1.Message.addToRepeatedWrapperField(message, 1, AnalysisForInterview.deserialize(reader), AnalysisForInterview));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): GetAnalysesForInterviewsResponse {
+            return GetAnalysesForInterviewsResponse.deserialize(bytes);
+        }
+    }
+    export class AnalysisForInterview extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            job_interview_id?: string;
+            analysis?: Analysis;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("job_interview_id" in data && data.job_interview_id != undefined) {
+                    this.job_interview_id = data.job_interview_id;
+                }
+                if ("analysis" in data && data.analysis != undefined) {
+                    this.analysis = data.analysis;
+                }
+            }
+        }
+        get job_interview_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set job_interview_id(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get analysis() {
+            return pb_1.Message.getWrapperField(this, Analysis, 2) as Analysis;
+        }
+        set analysis(value: Analysis) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_analysis() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        static fromObject(data: {
+            job_interview_id?: string;
+            analysis?: ReturnType<typeof Analysis.prototype.toObject>;
+        }): AnalysisForInterview {
+            const message = new AnalysisForInterview({});
+            if (data.job_interview_id != null) {
+                message.job_interview_id = data.job_interview_id;
+            }
+            if (data.analysis != null) {
+                message.analysis = Analysis.fromObject(data.analysis);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                job_interview_id?: string;
+                analysis?: ReturnType<typeof Analysis.prototype.toObject>;
+            } = {};
+            if (this.job_interview_id != null) {
+                data.job_interview_id = this.job_interview_id;
+            }
+            if (this.analysis != null) {
+                data.analysis = this.analysis.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.job_interview_id.length)
+                writer.writeString(1, this.job_interview_id);
+            if (this.has_analysis)
+                writer.writeMessage(2, this.analysis, () => this.analysis.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): AnalysisForInterview {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new AnalysisForInterview();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.job_interview_id = reader.readString();
+                        break;
+                    case 2:
+                        reader.readMessage(message.analysis, () => message.analysis = Analysis.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): AnalysisForInterview {
+            return AnalysisForInterview.deserialize(bytes);
+        }
+    }
     export class Analysis extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
@@ -615,6 +842,15 @@ export namespace job_interview_analysis_service {
                 requestDeserialize: (bytes: Buffer) => DeleteJobInterviewAnalysisRequest.deserialize(new Uint8Array(bytes)),
                 responseSerialize: (message: DeleteJobInterviewAnalysisResponse) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => DeleteJobInterviewAnalysisResponse.deserialize(new Uint8Array(bytes))
+            },
+            GetAnalysesForInterviews: {
+                path: "/job_interview_analysis_service.JobInterviewAnalysisService/GetAnalysesForInterviews",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: GetAnalysesForInterviewsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => GetAnalysesForInterviewsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: GetAnalysesForInterviewsResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => GetAnalysesForInterviewsResponse.deserialize(new Uint8Array(bytes))
             }
         };
         [method: string]: grpc_1.UntypedHandleCall;
@@ -622,6 +858,7 @@ export namespace job_interview_analysis_service {
         abstract ReadJobInterviewAnalysis(call: grpc_1.ServerUnaryCall<ReadJobInterviewAnalysisRequest, ReadJobInterviewAnalysisResponse>, callback: grpc_1.sendUnaryData<ReadJobInterviewAnalysisResponse>): void;
         abstract UpdateJobInterviewAnalysis(call: grpc_1.ServerUnaryCall<UpdateJobInterviewAnalysisRequest, UpdateJobInterviewAnalysisResponse>, callback: grpc_1.sendUnaryData<UpdateJobInterviewAnalysisResponse>): void;
         abstract DeleteJobInterviewAnalysis(call: grpc_1.ServerUnaryCall<DeleteJobInterviewAnalysisRequest, DeleteJobInterviewAnalysisResponse>, callback: grpc_1.sendUnaryData<DeleteJobInterviewAnalysisResponse>): void;
+        abstract GetAnalysesForInterviews(call: grpc_1.ServerUnaryCall<GetAnalysesForInterviewsRequest, GetAnalysesForInterviewsResponse>, callback: grpc_1.sendUnaryData<GetAnalysesForInterviewsResponse>): void;
     }
     export class JobInterviewAnalysisServiceClient extends grpc_1.makeGenericClientConstructor(UnimplementedJobInterviewAnalysisServiceService.definition, "JobInterviewAnalysisService", {}) {
         constructor(address: string, credentials: grpc_1.ChannelCredentials, options?: Partial<grpc_1.ChannelOptions>) {
@@ -638,6 +875,9 @@ export namespace job_interview_analysis_service {
         };
         DeleteJobInterviewAnalysis: GrpcUnaryServiceInterface<DeleteJobInterviewAnalysisRequest, DeleteJobInterviewAnalysisResponse> = (message: DeleteJobInterviewAnalysisRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<DeleteJobInterviewAnalysisResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<DeleteJobInterviewAnalysisResponse>, callback?: grpc_1.requestCallback<DeleteJobInterviewAnalysisResponse>): grpc_1.ClientUnaryCall => {
             return super.DeleteJobInterviewAnalysis(message, metadata, options, callback);
+        };
+        GetAnalysesForInterviews: GrpcUnaryServiceInterface<GetAnalysesForInterviewsRequest, GetAnalysesForInterviewsResponse> = (message: GetAnalysesForInterviewsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<GetAnalysesForInterviewsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<GetAnalysesForInterviewsResponse>, callback?: grpc_1.requestCallback<GetAnalysesForInterviewsResponse>): grpc_1.ClientUnaryCall => {
+            return super.GetAnalysesForInterviews(message, metadata, options, callback);
         };
     }
 }

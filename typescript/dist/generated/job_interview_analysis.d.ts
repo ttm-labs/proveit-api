@@ -128,6 +128,69 @@ export declare namespace job_interview_analysis_service {
         serializeBinary(): Uint8Array;
         static deserializeBinary(bytes: Uint8Array): DeleteJobInterviewAnalysisResponse;
     }
+    export class GetAnalysesForInterviewsRequest extends pb_1.Message {
+        #private;
+        constructor(data?: any[] | {
+            job_application_id?: string;
+        });
+        get job_application_id(): string;
+        set job_application_id(value: string);
+        static fromObject(data: {
+            job_application_id?: string;
+        }): GetAnalysesForInterviewsRequest;
+        toObject(): {
+            job_application_id?: string;
+        };
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GetAnalysesForInterviewsRequest;
+        serializeBinary(): Uint8Array;
+        static deserializeBinary(bytes: Uint8Array): GetAnalysesForInterviewsRequest;
+    }
+    export class GetAnalysesForInterviewsResponse extends pb_1.Message {
+        #private;
+        constructor(data?: any[] | {
+            analyses?: AnalysisForInterview[];
+        });
+        get analyses(): AnalysisForInterview[];
+        set analyses(value: AnalysisForInterview[]);
+        static fromObject(data: {
+            analyses?: ReturnType<typeof AnalysisForInterview.prototype.toObject>[];
+        }): GetAnalysesForInterviewsResponse;
+        toObject(): {
+            analyses?: ReturnType<typeof AnalysisForInterview.prototype.toObject>[];
+        };
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GetAnalysesForInterviewsResponse;
+        serializeBinary(): Uint8Array;
+        static deserializeBinary(bytes: Uint8Array): GetAnalysesForInterviewsResponse;
+    }
+    export class AnalysisForInterview extends pb_1.Message {
+        #private;
+        constructor(data?: any[] | {
+            job_interview_id?: string;
+            analysis?: Analysis;
+        });
+        get job_interview_id(): string;
+        set job_interview_id(value: string);
+        get analysis(): Analysis;
+        set analysis(value: Analysis);
+        get has_analysis(): boolean;
+        static fromObject(data: {
+            job_interview_id?: string;
+            analysis?: ReturnType<typeof Analysis.prototype.toObject>;
+        }): AnalysisForInterview;
+        toObject(): {
+            job_interview_id?: string;
+            analysis?: ReturnType<typeof Analysis.prototype.toObject>;
+        };
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): AnalysisForInterview;
+        serializeBinary(): Uint8Array;
+        static deserializeBinary(bytes: Uint8Array): AnalysisForInterview;
+    }
     export class Analysis extends pb_1.Message {
         #private;
         constructor(data?: any[] | {
@@ -202,12 +265,22 @@ export declare namespace job_interview_analysis_service {
                 responseSerialize: (message: DeleteJobInterviewAnalysisResponse) => Buffer;
                 responseDeserialize: (bytes: Buffer) => DeleteJobInterviewAnalysisResponse;
             };
+            GetAnalysesForInterviews: {
+                path: string;
+                requestStream: boolean;
+                responseStream: boolean;
+                requestSerialize: (message: GetAnalysesForInterviewsRequest) => Buffer;
+                requestDeserialize: (bytes: Buffer) => GetAnalysesForInterviewsRequest;
+                responseSerialize: (message: GetAnalysesForInterviewsResponse) => Buffer;
+                responseDeserialize: (bytes: Buffer) => GetAnalysesForInterviewsResponse;
+            };
         };
         [method: string]: grpc_1.UntypedHandleCall;
         abstract CreateJobInterviewAnalysis(call: grpc_1.ServerUnaryCall<CreateJobInterviewAnalysisRequest, CreateJobInterviewAnalysisResponse>, callback: grpc_1.sendUnaryData<CreateJobInterviewAnalysisResponse>): void;
         abstract ReadJobInterviewAnalysis(call: grpc_1.ServerUnaryCall<ReadJobInterviewAnalysisRequest, ReadJobInterviewAnalysisResponse>, callback: grpc_1.sendUnaryData<ReadJobInterviewAnalysisResponse>): void;
         abstract UpdateJobInterviewAnalysis(call: grpc_1.ServerUnaryCall<UpdateJobInterviewAnalysisRequest, UpdateJobInterviewAnalysisResponse>, callback: grpc_1.sendUnaryData<UpdateJobInterviewAnalysisResponse>): void;
         abstract DeleteJobInterviewAnalysis(call: grpc_1.ServerUnaryCall<DeleteJobInterviewAnalysisRequest, DeleteJobInterviewAnalysisResponse>, callback: grpc_1.sendUnaryData<DeleteJobInterviewAnalysisResponse>): void;
+        abstract GetAnalysesForInterviews(call: grpc_1.ServerUnaryCall<GetAnalysesForInterviewsRequest, GetAnalysesForInterviewsResponse>, callback: grpc_1.sendUnaryData<GetAnalysesForInterviewsResponse>): void;
     }
     const JobInterviewAnalysisServiceClient_base: grpc_1.ServiceClientConstructor;
     export class JobInterviewAnalysisServiceClient extends JobInterviewAnalysisServiceClient_base {
@@ -216,6 +289,7 @@ export declare namespace job_interview_analysis_service {
         ReadJobInterviewAnalysis: GrpcUnaryServiceInterface<ReadJobInterviewAnalysisRequest, ReadJobInterviewAnalysisResponse>;
         UpdateJobInterviewAnalysis: GrpcUnaryServiceInterface<UpdateJobInterviewAnalysisRequest, UpdateJobInterviewAnalysisResponse>;
         DeleteJobInterviewAnalysis: GrpcUnaryServiceInterface<DeleteJobInterviewAnalysisRequest, DeleteJobInterviewAnalysisResponse>;
+        GetAnalysesForInterviews: GrpcUnaryServiceInterface<GetAnalysesForInterviewsRequest, GetAnalysesForInterviewsResponse>;
     }
     export {};
 }
