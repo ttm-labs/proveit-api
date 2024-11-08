@@ -1200,7 +1200,7 @@ proto.job_interview_analysis_service.Analysis.toObject = function(includeInstanc
   var f, obj = {
     lastMessageId: jspb.Message.getFieldWithDefault(msg, 1, ""),
     lastMessageTs: (f = msg.getLastMessageTs()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    summary: jspb.Message.getFieldWithDefault(msg, 3, "")
+    analysis: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -1248,7 +1248,7 @@ proto.job_interview_analysis_service.Analysis.deserializeBinaryFromReader = func
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setSummary(value);
+      msg.setAnalysis(value);
       break;
     default:
       reader.skipField();
@@ -1294,7 +1294,7 @@ proto.job_interview_analysis_service.Analysis.serializeBinaryToWriter = function
       google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
-  f = message.getSummary();
+  f = message.getAnalysis();
   if (f.length > 0) {
     writer.writeString(
       3,
@@ -1360,10 +1360,10 @@ proto.job_interview_analysis_service.Analysis.prototype.hasLastMessageTs = funct
 
 
 /**
- * optional string summary = 3;
+ * optional string analysis = 3;
  * @return {string}
  */
-proto.job_interview_analysis_service.Analysis.prototype.getSummary = function() {
+proto.job_interview_analysis_service.Analysis.prototype.getAnalysis = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -1372,7 +1372,7 @@ proto.job_interview_analysis_service.Analysis.prototype.getSummary = function() 
  * @param {string} value
  * @return {!proto.job_interview_analysis_service.Analysis} returns this
  */
-proto.job_interview_analysis_service.Analysis.prototype.setSummary = function(value) {
+proto.job_interview_analysis_service.Analysis.prototype.setAnalysis = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 

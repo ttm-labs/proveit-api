@@ -443,7 +443,7 @@ export namespace job_interview_analysis_service {
         constructor(data?: any[] | {
             last_message_id?: string;
             last_message_ts?: dependency_1.google.protobuf.Timestamp;
-            summary?: string;
+            analysis?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -454,8 +454,8 @@ export namespace job_interview_analysis_service {
                 if ("last_message_ts" in data && data.last_message_ts != undefined) {
                     this.last_message_ts = data.last_message_ts;
                 }
-                if ("summary" in data && data.summary != undefined) {
-                    this.summary = data.summary;
+                if ("analysis" in data && data.analysis != undefined) {
+                    this.analysis = data.analysis;
                 }
             }
         }
@@ -474,16 +474,16 @@ export namespace job_interview_analysis_service {
         get has_last_message_ts() {
             return pb_1.Message.getField(this, 2) != null;
         }
-        get summary() {
+        get analysis() {
             return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
-        set summary(value: string) {
+        set analysis(value: string) {
             pb_1.Message.setField(this, 3, value);
         }
         static fromObject(data: {
             last_message_id?: string;
             last_message_ts?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
-            summary?: string;
+            analysis?: string;
         }): Analysis {
             const message = new Analysis({});
             if (data.last_message_id != null) {
@@ -492,8 +492,8 @@ export namespace job_interview_analysis_service {
             if (data.last_message_ts != null) {
                 message.last_message_ts = dependency_1.google.protobuf.Timestamp.fromObject(data.last_message_ts);
             }
-            if (data.summary != null) {
-                message.summary = data.summary;
+            if (data.analysis != null) {
+                message.analysis = data.analysis;
             }
             return message;
         }
@@ -501,7 +501,7 @@ export namespace job_interview_analysis_service {
             const data: {
                 last_message_id?: string;
                 last_message_ts?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
-                summary?: string;
+                analysis?: string;
             } = {};
             if (this.last_message_id != null) {
                 data.last_message_id = this.last_message_id;
@@ -509,8 +509,8 @@ export namespace job_interview_analysis_service {
             if (this.last_message_ts != null) {
                 data.last_message_ts = this.last_message_ts.toObject();
             }
-            if (this.summary != null) {
-                data.summary = this.summary;
+            if (this.analysis != null) {
+                data.analysis = this.analysis;
             }
             return data;
         }
@@ -522,8 +522,8 @@ export namespace job_interview_analysis_service {
                 writer.writeString(1, this.last_message_id);
             if (this.has_last_message_ts)
                 writer.writeMessage(2, this.last_message_ts, () => this.last_message_ts.serialize(writer));
-            if (this.summary.length)
-                writer.writeString(3, this.summary);
+            if (this.analysis.length)
+                writer.writeString(3, this.analysis);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -540,7 +540,7 @@ export namespace job_interview_analysis_service {
                         reader.readMessage(message.last_message_ts, () => message.last_message_ts = dependency_1.google.protobuf.Timestamp.deserialize(reader));
                         break;
                     case 3:
-                        message.summary = reader.readString();
+                        message.analysis = reader.readString();
                         break;
                     default: reader.skipField();
                 }

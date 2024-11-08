@@ -133,24 +133,24 @@ export declare namespace job_interview_analysis_service {
         constructor(data?: any[] | {
             last_message_id?: string;
             last_message_ts?: dependency_1.google.protobuf.Timestamp;
-            summary?: string;
+            analysis?: string;
         });
         get last_message_id(): string;
         set last_message_id(value: string);
         get last_message_ts(): dependency_1.google.protobuf.Timestamp;
         set last_message_ts(value: dependency_1.google.protobuf.Timestamp);
         get has_last_message_ts(): boolean;
-        get summary(): string;
-        set summary(value: string);
+        get analysis(): string;
+        set analysis(value: string);
         static fromObject(data: {
             last_message_id?: string;
             last_message_ts?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
-            summary?: string;
+            analysis?: string;
         }): Analysis;
         toObject(): {
             last_message_id?: string;
             last_message_ts?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
-            summary?: string;
+            analysis?: string;
         };
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;

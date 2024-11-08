@@ -41,5 +41,5 @@ message DeleteJobInterviewAnalysisResponse {}
 message Analysis {
     string last_message_id = 1;
     google.protobuf.Timestamp last_message_ts = 2;
-    string summary = 3;
+    string analysis = 3;
 }
