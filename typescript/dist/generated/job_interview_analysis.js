@@ -34,6 +34,7 @@ exports.job_interview_analysis_service = void 0;
  * compiler version: 5.27.3
  * source: job_interview_analysis.proto
  * git: https://github.com/thesayyn/protoc-gen-ts */
+const dependency_1 = __importStar(require("./google/protobuf/timestamp"));
 const pb_1 = __importStar(require("google-protobuf"));
 const grpc_1 = __importStar(require("@grpc/grpc-js"));
 var job_interview_analysis_service;
@@ -470,10 +471,13 @@ var job_interview_analysis_service;
             pb_1.Message.setField(this, 1, value);
         }
         get last_message_ts() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "");
+            return pb_1.Message.getWrapperField(this, dependency_1.google.protobuf.Timestamp, 2);
         }
         set last_message_ts(value) {
-            pb_1.Message.setField(this, 2, value);
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_last_message_ts() {
+            return pb_1.Message.getField(this, 2) != null;
         }
         get summary() {
             return pb_1.Message.getFieldWithDefault(this, 3, "");
@@ -487,7 +491,7 @@ var job_interview_analysis_service;
                 message.last_message_id = data.last_message_id;
             }
             if (data.last_message_ts != null) {
-                message.last_message_ts = data.last_message_ts;
+                message.last_message_ts = dependency_1.google.protobuf.Timestamp.fromObject(data.last_message_ts);
             }
             if (data.summary != null) {
                 message.summary = data.summary;
@@ -500,7 +504,7 @@ var job_interview_analysis_service;
                 data.last_message_id = this.last_message_id;
             }
             if (this.last_message_ts != null) {
-                data.last_message_ts = this.last_message_ts;
+                data.last_message_ts = this.last_message_ts.toObject();
             }
             if (this.summary != null) {
                 data.summary = this.summary;
@@ -511,8 +515,8 @@ var job_interview_analysis_service;
             const writer = w || new pb_1.BinaryWriter();
             if (this.last_message_id.length)
                 writer.writeString(1, this.last_message_id);
-            if (this.last_message_ts.length)
-                writer.writeString(2, this.last_message_ts);
+            if (this.has_last_message_ts)
+                writer.writeMessage(2, this.last_message_ts, () => this.last_message_ts.serialize(writer));
             if (this.summary.length)
                 writer.writeString(3, this.summary);
             if (!w)
@@ -528,7 +532,7 @@ var job_interview_analysis_service;
                         message.last_message_id = reader.readString();
                         break;
                     case 2:
-                        message.last_message_ts = reader.readString();
+                        reader.readMessage(message.last_message_ts, () => message.last_message_ts = dependency_1.google.protobuf.Timestamp.deserialize(reader));
                         break;
                     case 3:
                         message.summary = reader.readString();

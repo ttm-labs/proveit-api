@@ -3,6 +3,7 @@
  * compiler version: 5.27.3
  * source: job_interview_analysis.proto
  * git: https://github.com/thesayyn/protoc-gen-ts */
+import * as dependency_1 from "./google/protobuf/timestamp";
 import * as pb_1 from "google-protobuf";
 import * as grpc_1 from "@grpc/grpc-js";
 export declare namespace job_interview_analysis_service {
@@ -131,23 +132,24 @@ export declare namespace job_interview_analysis_service {
         #private;
         constructor(data?: any[] | {
             last_message_id?: string;
-            last_message_ts?: string;
+            last_message_ts?: dependency_1.google.protobuf.Timestamp;
             summary?: string;
         });
         get last_message_id(): string;
         set last_message_id(value: string);
-        get last_message_ts(): string;
-        set last_message_ts(value: string);
+        get last_message_ts(): dependency_1.google.protobuf.Timestamp;
+        set last_message_ts(value: dependency_1.google.protobuf.Timestamp);
+        get has_last_message_ts(): boolean;
         get summary(): string;
         set summary(value: string);
         static fromObject(data: {
             last_message_id?: string;
-            last_message_ts?: string;
+            last_message_ts?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
             summary?: string;
         }): Analysis;
         toObject(): {
             last_message_id?: string;
-            last_message_ts?: string;
+            last_message_ts?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
             summary?: string;
         };
         serialize(): Uint8Array;

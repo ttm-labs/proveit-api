@@ -3,6 +3,7 @@
  * compiler version: 5.27.3
  * source: job_interview_analysis.proto
  * git: https://github.com/thesayyn/protoc-gen-ts */
+import * as dependency_1 from "./google/protobuf/timestamp";
 import * as pb_1 from "google-protobuf";
 import * as grpc_1 from "@grpc/grpc-js";
 export namespace job_interview_analysis_service {
@@ -441,7 +442,7 @@ export namespace job_interview_analysis_service {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             last_message_id?: string;
-            last_message_ts?: string;
+            last_message_ts?: dependency_1.google.protobuf.Timestamp;
             summary?: string;
         }) {
             super();
@@ -465,10 +466,13 @@ export namespace job_interview_analysis_service {
             pb_1.Message.setField(this, 1, value);
         }
         get last_message_ts() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            return pb_1.Message.getWrapperField(this, dependency_1.google.protobuf.Timestamp, 2) as dependency_1.google.protobuf.Timestamp;
         }
-        set last_message_ts(value: string) {
-            pb_1.Message.setField(this, 2, value);
+        set last_message_ts(value: dependency_1.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_last_message_ts() {
+            return pb_1.Message.getField(this, 2) != null;
         }
         get summary() {
             return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
@@ -478,7 +482,7 @@ export namespace job_interview_analysis_service {
         }
         static fromObject(data: {
             last_message_id?: string;
-            last_message_ts?: string;
+            last_message_ts?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
             summary?: string;
         }): Analysis {
             const message = new Analysis({});
@@ -486,7 +490,7 @@ export namespace job_interview_analysis_service {
                 message.last_message_id = data.last_message_id;
             }
             if (data.last_message_ts != null) {
-                message.last_message_ts = data.last_message_ts;
+                message.last_message_ts = dependency_1.google.protobuf.Timestamp.fromObject(data.last_message_ts);
             }
             if (data.summary != null) {
                 message.summary = data.summary;
@@ -496,14 +500,14 @@ export namespace job_interview_analysis_service {
         toObject() {
             const data: {
                 last_message_id?: string;
-                last_message_ts?: string;
+                last_message_ts?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
                 summary?: string;
             } = {};
             if (this.last_message_id != null) {
                 data.last_message_id = this.last_message_id;
             }
             if (this.last_message_ts != null) {
-                data.last_message_ts = this.last_message_ts;
+                data.last_message_ts = this.last_message_ts.toObject();
             }
             if (this.summary != null) {
                 data.summary = this.summary;
@@ -516,8 +520,8 @@ export namespace job_interview_analysis_service {
             const writer = w || new pb_1.BinaryWriter();
             if (this.last_message_id.length)
                 writer.writeString(1, this.last_message_id);
-            if (this.last_message_ts.length)
-                writer.writeString(2, this.last_message_ts);
+            if (this.has_last_message_ts)
+                writer.writeMessage(2, this.last_message_ts, () => this.last_message_ts.serialize(writer));
             if (this.summary.length)
                 writer.writeString(3, this.summary);
             if (!w)
@@ -533,7 +537,7 @@ export namespace job_interview_analysis_service {
                         message.last_message_id = reader.readString();
                         break;
                     case 2:
-                        message.last_message_ts = reader.readString();
+                        reader.readMessage(message.last_message_ts, () => message.last_message_ts = dependency_1.google.protobuf.Timestamp.deserialize(reader));
                         break;
                     case 3:
                         message.summary = reader.readString();

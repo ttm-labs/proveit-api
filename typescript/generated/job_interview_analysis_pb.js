@@ -21,6 +21,8 @@ var global =
     (function () { return this; }).call(null) ||
     Function('return this')();
 
+var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
+goog.object.extend(proto, google_protobuf_timestamp_pb);
 goog.exportSymbol('proto.job_interview_analysis_service.Analysis', null, global);
 goog.exportSymbol('proto.job_interview_analysis_service.CreateJobInterviewAnalysisRequest', null, global);
 goog.exportSymbol('proto.job_interview_analysis_service.CreateJobInterviewAnalysisResponse', null, global);
@@ -1197,7 +1199,7 @@ proto.job_interview_analysis_service.Analysis.prototype.toObject = function(opt_
 proto.job_interview_analysis_service.Analysis.toObject = function(includeInstance, msg) {
   var f, obj = {
     lastMessageId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    lastMessageTs: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    lastMessageTs: (f = msg.getLastMessageTs()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     summary: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
@@ -1240,7 +1242,8 @@ proto.job_interview_analysis_service.Analysis.deserializeBinaryFromReader = func
       msg.setLastMessageId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
       msg.setLastMessageTs(value);
       break;
     case 3:
@@ -1284,10 +1287,11 @@ proto.job_interview_analysis_service.Analysis.serializeBinaryToWriter = function
     );
   }
   f = message.getLastMessageTs();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f != null) {
+    writer.writeMessage(
       2,
-      f
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
   f = message.getSummary();
@@ -1319,20 +1323,39 @@ proto.job_interview_analysis_service.Analysis.prototype.setLastMessageId = funct
 
 
 /**
- * optional string last_message_ts = 2;
- * @return {string}
+ * optional google.protobuf.Timestamp last_message_ts = 2;
+ * @return {?proto.google.protobuf.Timestamp}
  */
 proto.job_interview_analysis_service.Analysis.prototype.getLastMessageTs = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 2));
 };
 
 
 /**
- * @param {string} value
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.job_interview_analysis_service.Analysis} returns this
+*/
+proto.job_interview_analysis_service.Analysis.prototype.setLastMessageTs = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
  * @return {!proto.job_interview_analysis_service.Analysis} returns this
  */
-proto.job_interview_analysis_service.Analysis.prototype.setLastMessageTs = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
+proto.job_interview_analysis_service.Analysis.prototype.clearLastMessageTs = function() {
+  return this.setLastMessageTs(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.job_interview_analysis_service.Analysis.prototype.hasLastMessageTs = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 

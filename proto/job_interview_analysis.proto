@@ -4,6 +4,9 @@ package job_interview_analysis_service;
 
 option go_package = "proto/";
 
+// Import the timestamp type
+import "google/protobuf/timestamp.proto";
+
 service JobInterviewAnalysisService {
     rpc CreateJobInterviewAnalysis(CreateJobInterviewAnalysisRequest) returns (CreateJobInterviewAnalysisResponse) {}
     rpc ReadJobInterviewAnalysis(ReadJobInterviewAnalysisRequest) returns (ReadJobInterviewAnalysisResponse) {}
@@ -37,6 +40,6 @@ message DeleteJobInterviewAnalysisResponse {}
 
 message Analysis {
     string last_message_id = 1;
-    string last_message_ts = 2;
+    google.protobuf.Timestamp last_message_ts = 2;
     string summary = 3;
 }
