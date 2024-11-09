@@ -13,6 +13,7 @@ service JobInterviewAnalysisService {
     rpc UpdateJobInterviewAnalysis(UpdateJobInterviewAnalysisRequest) returns (UpdateJobInterviewAnalysisResponse) {}
     rpc DeleteJobInterviewAnalysis(DeleteJobInterviewAnalysisRequest) returns (DeleteJobInterviewAnalysisResponse) {}
     
+    rpc CreateAnalysesForInterviews(CreateAnalysesForInterviewsRequest) returns (CreateAnalysesForInterviewsResponse) {}
     rpc GetAnalysesForInterviews(GetAnalysesForInterviewsRequest) returns (GetAnalysesForInterviewsResponse) {}
 }
 
@@ -47,6 +48,12 @@ message GetAnalysesForInterviewsRequest {
 message GetAnalysesForInterviewsResponse {
     repeated AnalysisForInterview analyses = 1;
 }
+
+message CreateAnalysesForInterviewsRequest {
+    string job_application_id = 1;
+}
+
+message CreateAnalysesForInterviewsResponse {}
 
 message AnalysisForInterview {
     string job_interview_id = 1;
