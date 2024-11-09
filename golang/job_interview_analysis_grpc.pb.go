@@ -19,12 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	JobInterviewAnalysisService_CreateJobInterviewAnalysis_FullMethodName  = "/job_interview_analysis_service.JobInterviewAnalysisService/CreateJobInterviewAnalysis"
-	JobInterviewAnalysisService_ReadJobInterviewAnalysis_FullMethodName    = "/job_interview_analysis_service.JobInterviewAnalysisService/ReadJobInterviewAnalysis"
-	JobInterviewAnalysisService_UpdateJobInterviewAnalysis_FullMethodName  = "/job_interview_analysis_service.JobInterviewAnalysisService/UpdateJobInterviewAnalysis"
-	JobInterviewAnalysisService_DeleteJobInterviewAnalysis_FullMethodName  = "/job_interview_analysis_service.JobInterviewAnalysisService/DeleteJobInterviewAnalysis"
-	JobInterviewAnalysisService_CreateAnalysesForInterviews_FullMethodName = "/job_interview_analysis_service.JobInterviewAnalysisService/CreateAnalysesForInterviews"
-	JobInterviewAnalysisService_GetAnalysesForInterviews_FullMethodName    = "/job_interview_analysis_service.JobInterviewAnalysisService/GetAnalysesForInterviews"
+	JobInterviewAnalysisService_CreateJobInterviewAnalysis_FullMethodName    = "/job_interview_analysis_service.JobInterviewAnalysisService/CreateJobInterviewAnalysis"
+	JobInterviewAnalysisService_ReadJobInterviewAnalysis_FullMethodName      = "/job_interview_analysis_service.JobInterviewAnalysisService/ReadJobInterviewAnalysis"
+	JobInterviewAnalysisService_UpdateJobInterviewAnalysis_FullMethodName    = "/job_interview_analysis_service.JobInterviewAnalysisService/UpdateJobInterviewAnalysis"
+	JobInterviewAnalysisService_DeleteJobInterviewAnalysis_FullMethodName    = "/job_interview_analysis_service.JobInterviewAnalysisService/DeleteJobInterviewAnalysis"
+	JobInterviewAnalysisService_GenerateAnalysesForInterviews_FullMethodName = "/job_interview_analysis_service.JobInterviewAnalysisService/GenerateAnalysesForInterviews"
+	JobInterviewAnalysisService_GetAnalysesForInterviews_FullMethodName      = "/job_interview_analysis_service.JobInterviewAnalysisService/GetAnalysesForInterviews"
 )
 
 // JobInterviewAnalysisServiceClient is the client API for JobInterviewAnalysisService service.
@@ -35,7 +35,7 @@ type JobInterviewAnalysisServiceClient interface {
 	ReadJobInterviewAnalysis(ctx context.Context, in *ReadJobInterviewAnalysisRequest, opts ...grpc.CallOption) (*ReadJobInterviewAnalysisResponse, error)
 	UpdateJobInterviewAnalysis(ctx context.Context, in *UpdateJobInterviewAnalysisRequest, opts ...grpc.CallOption) (*UpdateJobInterviewAnalysisResponse, error)
 	DeleteJobInterviewAnalysis(ctx context.Context, in *DeleteJobInterviewAnalysisRequest, opts ...grpc.CallOption) (*DeleteJobInterviewAnalysisResponse, error)
-	CreateAnalysesForInterviews(ctx context.Context, in *CreateAnalysesForInterviewsRequest, opts ...grpc.CallOption) (*CreateAnalysesForInterviewsResponse, error)
+	GenerateAnalysesForInterviews(ctx context.Context, in *GenerateAnalysesForInterviewsRequest, opts ...grpc.CallOption) (*GenerateAnalysesForInterviewsResponse, error)
 	GetAnalysesForInterviews(ctx context.Context, in *GetAnalysesForInterviewsRequest, opts ...grpc.CallOption) (*GetAnalysesForInterviewsResponse, error)
 }
 
@@ -87,10 +87,10 @@ func (c *jobInterviewAnalysisServiceClient) DeleteJobInterviewAnalysis(ctx conte
 	return out, nil
 }
 
-func (c *jobInterviewAnalysisServiceClient) CreateAnalysesForInterviews(ctx context.Context, in *CreateAnalysesForInterviewsRequest, opts ...grpc.CallOption) (*CreateAnalysesForInterviewsResponse, error) {
+func (c *jobInterviewAnalysisServiceClient) GenerateAnalysesForInterviews(ctx context.Context, in *GenerateAnalysesForInterviewsRequest, opts ...grpc.CallOption) (*GenerateAnalysesForInterviewsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateAnalysesForInterviewsResponse)
-	err := c.cc.Invoke(ctx, JobInterviewAnalysisService_CreateAnalysesForInterviews_FullMethodName, in, out, cOpts...)
+	out := new(GenerateAnalysesForInterviewsResponse)
+	err := c.cc.Invoke(ctx, JobInterviewAnalysisService_GenerateAnalysesForInterviews_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -115,7 +115,7 @@ type JobInterviewAnalysisServiceServer interface {
 	ReadJobInterviewAnalysis(context.Context, *ReadJobInterviewAnalysisRequest) (*ReadJobInterviewAnalysisResponse, error)
 	UpdateJobInterviewAnalysis(context.Context, *UpdateJobInterviewAnalysisRequest) (*UpdateJobInterviewAnalysisResponse, error)
 	DeleteJobInterviewAnalysis(context.Context, *DeleteJobInterviewAnalysisRequest) (*DeleteJobInterviewAnalysisResponse, error)
-	CreateAnalysesForInterviews(context.Context, *CreateAnalysesForInterviewsRequest) (*CreateAnalysesForInterviewsResponse, error)
+	GenerateAnalysesForInterviews(context.Context, *GenerateAnalysesForInterviewsRequest) (*GenerateAnalysesForInterviewsResponse, error)
 	GetAnalysesForInterviews(context.Context, *GetAnalysesForInterviewsRequest) (*GetAnalysesForInterviewsResponse, error)
 	mustEmbedUnimplementedJobInterviewAnalysisServiceServer()
 }
@@ -139,8 +139,8 @@ func (UnimplementedJobInterviewAnalysisServiceServer) UpdateJobInterviewAnalysis
 func (UnimplementedJobInterviewAnalysisServiceServer) DeleteJobInterviewAnalysis(context.Context, *DeleteJobInterviewAnalysisRequest) (*DeleteJobInterviewAnalysisResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteJobInterviewAnalysis not implemented")
 }
-func (UnimplementedJobInterviewAnalysisServiceServer) CreateAnalysesForInterviews(context.Context, *CreateAnalysesForInterviewsRequest) (*CreateAnalysesForInterviewsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateAnalysesForInterviews not implemented")
+func (UnimplementedJobInterviewAnalysisServiceServer) GenerateAnalysesForInterviews(context.Context, *GenerateAnalysesForInterviewsRequest) (*GenerateAnalysesForInterviewsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GenerateAnalysesForInterviews not implemented")
 }
 func (UnimplementedJobInterviewAnalysisServiceServer) GetAnalysesForInterviews(context.Context, *GetAnalysesForInterviewsRequest) (*GetAnalysesForInterviewsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAnalysesForInterviews not implemented")
@@ -239,20 +239,20 @@ func _JobInterviewAnalysisService_DeleteJobInterviewAnalysis_Handler(srv interfa
 	return interceptor(ctx, in, info, handler)
 }
 
-func _JobInterviewAnalysisService_CreateAnalysesForInterviews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateAnalysesForInterviewsRequest)
+func _JobInterviewAnalysisService_GenerateAnalysesForInterviews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GenerateAnalysesForInterviewsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(JobInterviewAnalysisServiceServer).CreateAnalysesForInterviews(ctx, in)
+		return srv.(JobInterviewAnalysisServiceServer).GenerateAnalysesForInterviews(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: JobInterviewAnalysisService_CreateAnalysesForInterviews_FullMethodName,
+		FullMethod: JobInterviewAnalysisService_GenerateAnalysesForInterviews_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobInterviewAnalysisServiceServer).CreateAnalysesForInterviews(ctx, req.(*CreateAnalysesForInterviewsRequest))
+		return srv.(JobInterviewAnalysisServiceServer).GenerateAnalysesForInterviews(ctx, req.(*GenerateAnalysesForInterviewsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -299,8 +299,8 @@ var JobInterviewAnalysisService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _JobInterviewAnalysisService_DeleteJobInterviewAnalysis_Handler,
 		},
 		{
-			MethodName: "CreateAnalysesForInterviews",
-			Handler:    _JobInterviewAnalysisService_CreateAnalysesForInterviews_Handler,
+			MethodName: "GenerateAnalysesForInterviews",
+			Handler:    _JobInterviewAnalysisService_GenerateAnalysesForInterviews_Handler,
 		},
 		{
 			MethodName: "GetAnalysesForInterviews",

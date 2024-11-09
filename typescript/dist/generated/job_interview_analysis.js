@@ -39,7 +39,7 @@ const pb_1 = __importStar(require("google-protobuf"));
 const grpc_1 = __importStar(require("@grpc/grpc-js"));
 var job_interview_analysis_service;
 (function (job_interview_analysis_service) {
-    var _CreateJobInterviewAnalysisRequest_one_of_decls, _CreateJobInterviewAnalysisResponse_one_of_decls, _ReadJobInterviewAnalysisRequest_one_of_decls, _ReadJobInterviewAnalysisResponse_one_of_decls, _UpdateJobInterviewAnalysisRequest_one_of_decls, _UpdateJobInterviewAnalysisResponse_one_of_decls, _DeleteJobInterviewAnalysisRequest_one_of_decls, _DeleteJobInterviewAnalysisResponse_one_of_decls, _GetAnalysesForInterviewsRequest_one_of_decls, _GetAnalysesForInterviewsResponse_one_of_decls, _CreateAnalysesForInterviewsRequest_one_of_decls, _CreateAnalysesForInterviewsResponse_one_of_decls, _AnalysisForInterview_one_of_decls, _Analysis_one_of_decls;
+    var _CreateJobInterviewAnalysisRequest_one_of_decls, _CreateJobInterviewAnalysisResponse_one_of_decls, _ReadJobInterviewAnalysisRequest_one_of_decls, _ReadJobInterviewAnalysisResponse_one_of_decls, _UpdateJobInterviewAnalysisRequest_one_of_decls, _UpdateJobInterviewAnalysisResponse_one_of_decls, _DeleteJobInterviewAnalysisRequest_one_of_decls, _DeleteJobInterviewAnalysisResponse_one_of_decls, _GetAnalysesForInterviewsRequest_one_of_decls, _GetAnalysesForInterviewsResponse_one_of_decls, _GenerateAnalysesForInterviewsRequest_one_of_decls, _GenerateAnalysesForInterviewsResponse_one_of_decls, _AnalysisForInterview_one_of_decls, _Analysis_one_of_decls;
     class CreateJobInterviewAnalysisRequest extends pb_1.Message {
         constructor(data) {
             super();
@@ -569,11 +569,11 @@ var job_interview_analysis_service;
     }
     _GetAnalysesForInterviewsResponse_one_of_decls = new WeakMap();
     job_interview_analysis_service.GetAnalysesForInterviewsResponse = GetAnalysesForInterviewsResponse;
-    class CreateAnalysesForInterviewsRequest extends pb_1.Message {
+    class GenerateAnalysesForInterviewsRequest extends pb_1.Message {
         constructor(data) {
             super();
-            _CreateAnalysesForInterviewsRequest_one_of_decls.set(this, []);
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], __classPrivateFieldGet(this, _CreateAnalysesForInterviewsRequest_one_of_decls, "f"));
+            _GenerateAnalysesForInterviewsRequest_one_of_decls.set(this, []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], __classPrivateFieldGet(this, _GenerateAnalysesForInterviewsRequest_one_of_decls, "f"));
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("job_application_id" in data && data.job_application_id != undefined) {
                     this.job_application_id = data.job_application_id;
@@ -587,7 +587,7 @@ var job_interview_analysis_service;
             pb_1.Message.setField(this, 1, value);
         }
         static fromObject(data) {
-            const message = new CreateAnalysesForInterviewsRequest({});
+            const message = new GenerateAnalysesForInterviewsRequest({});
             if (data.job_application_id != null) {
                 message.job_application_id = data.job_application_id;
             }
@@ -608,7 +608,7 @@ var job_interview_analysis_service;
                 return writer.getResultBuffer();
         }
         static deserialize(bytes) {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new CreateAnalysesForInterviewsRequest();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GenerateAnalysesForInterviewsRequest();
             while (reader.nextField()) {
                 if (reader.isEndGroup())
                     break;
@@ -625,20 +625,20 @@ var job_interview_analysis_service;
             return this.serialize();
         }
         static deserializeBinary(bytes) {
-            return CreateAnalysesForInterviewsRequest.deserialize(bytes);
+            return GenerateAnalysesForInterviewsRequest.deserialize(bytes);
         }
     }
-    _CreateAnalysesForInterviewsRequest_one_of_decls = new WeakMap();
-    job_interview_analysis_service.CreateAnalysesForInterviewsRequest = CreateAnalysesForInterviewsRequest;
-    class CreateAnalysesForInterviewsResponse extends pb_1.Message {
+    _GenerateAnalysesForInterviewsRequest_one_of_decls = new WeakMap();
+    job_interview_analysis_service.GenerateAnalysesForInterviewsRequest = GenerateAnalysesForInterviewsRequest;
+    class GenerateAnalysesForInterviewsResponse extends pb_1.Message {
         constructor(data) {
             super();
-            _CreateAnalysesForInterviewsResponse_one_of_decls.set(this, []);
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], __classPrivateFieldGet(this, _CreateAnalysesForInterviewsResponse_one_of_decls, "f"));
+            _GenerateAnalysesForInterviewsResponse_one_of_decls.set(this, []);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], __classPrivateFieldGet(this, _GenerateAnalysesForInterviewsResponse_one_of_decls, "f"));
             if (!Array.isArray(data) && typeof data == "object") { }
         }
         static fromObject(data) {
-            const message = new CreateAnalysesForInterviewsResponse({});
+            const message = new GenerateAnalysesForInterviewsResponse({});
             return message;
         }
         toObject() {
@@ -651,7 +651,7 @@ var job_interview_analysis_service;
                 return writer.getResultBuffer();
         }
         static deserialize(bytes) {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new CreateAnalysesForInterviewsResponse();
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GenerateAnalysesForInterviewsResponse();
             while (reader.nextField()) {
                 if (reader.isEndGroup())
                     break;
@@ -665,11 +665,11 @@ var job_interview_analysis_service;
             return this.serialize();
         }
         static deserializeBinary(bytes) {
-            return CreateAnalysesForInterviewsResponse.deserialize(bytes);
+            return GenerateAnalysesForInterviewsResponse.deserialize(bytes);
         }
     }
-    _CreateAnalysesForInterviewsResponse_one_of_decls = new WeakMap();
-    job_interview_analysis_service.CreateAnalysesForInterviewsResponse = CreateAnalysesForInterviewsResponse;
+    _GenerateAnalysesForInterviewsResponse_one_of_decls = new WeakMap();
+    job_interview_analysis_service.GenerateAnalysesForInterviewsResponse = GenerateAnalysesForInterviewsResponse;
     class AnalysisForInterview extends pb_1.Message {
         constructor(data) {
             super();
@@ -897,14 +897,14 @@ var job_interview_analysis_service;
             responseSerialize: (message) => Buffer.from(message.serialize()),
             responseDeserialize: (bytes) => DeleteJobInterviewAnalysisResponse.deserialize(new Uint8Array(bytes))
         },
-        CreateAnalysesForInterviews: {
-            path: "/job_interview_analysis_service.JobInterviewAnalysisService/CreateAnalysesForInterviews",
+        GenerateAnalysesForInterviews: {
+            path: "/job_interview_analysis_service.JobInterviewAnalysisService/GenerateAnalysesForInterviews",
             requestStream: false,
             responseStream: false,
             requestSerialize: (message) => Buffer.from(message.serialize()),
-            requestDeserialize: (bytes) => CreateAnalysesForInterviewsRequest.deserialize(new Uint8Array(bytes)),
+            requestDeserialize: (bytes) => GenerateAnalysesForInterviewsRequest.deserialize(new Uint8Array(bytes)),
             responseSerialize: (message) => Buffer.from(message.serialize()),
-            responseDeserialize: (bytes) => CreateAnalysesForInterviewsResponse.deserialize(new Uint8Array(bytes))
+            responseDeserialize: (bytes) => GenerateAnalysesForInterviewsResponse.deserialize(new Uint8Array(bytes))
         },
         GetAnalysesForInterviews: {
             path: "/job_interview_analysis_service.JobInterviewAnalysisService/GetAnalysesForInterviews",
@@ -932,8 +932,8 @@ var job_interview_analysis_service;
             this.DeleteJobInterviewAnalysis = (message, metadata, options, callback) => {
                 return super.DeleteJobInterviewAnalysis(message, metadata, options, callback);
             };
-            this.CreateAnalysesForInterviews = (message, metadata, options, callback) => {
-                return super.CreateAnalysesForInterviews(message, metadata, options, callback);
+            this.GenerateAnalysesForInterviews = (message, metadata, options, callback) => {
+                return super.GenerateAnalysesForInterviews(message, metadata, options, callback);
             };
             this.GetAnalysesForInterviews = (message, metadata, options, callback) => {
                 return super.GetAnalysesForInterviews(message, metadata, options, callback);

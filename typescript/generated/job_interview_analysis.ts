@@ -572,7 +572,7 @@ export namespace job_interview_analysis_service {
             return GetAnalysesForInterviewsResponse.deserialize(bytes);
         }
     }
-    export class CreateAnalysesForInterviewsRequest extends pb_1.Message {
+    export class GenerateAnalysesForInterviewsRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             job_application_id?: string;
@@ -593,8 +593,8 @@ export namespace job_interview_analysis_service {
         }
         static fromObject(data: {
             job_application_id?: string;
-        }): CreateAnalysesForInterviewsRequest {
-            const message = new CreateAnalysesForInterviewsRequest({});
+        }): GenerateAnalysesForInterviewsRequest {
+            const message = new GenerateAnalysesForInterviewsRequest({});
             if (data.job_application_id != null) {
                 message.job_application_id = data.job_application_id;
             }
@@ -618,8 +618,8 @@ export namespace job_interview_analysis_service {
             if (!w)
                 return writer.getResultBuffer();
         }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): CreateAnalysesForInterviewsRequest {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new CreateAnalysesForInterviewsRequest();
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GenerateAnalysesForInterviewsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GenerateAnalysesForInterviewsRequest();
             while (reader.nextField()) {
                 if (reader.isEndGroup())
                     break;
@@ -635,19 +635,19 @@ export namespace job_interview_analysis_service {
         serializeBinary(): Uint8Array {
             return this.serialize();
         }
-        static deserializeBinary(bytes: Uint8Array): CreateAnalysesForInterviewsRequest {
-            return CreateAnalysesForInterviewsRequest.deserialize(bytes);
+        static deserializeBinary(bytes: Uint8Array): GenerateAnalysesForInterviewsRequest {
+            return GenerateAnalysesForInterviewsRequest.deserialize(bytes);
         }
     }
-    export class CreateAnalysesForInterviewsResponse extends pb_1.Message {
+    export class GenerateAnalysesForInterviewsResponse extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {}) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") { }
         }
-        static fromObject(data: {}): CreateAnalysesForInterviewsResponse {
-            const message = new CreateAnalysesForInterviewsResponse({});
+        static fromObject(data: {}): GenerateAnalysesForInterviewsResponse {
+            const message = new GenerateAnalysesForInterviewsResponse({});
             return message;
         }
         toObject() {
@@ -661,8 +661,8 @@ export namespace job_interview_analysis_service {
             if (!w)
                 return writer.getResultBuffer();
         }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): CreateAnalysesForInterviewsResponse {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new CreateAnalysesForInterviewsResponse();
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GenerateAnalysesForInterviewsResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GenerateAnalysesForInterviewsResponse();
             while (reader.nextField()) {
                 if (reader.isEndGroup())
                     break;
@@ -675,8 +675,8 @@ export namespace job_interview_analysis_service {
         serializeBinary(): Uint8Array {
             return this.serialize();
         }
-        static deserializeBinary(bytes: Uint8Array): CreateAnalysesForInterviewsResponse {
-            return CreateAnalysesForInterviewsResponse.deserialize(bytes);
+        static deserializeBinary(bytes: Uint8Array): GenerateAnalysesForInterviewsResponse {
+            return GenerateAnalysesForInterviewsResponse.deserialize(bytes);
         }
     }
     export class AnalysisForInterview extends pb_1.Message {
@@ -950,14 +950,14 @@ export namespace job_interview_analysis_service {
                 responseSerialize: (message: DeleteJobInterviewAnalysisResponse) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => DeleteJobInterviewAnalysisResponse.deserialize(new Uint8Array(bytes))
             },
-            CreateAnalysesForInterviews: {
-                path: "/job_interview_analysis_service.JobInterviewAnalysisService/CreateAnalysesForInterviews",
+            GenerateAnalysesForInterviews: {
+                path: "/job_interview_analysis_service.JobInterviewAnalysisService/GenerateAnalysesForInterviews",
                 requestStream: false,
                 responseStream: false,
-                requestSerialize: (message: CreateAnalysesForInterviewsRequest) => Buffer.from(message.serialize()),
-                requestDeserialize: (bytes: Buffer) => CreateAnalysesForInterviewsRequest.deserialize(new Uint8Array(bytes)),
-                responseSerialize: (message: CreateAnalysesForInterviewsResponse) => Buffer.from(message.serialize()),
-                responseDeserialize: (bytes: Buffer) => CreateAnalysesForInterviewsResponse.deserialize(new Uint8Array(bytes))
+                requestSerialize: (message: GenerateAnalysesForInterviewsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => GenerateAnalysesForInterviewsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: GenerateAnalysesForInterviewsResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => GenerateAnalysesForInterviewsResponse.deserialize(new Uint8Array(bytes))
             },
             GetAnalysesForInterviews: {
                 path: "/job_interview_analysis_service.JobInterviewAnalysisService/GetAnalysesForInterviews",
@@ -974,7 +974,7 @@ export namespace job_interview_analysis_service {
         abstract ReadJobInterviewAnalysis(call: grpc_1.ServerUnaryCall<ReadJobInterviewAnalysisRequest, ReadJobInterviewAnalysisResponse>, callback: grpc_1.sendUnaryData<ReadJobInterviewAnalysisResponse>): void;
         abstract UpdateJobInterviewAnalysis(call: grpc_1.ServerUnaryCall<UpdateJobInterviewAnalysisRequest, UpdateJobInterviewAnalysisResponse>, callback: grpc_1.sendUnaryData<UpdateJobInterviewAnalysisResponse>): void;
         abstract DeleteJobInterviewAnalysis(call: grpc_1.ServerUnaryCall<DeleteJobInterviewAnalysisRequest, DeleteJobInterviewAnalysisResponse>, callback: grpc_1.sendUnaryData<DeleteJobInterviewAnalysisResponse>): void;
-        abstract CreateAnalysesForInterviews(call: grpc_1.ServerUnaryCall<CreateAnalysesForInterviewsRequest, CreateAnalysesForInterviewsResponse>, callback: grpc_1.sendUnaryData<CreateAnalysesForInterviewsResponse>): void;
+        abstract GenerateAnalysesForInterviews(call: grpc_1.ServerUnaryCall<GenerateAnalysesForInterviewsRequest, GenerateAnalysesForInterviewsResponse>, callback: grpc_1.sendUnaryData<GenerateAnalysesForInterviewsResponse>): void;
         abstract GetAnalysesForInterviews(call: grpc_1.ServerUnaryCall<GetAnalysesForInterviewsRequest, GetAnalysesForInterviewsResponse>, callback: grpc_1.sendUnaryData<GetAnalysesForInterviewsResponse>): void;
     }
     export class JobInterviewAnalysisServiceClient extends grpc_1.makeGenericClientConstructor(UnimplementedJobInterviewAnalysisServiceService.definition, "JobInterviewAnalysisService", {}) {
@@ -993,8 +993,8 @@ export namespace job_interview_analysis_service {
         DeleteJobInterviewAnalysis: GrpcUnaryServiceInterface<DeleteJobInterviewAnalysisRequest, DeleteJobInterviewAnalysisResponse> = (message: DeleteJobInterviewAnalysisRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<DeleteJobInterviewAnalysisResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<DeleteJobInterviewAnalysisResponse>, callback?: grpc_1.requestCallback<DeleteJobInterviewAnalysisResponse>): grpc_1.ClientUnaryCall => {
             return super.DeleteJobInterviewAnalysis(message, metadata, options, callback);
         };
-        CreateAnalysesForInterviews: GrpcUnaryServiceInterface<CreateAnalysesForInterviewsRequest, CreateAnalysesForInterviewsResponse> = (message: CreateAnalysesForInterviewsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<CreateAnalysesForInterviewsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<CreateAnalysesForInterviewsResponse>, callback?: grpc_1.requestCallback<CreateAnalysesForInterviewsResponse>): grpc_1.ClientUnaryCall => {
-            return super.CreateAnalysesForInterviews(message, metadata, options, callback);
+        GenerateAnalysesForInterviews: GrpcUnaryServiceInterface<GenerateAnalysesForInterviewsRequest, GenerateAnalysesForInterviewsResponse> = (message: GenerateAnalysesForInterviewsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<GenerateAnalysesForInterviewsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<GenerateAnalysesForInterviewsResponse>, callback?: grpc_1.requestCallback<GenerateAnalysesForInterviewsResponse>): grpc_1.ClientUnaryCall => {
+            return super.GenerateAnalysesForInterviews(message, metadata, options, callback);
         };
         GetAnalysesForInterviews: GrpcUnaryServiceInterface<GetAnalysesForInterviewsRequest, GetAnalysesForInterviewsResponse> = (message: GetAnalysesForInterviewsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<GetAnalysesForInterviewsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<GetAnalysesForInterviewsResponse>, callback?: grpc_1.requestCallback<GetAnalysesForInterviewsResponse>): grpc_1.ClientUnaryCall => {
             return super.GetAnalysesForInterviews(message, metadata, options, callback);
